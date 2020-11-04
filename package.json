@@ -6,9 +6,7 @@
     "type": "git",
     "url": "https://github.com/pahud/cdk-gitlab.git"
   },
-  "bin": {
-    "refresh_credentials.sh": "bin/refresh_credentials.sh"
-  },
+  "bin": {},
   "scripts": {
     "start": "npx projen start -i",
     "projen": "node .projenrc.js",

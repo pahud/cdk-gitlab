@@ -8,6 +8,7 @@ const project = new AwsCdkConstructLibrary({
   repository: "https://github.com/pahud/cdk-gitlab.git",
   description: "High level CDK construct to provision GitLab integrations with AWS",
   defaultReleaseBranch: 'main',
+  autoDetectBin: false,
   cdkDependencies: [
     '@aws-cdk/core',
     '@aws-cdk/aws-ec2',
