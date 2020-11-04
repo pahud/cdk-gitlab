@@ -1,0 +1,1540 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`integ snapshot validation 1`] = `
+Object {
+  "Outputs": Object {
+    "GitlabEksClusterConfigCommandA049D964": Object {
+      "Value": Object {
+        "Fn::Join": Array [
+          "",
+          Array [
+            "aws eks update-kubeconfig --name ",
+            Object {
+              "Ref": "GitlabEksCluster04011DE8",
+            },
+            " --region us-east-1 --role-arn ",
+            Object {
+              "Fn::GetAtt": Array [
+                "GitlabEksClusterMastersRole5C87183A",
+                "Arn",
+              ],
+            },
+          ],
+        ],
+      },
+    },
+    "GitlabEksClusterGetTokenCommandB9B77F39": Object {
+      "Value": Object {
+        "Fn::Join": Array [
+          "",
+          Array [
+            "aws eks get-token --cluster-name ",
+            Object {
+              "Ref": "GitlabEksCluster04011DE8",
+            },
+            " --region us-east-1 --role-arn ",
+            Object {
+              "Fn::GetAtt": Array [
+                "GitlabEksClusterMastersRole5C87183A",
+                "Arn",
+              ],
+            },
+          ],
+        ],
+      },
+    },
+    "GitlabProviderRegionAAFDAA56": Object {
+      "Value": "us-east-1",
+    },
+  },
+  "Parameters": Object {
+    "AssetParameters456c12587e28e9e258e07a919f3c252242a0ff9e0cc2d932757db63062ea476eArtifactHashD887EA02": Object {
+      "Description": "Artifact hash for asset \\"456c12587e28e9e258e07a919f3c252242a0ff9e0cc2d932757db63062ea476e\\"",
+      "Type": "String",
+    },
+    "AssetParameters456c12587e28e9e258e07a919f3c252242a0ff9e0cc2d932757db63062ea476eS3BucketE429B224": Object {
+      "Description": "S3 bucket for asset \\"456c12587e28e9e258e07a919f3c252242a0ff9e0cc2d932757db63062ea476e\\"",
+      "Type": "String",
+    },
+    "AssetParameters456c12587e28e9e258e07a919f3c252242a0ff9e0cc2d932757db63062ea476eS3VersionKeyAF86745F": Object {
+      "Description": "S3 key for asset version \\"456c12587e28e9e258e07a919f3c252242a0ff9e0cc2d932757db63062ea476e\\"",
+      "Type": "String",
+    },
+    "AssetParameters50e10880d134a01b440991fc77d217f39f01c2d56945215ee9a3b81187c6f3b1ArtifactHash32F5D823": Object {
+      "Description": "Artifact hash for asset \\"50e10880d134a01b440991fc77d217f39f01c2d56945215ee9a3b81187c6f3b1\\"",
+      "Type": "String",
+    },
+    "AssetParameters50e10880d134a01b440991fc77d217f39f01c2d56945215ee9a3b81187c6f3b1S3Bucket36C546E0": Object {
+      "Description": "S3 bucket for asset \\"50e10880d134a01b440991fc77d217f39f01c2d56945215ee9a3b81187c6f3b1\\"",
+      "Type": "String",
+    },
+    "AssetParameters50e10880d134a01b440991fc77d217f39f01c2d56945215ee9a3b81187c6f3b1S3VersionKey85C003F9": Object {
+      "Description": "S3 key for asset version \\"50e10880d134a01b440991fc77d217f39f01c2d56945215ee9a3b81187c6f3b1\\"",
+      "Type": "String",
+    },
+    "AssetParameters6f6ba65780b34ab5218a718dc1a30ed9a96795f1909db912b68ea7292e02ff74ArtifactHashD7A6A7E4": Object {
+      "Description": "Artifact hash for asset \\"6f6ba65780b34ab5218a718dc1a30ed9a96795f1909db912b68ea7292e02ff74\\"",
+      "Type": "String",
+    },
+    "AssetParameters6f6ba65780b34ab5218a718dc1a30ed9a96795f1909db912b68ea7292e02ff74S3Bucket172A5100": Object {
+      "Description": "S3 bucket for asset \\"6f6ba65780b34ab5218a718dc1a30ed9a96795f1909db912b68ea7292e02ff74\\"",
+      "Type": "String",
+    },
+    "AssetParameters6f6ba65780b34ab5218a718dc1a30ed9a96795f1909db912b68ea7292e02ff74S3VersionKey0EB86A6B": Object {
+      "Description": "S3 key for asset version \\"6f6ba65780b34ab5218a718dc1a30ed9a96795f1909db912b68ea7292e02ff74\\"",
+      "Type": "String",
+    },
+    "AssetParametersb7d8a9750f8bfded8ac76be100e3bee1c3d4824df006766110d023f42952f5c2ArtifactHashE86B38C7": Object {
+      "Description": "Artifact hash for asset \\"b7d8a9750f8bfded8ac76be100e3bee1c3d4824df006766110d023f42952f5c2\\"",
+      "Type": "String",
+    },
+    "AssetParametersb7d8a9750f8bfded8ac76be100e3bee1c3d4824df006766110d023f42952f5c2S3Bucket9ABBD5A2": Object {
+      "Description": "S3 bucket for asset \\"b7d8a9750f8bfded8ac76be100e3bee1c3d4824df006766110d023f42952f5c2\\"",
+      "Type": "String",
+    },
+    "AssetParametersb7d8a9750f8bfded8ac76be100e3bee1c3d4824df006766110d023f42952f5c2S3VersionKey40FF2C4A": Object {
+      "Description": "S3 key for asset version \\"b7d8a9750f8bfded8ac76be100e3bee1c3d4824df006766110d023f42952f5c2\\"",
+      "Type": "String",
+    },
+    "AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cArtifactHash627DAAA7": Object {
+      "Description": "Artifact hash for asset \\"c691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49c\\"",
+      "Type": "String",
+    },
+    "AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3BucketEAC9DD43": Object {
+      "Description": "S3 bucket for asset \\"c691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49c\\"",
+      "Type": "String",
+    },
+    "AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3VersionKeyDD9AE9E7": Object {
+      "Description": "S3 key for asset version \\"c691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49c\\"",
+      "Type": "String",
+    },
+  },
+  "Resources": Object {
+    "GitlabEksCluster04011DE8": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "GitlabEksClusterDefaultVpcIGWCC17ABDC",
+        "GitlabEksClusterDefaultVpcPrivateSubnet1DefaultRoute0D5F7151",
+        "GitlabEksClusterDefaultVpcPrivateSubnet1RouteTableACBD804C",
+        "GitlabEksClusterDefaultVpcPrivateSubnet1RouteTableAssociation76DC0A9D",
+        "GitlabEksClusterDefaultVpcPrivateSubnet1Subnet79F576B3",
+        "GitlabEksClusterDefaultVpcPrivateSubnet2DefaultRoute05D5D49D",
+        "GitlabEksClusterDefaultVpcPrivateSubnet2RouteTable1F35095D",
+        "GitlabEksClusterDefaultVpcPrivateSubnet2RouteTableAssociation396E62E9",
+        "GitlabEksClusterDefaultVpcPrivateSubnet2SubnetAFCE36B1",
+        "GitlabEksClusterDefaultVpcPublicSubnet1DefaultRouteC27960C9",
+        "GitlabEksClusterDefaultVpcPublicSubnet1EIP8B52A370",
+        "GitlabEksClusterDefaultVpcPublicSubnet1NATGateway1EF7D956",
+        "GitlabEksClusterDefaultVpcPublicSubnet1RouteTable1DD430E2",
+        "GitlabEksClusterDefaultVpcPublicSubnet1RouteTableAssociationC8EDCE71",
+        "GitlabEksClusterDefaultVpcPublicSubnet1Subnet8F613069",
+        "GitlabEksClusterDefaultVpcPublicSubnet2DefaultRouteCFE5E523",
+        "GitlabEksClusterDefaultVpcPublicSubnet2EIPA7953A44",
+        "GitlabEksClusterDefaultVpcPublicSubnet2NATGateway9F539312",
+        "GitlabEksClusterDefaultVpcPublicSubnet2RouteTableE26AFEF4",
+        "GitlabEksClusterDefaultVpcPublicSubnet2RouteTableAssociationB780D203",
+        "GitlabEksClusterDefaultVpcPublicSubnet2Subnet5A2BD961",
+        "GitlabEksClusterDefaultVpcD20F0C58",
+        "GitlabEksClusterDefaultVpcVPCGWA5DF83E7",
+        "GitlabEksClusterCreationRoleDefaultPolicy48F9306E",
+        "GitlabEksClusterCreationRoleFA5C3E1D",
+      ],
+      "Properties": Object {
+        "AssumeRoleArn": Object {
+          "Fn::GetAtt": Array [
+            "GitlabEksClusterCreationRoleFA5C3E1D",
+            "Arn",
+          ],
+        },
+        "AttributesRevision": 2,
+        "Config": Object {
+          "resourcesVpcConfig": Object {
+            "endpointPrivateAccess": true,
+            "endpointPublicAccess": true,
+            "securityGroupIds": Array [
+              Object {
+                "Fn::GetAtt": Array [
+                  "GitlabEksClusterControlPlaneSecurityGroup486577CA",
+                  "GroupId",
+                ],
+              },
+            ],
+            "subnetIds": Array [
+              Object {
+                "Ref": "GitlabEksClusterDefaultVpcPublicSubnet1Subnet8F613069",
+              },
+              Object {
+                "Ref": "GitlabEksClusterDefaultVpcPublicSubnet2Subnet5A2BD961",
+              },
+              Object {
+                "Ref": "GitlabEksClusterDefaultVpcPrivateSubnet1Subnet79F576B3",
+              },
+              Object {
+                "Ref": "GitlabEksClusterDefaultVpcPrivateSubnet2SubnetAFCE36B1",
+              },
+            ],
+          },
+          "roleArn": Object {
+            "Fn::GetAtt": Array [
+              "GitlabEksClusterRole49C5ADB7",
+              "Arn",
+            ],
+          },
+          "version": "1.18",
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454",
+            "Outputs.integstackawscdkawseksClusterResourceProviderframeworkonEvent212B1211Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-Cluster",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "GitlabEksClusterAwsAuthmanifest41274017": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "GitlabEksClusterKubectlReadyBarrierF39FD0FB",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "GitlabEksCluster04011DE8",
+        },
+        "Manifest": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "[{\\"apiVersion\\":\\"v1\\",\\"kind\\":\\"ConfigMap\\",\\"metadata\\":{\\"name\\":\\"aws-auth\\",\\"namespace\\":\\"kube-system\\"},\\"data\\":{\\"mapRoles\\":\\"[{\\\\\\"rolearn\\\\\\":\\\\\\"",
+              Object {
+                "Fn::GetAtt": Array [
+                  "GitlabEksClusterMastersRole5C87183A",
+                  "Arn",
+                ],
+              },
+              "\\\\\\",\\\\\\"username\\\\\\":\\\\\\"",
+              Object {
+                "Fn::GetAtt": Array [
+                  "GitlabEksClusterMastersRole5C87183A",
+                  "Arn",
+                ],
+              },
+              "\\\\\\",\\\\\\"groups\\\\\\":[\\\\\\"system:masters\\\\\\"]},{\\\\\\"rolearn\\\\\\":\\\\\\"",
+              Object {
+                "Fn::GetAtt": Array [
+                  "GitlabEksClusterNodegroupDefaultCapacityNodeGroupRoleD3626F4D",
+                  "Arn",
+                ],
+              },
+              "\\\\\\",\\\\\\"username\\\\\\":\\\\\\"system:node:{{EC2PrivateDNSName}}\\\\\\",\\\\\\"groups\\\\\\":[\\\\\\"system:bootstrappers\\\\\\",\\\\\\"system:nodes\\\\\\"]}]\\",\\"mapUsers\\":\\"[]\\",\\"mapAccounts\\":\\"[]\\"}}]",
+            ],
+          ],
+        },
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "GitlabEksClusterCreationRoleFA5C3E1D",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.integstackawscdkawseksKubectlProviderframeworkonEvent0B680441Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "GitlabEksClusterControlPlaneSecurityGroup486577CA": Object {
+      "Properties": Object {
+        "GroupDescription": "EKS Control Plane Security Group",
+        "SecurityGroupEgress": Array [
+          Object {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "GitlabEksClusterDefaultVpcD20F0C58",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "GitlabEksClusterCreationRoleDefaultPolicy48F9306E": Object {
+      "DependsOn": Array [
+        "GitlabEksClusterDefaultVpcIGWCC17ABDC",
+        "GitlabEksClusterDefaultVpcPrivateSubnet1DefaultRoute0D5F7151",
+        "GitlabEksClusterDefaultVpcPrivateSubnet1RouteTableACBD804C",
+        "GitlabEksClusterDefaultVpcPrivateSubnet1RouteTableAssociation76DC0A9D",
+        "GitlabEksClusterDefaultVpcPrivateSubnet1Subnet79F576B3",
+        "GitlabEksClusterDefaultVpcPrivateSubnet2DefaultRoute05D5D49D",
+        "GitlabEksClusterDefaultVpcPrivateSubnet2RouteTable1F35095D",
+        "GitlabEksClusterDefaultVpcPrivateSubnet2RouteTableAssociation396E62E9",
+        "GitlabEksClusterDefaultVpcPrivateSubnet2SubnetAFCE36B1",
+        "GitlabEksClusterDefaultVpcPublicSubnet1DefaultRouteC27960C9",
+        "GitlabEksClusterDefaultVpcPublicSubnet1EIP8B52A370",
+        "GitlabEksClusterDefaultVpcPublicSubnet1NATGateway1EF7D956",
+        "GitlabEksClusterDefaultVpcPublicSubnet1RouteTable1DD430E2",
+        "GitlabEksClusterDefaultVpcPublicSubnet1RouteTableAssociationC8EDCE71",
+        "GitlabEksClusterDefaultVpcPublicSubnet1Subnet8F613069",
+        "GitlabEksClusterDefaultVpcPublicSubnet2DefaultRouteCFE5E523",
+        "GitlabEksClusterDefaultVpcPublicSubnet2EIPA7953A44",
+        "GitlabEksClusterDefaultVpcPublicSubnet2NATGateway9F539312",
+        "GitlabEksClusterDefaultVpcPublicSubnet2RouteTableE26AFEF4",
+        "GitlabEksClusterDefaultVpcPublicSubnet2RouteTableAssociationB780D203",
+        "GitlabEksClusterDefaultVpcPublicSubnet2Subnet5A2BD961",
+        "GitlabEksClusterDefaultVpcD20F0C58",
+        "GitlabEksClusterDefaultVpcVPCGWA5DF83E7",
+      ],
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "iam:PassRole",
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::GetAtt": Array [
+                  "GitlabEksClusterRole49C5ADB7",
+                  "Arn",
+                ],
+              },
+            },
+            Object {
+              "Action": Array [
+                "ec2:DescribeSubnets",
+                "ec2:DescribeRouteTables",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            Object {
+              "Action": Array [
+                "eks:CreateCluster",
+                "eks:DescribeCluster",
+                "eks:DescribeUpdate",
+                "eks:DeleteCluster",
+                "eks:UpdateClusterVersion",
+                "eks:UpdateClusterConfig",
+                "eks:CreateFargateProfile",
+                "eks:TagResource",
+                "eks:UntagResource",
+              ],
+              "Effect": "Allow",
+              "Resource": Array [
+                "*",
+              ],
+            },
+            Object {
+              "Action": Array [
+                "eks:DescribeFargateProfile",
+                "eks:DeleteFargateProfile",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            Object {
+              "Action": Array [
+                "iam:GetRole",
+                "iam:listAttachedRolePolicies",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            Object {
+              "Action": "iam:CreateServiceLinkedRole",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            Object {
+              "Action": "ec2:DescribeVpcs",
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::Join": Array [
+                  "",
+                  Array [
+                    "arn:",
+                    Object {
+                      "Ref": "AWS::Partition",
+                    },
+                    ":ec2:us-east-1:",
+                    Object {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":vpc/",
+                    Object {
+                      "Ref": "GitlabEksClusterDefaultVpcD20F0C58",
+                    },
+                  ],
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "GitlabEksClusterCreationRoleDefaultPolicy48F9306E",
+        "Roles": Array [
+          Object {
+            "Ref": "GitlabEksClusterCreationRoleFA5C3E1D",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "GitlabEksClusterCreationRoleFA5C3E1D": Object {
+      "DependsOn": Array [
+        "GitlabEksClusterDefaultVpcIGWCC17ABDC",
+        "GitlabEksClusterDefaultVpcPrivateSubnet1DefaultRoute0D5F7151",
+        "GitlabEksClusterDefaultVpcPrivateSubnet1RouteTableACBD804C",
+        "GitlabEksClusterDefaultVpcPrivateSubnet1RouteTableAssociation76DC0A9D",
+        "GitlabEksClusterDefaultVpcPrivateSubnet1Subnet79F576B3",
+        "GitlabEksClusterDefaultVpcPrivateSubnet2DefaultRoute05D5D49D",
+        "GitlabEksClusterDefaultVpcPrivateSubnet2RouteTable1F35095D",
+        "GitlabEksClusterDefaultVpcPrivateSubnet2RouteTableAssociation396E62E9",
+        "GitlabEksClusterDefaultVpcPrivateSubnet2SubnetAFCE36B1",
+        "GitlabEksClusterDefaultVpcPublicSubnet1DefaultRouteC27960C9",
+        "GitlabEksClusterDefaultVpcPublicSubnet1EIP8B52A370",
+        "GitlabEksClusterDefaultVpcPublicSubnet1NATGateway1EF7D956",
+        "GitlabEksClusterDefaultVpcPublicSubnet1RouteTable1DD430E2",
+        "GitlabEksClusterDefaultVpcPublicSubnet1RouteTableAssociationC8EDCE71",
+        "GitlabEksClusterDefaultVpcPublicSubnet1Subnet8F613069",
+        "GitlabEksClusterDefaultVpcPublicSubnet2DefaultRouteCFE5E523",
+        "GitlabEksClusterDefaultVpcPublicSubnet2EIPA7953A44",
+        "GitlabEksClusterDefaultVpcPublicSubnet2NATGateway9F539312",
+        "GitlabEksClusterDefaultVpcPublicSubnet2RouteTableE26AFEF4",
+        "GitlabEksClusterDefaultVpcPublicSubnet2RouteTableAssociationB780D203",
+        "GitlabEksClusterDefaultVpcPublicSubnet2Subnet5A2BD961",
+        "GitlabEksClusterDefaultVpcD20F0C58",
+        "GitlabEksClusterDefaultVpcVPCGWA5DF83E7",
+      ],
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "AWS": Object {
+                  "Fn::Join": Array [
+                    "",
+                    Array [
+                      "arn:",
+                      Object {
+                        "Ref": "AWS::Partition",
+                      },
+                      ":iam::",
+                      Object {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":root",
+                    ],
+                  ],
+                },
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "GitlabEksClusterDefaultVpcD20F0C58": Object {
+      "Properties": Object {
+        "CidrBlock": "10.0.0.0/16",
+        "EnableDnsHostnames": true,
+        "EnableDnsSupport": true,
+        "InstanceTenancy": "default",
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "integ-stack/GitlabEksCluster/DefaultVpc",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::VPC",
+    },
+    "GitlabEksClusterDefaultVpcIGWCC17ABDC": Object {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "integ-stack/GitlabEksCluster/DefaultVpc",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::InternetGateway",
+    },
+    "GitlabEksClusterDefaultVpcPrivateSubnet1DefaultRoute0D5F7151": Object {
+      "Properties": Object {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "NatGatewayId": Object {
+          "Ref": "GitlabEksClusterDefaultVpcPublicSubnet1NATGateway1EF7D956",
+        },
+        "RouteTableId": Object {
+          "Ref": "GitlabEksClusterDefaultVpcPrivateSubnet1RouteTableACBD804C",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "GitlabEksClusterDefaultVpcPrivateSubnet1RouteTableACBD804C": Object {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
+            "Key": "kubernetes.io/role/internal-elb",
+            "Value": "1",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "integ-stack/GitlabEksCluster/DefaultVpc/PrivateSubnet1",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "GitlabEksClusterDefaultVpcD20F0C58",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "GitlabEksClusterDefaultVpcPrivateSubnet1RouteTableAssociation76DC0A9D": Object {
+      "Properties": Object {
+        "RouteTableId": Object {
+          "Ref": "GitlabEksClusterDefaultVpcPrivateSubnet1RouteTableACBD804C",
+        },
+        "SubnetId": Object {
+          "Ref": "GitlabEksClusterDefaultVpcPrivateSubnet1Subnet79F576B3",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "GitlabEksClusterDefaultVpcPrivateSubnet1Subnet79F576B3": Object {
+      "Properties": Object {
+        "AvailabilityZone": Object {
+          "Fn::Select": Array [
+            0,
+            Object {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
+        "CidrBlock": "10.0.128.0/18",
+        "MapPublicIpOnLaunch": false,
+        "Tags": Array [
+          Object {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Private",
+          },
+          Object {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Private",
+          },
+          Object {
+            "Key": "kubernetes.io/role/internal-elb",
+            "Value": "1",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "integ-stack/GitlabEksCluster/DefaultVpc/PrivateSubnet1",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "GitlabEksClusterDefaultVpcD20F0C58",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "GitlabEksClusterDefaultVpcPrivateSubnet2DefaultRoute05D5D49D": Object {
+      "Properties": Object {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "NatGatewayId": Object {
+          "Ref": "GitlabEksClusterDefaultVpcPublicSubnet2NATGateway9F539312",
+        },
+        "RouteTableId": Object {
+          "Ref": "GitlabEksClusterDefaultVpcPrivateSubnet2RouteTable1F35095D",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "GitlabEksClusterDefaultVpcPrivateSubnet2RouteTable1F35095D": Object {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
+            "Key": "kubernetes.io/role/internal-elb",
+            "Value": "1",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "integ-stack/GitlabEksCluster/DefaultVpc/PrivateSubnet2",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "GitlabEksClusterDefaultVpcD20F0C58",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "GitlabEksClusterDefaultVpcPrivateSubnet2RouteTableAssociation396E62E9": Object {
+      "Properties": Object {
+        "RouteTableId": Object {
+          "Ref": "GitlabEksClusterDefaultVpcPrivateSubnet2RouteTable1F35095D",
+        },
+        "SubnetId": Object {
+          "Ref": "GitlabEksClusterDefaultVpcPrivateSubnet2SubnetAFCE36B1",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "GitlabEksClusterDefaultVpcPrivateSubnet2SubnetAFCE36B1": Object {
+      "Properties": Object {
+        "AvailabilityZone": Object {
+          "Fn::Select": Array [
+            1,
+            Object {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
+        "CidrBlock": "10.0.192.0/18",
+        "MapPublicIpOnLaunch": false,
+        "Tags": Array [
+          Object {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Private",
+          },
+          Object {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Private",
+          },
+          Object {
+            "Key": "kubernetes.io/role/internal-elb",
+            "Value": "1",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "integ-stack/GitlabEksCluster/DefaultVpc/PrivateSubnet2",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "GitlabEksClusterDefaultVpcD20F0C58",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "GitlabEksClusterDefaultVpcPublicSubnet1DefaultRouteC27960C9": Object {
+      "DependsOn": Array [
+        "GitlabEksClusterDefaultVpcVPCGWA5DF83E7",
+      ],
+      "Properties": Object {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": Object {
+          "Ref": "GitlabEksClusterDefaultVpcIGWCC17ABDC",
+        },
+        "RouteTableId": Object {
+          "Ref": "GitlabEksClusterDefaultVpcPublicSubnet1RouteTable1DD430E2",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "GitlabEksClusterDefaultVpcPublicSubnet1EIP8B52A370": Object {
+      "Properties": Object {
+        "Domain": "vpc",
+        "Tags": Array [
+          Object {
+            "Key": "kubernetes.io/role/elb",
+            "Value": "1",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "integ-stack/GitlabEksCluster/DefaultVpc/PublicSubnet1",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::EIP",
+    },
+    "GitlabEksClusterDefaultVpcPublicSubnet1NATGateway1EF7D956": Object {
+      "Properties": Object {
+        "AllocationId": Object {
+          "Fn::GetAtt": Array [
+            "GitlabEksClusterDefaultVpcPublicSubnet1EIP8B52A370",
+            "AllocationId",
+          ],
+        },
+        "SubnetId": Object {
+          "Ref": "GitlabEksClusterDefaultVpcPublicSubnet1Subnet8F613069",
+        },
+        "Tags": Array [
+          Object {
+            "Key": "kubernetes.io/role/elb",
+            "Value": "1",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "integ-stack/GitlabEksCluster/DefaultVpc/PublicSubnet1",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::NatGateway",
+    },
+    "GitlabEksClusterDefaultVpcPublicSubnet1RouteTable1DD430E2": Object {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
+            "Key": "kubernetes.io/role/elb",
+            "Value": "1",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "integ-stack/GitlabEksCluster/DefaultVpc/PublicSubnet1",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "GitlabEksClusterDefaultVpcD20F0C58",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "GitlabEksClusterDefaultVpcPublicSubnet1RouteTableAssociationC8EDCE71": Object {
+      "Properties": Object {
+        "RouteTableId": Object {
+          "Ref": "GitlabEksClusterDefaultVpcPublicSubnet1RouteTable1DD430E2",
+        },
+        "SubnetId": Object {
+          "Ref": "GitlabEksClusterDefaultVpcPublicSubnet1Subnet8F613069",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "GitlabEksClusterDefaultVpcPublicSubnet1Subnet8F613069": Object {
+      "Properties": Object {
+        "AvailabilityZone": Object {
+          "Fn::Select": Array [
+            0,
+            Object {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
+        "CidrBlock": "10.0.0.0/18",
+        "MapPublicIpOnLaunch": true,
+        "Tags": Array [
+          Object {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Public",
+          },
+          Object {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Public",
+          },
+          Object {
+            "Key": "kubernetes.io/role/elb",
+            "Value": "1",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "integ-stack/GitlabEksCluster/DefaultVpc/PublicSubnet1",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "GitlabEksClusterDefaultVpcD20F0C58",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "GitlabEksClusterDefaultVpcPublicSubnet2DefaultRouteCFE5E523": Object {
+      "DependsOn": Array [
+        "GitlabEksClusterDefaultVpcVPCGWA5DF83E7",
+      ],
+      "Properties": Object {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": Object {
+          "Ref": "GitlabEksClusterDefaultVpcIGWCC17ABDC",
+        },
+        "RouteTableId": Object {
+          "Ref": "GitlabEksClusterDefaultVpcPublicSubnet2RouteTableE26AFEF4",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "GitlabEksClusterDefaultVpcPublicSubnet2EIPA7953A44": Object {
+      "Properties": Object {
+        "Domain": "vpc",
+        "Tags": Array [
+          Object {
+            "Key": "kubernetes.io/role/elb",
+            "Value": "1",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "integ-stack/GitlabEksCluster/DefaultVpc/PublicSubnet2",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::EIP",
+    },
+    "GitlabEksClusterDefaultVpcPublicSubnet2NATGateway9F539312": Object {
+      "Properties": Object {
+        "AllocationId": Object {
+          "Fn::GetAtt": Array [
+            "GitlabEksClusterDefaultVpcPublicSubnet2EIPA7953A44",
+            "AllocationId",
+          ],
+        },
+        "SubnetId": Object {
+          "Ref": "GitlabEksClusterDefaultVpcPublicSubnet2Subnet5A2BD961",
+        },
+        "Tags": Array [
+          Object {
+            "Key": "kubernetes.io/role/elb",
+            "Value": "1",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "integ-stack/GitlabEksCluster/DefaultVpc/PublicSubnet2",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::NatGateway",
+    },
+    "GitlabEksClusterDefaultVpcPublicSubnet2RouteTableAssociationB780D203": Object {
+      "Properties": Object {
+        "RouteTableId": Object {
+          "Ref": "GitlabEksClusterDefaultVpcPublicSubnet2RouteTableE26AFEF4",
+        },
+        "SubnetId": Object {
+          "Ref": "GitlabEksClusterDefaultVpcPublicSubnet2Subnet5A2BD961",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "GitlabEksClusterDefaultVpcPublicSubnet2RouteTableE26AFEF4": Object {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
+            "Key": "kubernetes.io/role/elb",
+            "Value": "1",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "integ-stack/GitlabEksCluster/DefaultVpc/PublicSubnet2",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "GitlabEksClusterDefaultVpcD20F0C58",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "GitlabEksClusterDefaultVpcPublicSubnet2Subnet5A2BD961": Object {
+      "Properties": Object {
+        "AvailabilityZone": Object {
+          "Fn::Select": Array [
+            1,
+            Object {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
+        "CidrBlock": "10.0.64.0/18",
+        "MapPublicIpOnLaunch": true,
+        "Tags": Array [
+          Object {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Public",
+          },
+          Object {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Public",
+          },
+          Object {
+            "Key": "kubernetes.io/role/elb",
+            "Value": "1",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "integ-stack/GitlabEksCluster/DefaultVpc/PublicSubnet2",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "GitlabEksClusterDefaultVpcD20F0C58",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "GitlabEksClusterDefaultVpcVPCGWA5DF83E7": Object {
+      "Properties": Object {
+        "InternetGatewayId": Object {
+          "Ref": "GitlabEksClusterDefaultVpcIGWCC17ABDC",
+        },
+        "VpcId": Object {
+          "Ref": "GitlabEksClusterDefaultVpcD20F0C58",
+        },
+      },
+      "Type": "AWS::EC2::VPCGatewayAttachment",
+    },
+    "GitlabEksClusterKubectlReadyBarrierF39FD0FB": Object {
+      "DependsOn": Array [
+        "GitlabEksClusterCreationRoleDefaultPolicy48F9306E",
+        "GitlabEksClusterCreationRoleFA5C3E1D",
+        "GitlabEksCluster04011DE8",
+      ],
+      "Properties": Object {
+        "Type": "String",
+        "Value": "aws:cdk:eks:kubectl-ready",
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "GitlabEksClusterMastersRole5C87183A": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "AWS": Object {
+                  "Fn::Join": Array [
+                    "",
+                    Array [
+                      "arn:",
+                      Object {
+                        "Ref": "AWS::Partition",
+                      },
+                      ":iam::",
+                      Object {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":root",
+                    ],
+                  ],
+                },
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "GitlabEksClusterNodegroupDefaultCapacity6A883D4A": Object {
+      "Properties": Object {
+        "AmiType": "AL2_x86_64",
+        "ClusterName": Object {
+          "Ref": "GitlabEksCluster04011DE8",
+        },
+        "ForceUpdateEnabled": true,
+        "InstanceTypes": Array [
+          "m5.large",
+        ],
+        "NodeRole": Object {
+          "Fn::GetAtt": Array [
+            "GitlabEksClusterNodegroupDefaultCapacityNodeGroupRoleD3626F4D",
+            "Arn",
+          ],
+        },
+        "ScalingConfig": Object {
+          "DesiredSize": 2,
+          "MaxSize": 2,
+          "MinSize": 2,
+        },
+        "Subnets": Array [
+          Object {
+            "Ref": "GitlabEksClusterDefaultVpcPrivateSubnet1Subnet79F576B3",
+          },
+          Object {
+            "Ref": "GitlabEksClusterDefaultVpcPrivateSubnet2SubnetAFCE36B1",
+          },
+        ],
+      },
+      "Type": "AWS::EKS::Nodegroup",
+    },
+    "GitlabEksClusterNodegroupDefaultCapacityNodeGroupRoleD3626F4D": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "ec2.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/AmazonEKSWorkerNodePolicy",
+              ],
+            ],
+          },
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/AmazonEKS_CNI_Policy",
+              ],
+            ],
+          },
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "GitlabEksClusterRole49C5ADB7": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "eks.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/AmazonEKSClusterPolicy",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "GitlabProviderVpc79137F4F": Object {
+      "Properties": Object {
+        "CidrBlock": "10.0.0.0/16",
+        "EnableDnsHostnames": true,
+        "EnableDnsSupport": true,
+        "InstanceTenancy": "default",
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "integ-stack/GitlabProvider/Vpc",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::VPC",
+    },
+    "GitlabProviderVpcIGW0BE54733": Object {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "integ-stack/GitlabProvider/Vpc",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::InternetGateway",
+    },
+    "GitlabProviderVpcPrivateSubnet1DefaultRoute0D5D68E8": Object {
+      "Properties": Object {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "NatGatewayId": Object {
+          "Ref": "GitlabProviderVpcPublicSubnet1NATGatewayD2C06180",
+        },
+        "RouteTableId": Object {
+          "Ref": "GitlabProviderVpcPrivateSubnet1RouteTable978F7B5F",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "GitlabProviderVpcPrivateSubnet1RouteTable978F7B5F": Object {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "integ-stack/GitlabProvider/Vpc/PrivateSubnet1",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "GitlabProviderVpc79137F4F",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "GitlabProviderVpcPrivateSubnet1RouteTableAssociation5F362601": Object {
+      "Properties": Object {
+        "RouteTableId": Object {
+          "Ref": "GitlabProviderVpcPrivateSubnet1RouteTable978F7B5F",
+        },
+        "SubnetId": Object {
+          "Ref": "GitlabProviderVpcPrivateSubnet1Subnet50AC2252",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "GitlabProviderVpcPrivateSubnet1Subnet50AC2252": Object {
+      "Properties": Object {
+        "AvailabilityZone": Object {
+          "Fn::Select": Array [
+            0,
+            Object {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
+        "CidrBlock": "10.0.128.0/18",
+        "MapPublicIpOnLaunch": false,
+        "Tags": Array [
+          Object {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Private",
+          },
+          Object {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Private",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "integ-stack/GitlabProvider/Vpc/PrivateSubnet1",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "GitlabProviderVpc79137F4F",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "GitlabProviderVpcPrivateSubnet2DefaultRoute94EBBA85": Object {
+      "Properties": Object {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "NatGatewayId": Object {
+          "Ref": "GitlabProviderVpcPublicSubnet1NATGatewayD2C06180",
+        },
+        "RouteTableId": Object {
+          "Ref": "GitlabProviderVpcPrivateSubnet2RouteTable67892EE3",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "GitlabProviderVpcPrivateSubnet2RouteTable67892EE3": Object {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "integ-stack/GitlabProvider/Vpc/PrivateSubnet2",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "GitlabProviderVpc79137F4F",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "GitlabProviderVpcPrivateSubnet2RouteTableAssociation8FD649B8": Object {
+      "Properties": Object {
+        "RouteTableId": Object {
+          "Ref": "GitlabProviderVpcPrivateSubnet2RouteTable67892EE3",
+        },
+        "SubnetId": Object {
+          "Ref": "GitlabProviderVpcPrivateSubnet2Subnet37A8DA86",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "GitlabProviderVpcPrivateSubnet2Subnet37A8DA86": Object {
+      "Properties": Object {
+        "AvailabilityZone": Object {
+          "Fn::Select": Array [
+            1,
+            Object {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
+        "CidrBlock": "10.0.192.0/18",
+        "MapPublicIpOnLaunch": false,
+        "Tags": Array [
+          Object {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Private",
+          },
+          Object {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Private",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "integ-stack/GitlabProvider/Vpc/PrivateSubnet2",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "GitlabProviderVpc79137F4F",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "GitlabProviderVpcPublicSubnet1DefaultRouteD043328A": Object {
+      "DependsOn": Array [
+        "GitlabProviderVpcVPCGWF18E9428",
+      ],
+      "Properties": Object {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": Object {
+          "Ref": "GitlabProviderVpcIGW0BE54733",
+        },
+        "RouteTableId": Object {
+          "Ref": "GitlabProviderVpcPublicSubnet1RouteTable6638258C",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "GitlabProviderVpcPublicSubnet1EIPCBF61AE3": Object {
+      "Properties": Object {
+        "Domain": "vpc",
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "integ-stack/GitlabProvider/Vpc/PublicSubnet1",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::EIP",
+    },
+    "GitlabProviderVpcPublicSubnet1NATGatewayD2C06180": Object {
+      "Properties": Object {
+        "AllocationId": Object {
+          "Fn::GetAtt": Array [
+            "GitlabProviderVpcPublicSubnet1EIPCBF61AE3",
+            "AllocationId",
+          ],
+        },
+        "SubnetId": Object {
+          "Ref": "GitlabProviderVpcPublicSubnet1Subnet67AEB09D",
+        },
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "integ-stack/GitlabProvider/Vpc/PublicSubnet1",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::NatGateway",
+    },
+    "GitlabProviderVpcPublicSubnet1RouteTable6638258C": Object {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "integ-stack/GitlabProvider/Vpc/PublicSubnet1",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "GitlabProviderVpc79137F4F",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "GitlabProviderVpcPublicSubnet1RouteTableAssociation3F2557DB": Object {
+      "Properties": Object {
+        "RouteTableId": Object {
+          "Ref": "GitlabProviderVpcPublicSubnet1RouteTable6638258C",
+        },
+        "SubnetId": Object {
+          "Ref": "GitlabProviderVpcPublicSubnet1Subnet67AEB09D",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "GitlabProviderVpcPublicSubnet1Subnet67AEB09D": Object {
+      "Properties": Object {
+        "AvailabilityZone": Object {
+          "Fn::Select": Array [
+            0,
+            Object {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
+        "CidrBlock": "10.0.0.0/18",
+        "MapPublicIpOnLaunch": true,
+        "Tags": Array [
+          Object {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Public",
+          },
+          Object {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Public",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "integ-stack/GitlabProvider/Vpc/PublicSubnet1",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "GitlabProviderVpc79137F4F",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "GitlabProviderVpcPublicSubnet2DefaultRouteC2060FBF": Object {
+      "DependsOn": Array [
+        "GitlabProviderVpcVPCGWF18E9428",
+      ],
+      "Properties": Object {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": Object {
+          "Ref": "GitlabProviderVpcIGW0BE54733",
+        },
+        "RouteTableId": Object {
+          "Ref": "GitlabProviderVpcPublicSubnet2RouteTable239B163B",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "GitlabProviderVpcPublicSubnet2RouteTable239B163B": Object {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "integ-stack/GitlabProvider/Vpc/PublicSubnet2",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "GitlabProviderVpc79137F4F",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "GitlabProviderVpcPublicSubnet2RouteTableAssociation39887837": Object {
+      "Properties": Object {
+        "RouteTableId": Object {
+          "Ref": "GitlabProviderVpcPublicSubnet2RouteTable239B163B",
+        },
+        "SubnetId": Object {
+          "Ref": "GitlabProviderVpcPublicSubnet2SubnetAE2F7CEB",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "GitlabProviderVpcPublicSubnet2SubnetAE2F7CEB": Object {
+      "Properties": Object {
+        "AvailabilityZone": Object {
+          "Fn::Select": Array [
+            1,
+            Object {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
+        "CidrBlock": "10.0.64.0/18",
+        "MapPublicIpOnLaunch": true,
+        "Tags": Array [
+          Object {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Public",
+          },
+          Object {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Public",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "integ-stack/GitlabProvider/Vpc/PublicSubnet2",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "GitlabProviderVpc79137F4F",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "GitlabProviderVpcVPCGWF18E9428": Object {
+      "Properties": Object {
+        "InternetGatewayId": Object {
+          "Ref": "GitlabProviderVpcIGW0BE54733",
+        },
+        "VpcId": Object {
+          "Ref": "GitlabProviderVpc79137F4F",
+        },
+      },
+      "Type": "AWS::EC2::VPCGatewayAttachment",
+    },
+    "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454": Object {
+      "Properties": Object {
+        "Parameters": Object {
+          "referencetointegstackAssetParameters50e10880d134a01b440991fc77d217f39f01c2d56945215ee9a3b81187c6f3b1S3Bucket2509765ERef": Object {
+            "Ref": "AssetParameters50e10880d134a01b440991fc77d217f39f01c2d56945215ee9a3b81187c6f3b1S3Bucket36C546E0",
+          },
+          "referencetointegstackAssetParameters50e10880d134a01b440991fc77d217f39f01c2d56945215ee9a3b81187c6f3b1S3VersionKey3435E212Ref": Object {
+            "Ref": "AssetParameters50e10880d134a01b440991fc77d217f39f01c2d56945215ee9a3b81187c6f3b1S3VersionKey85C003F9",
+          },
+          "referencetointegstackAssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3Bucket9956EB8BRef": Object {
+            "Ref": "AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3BucketEAC9DD43",
+          },
+          "referencetointegstackAssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3VersionKeyEB79234ARef": Object {
+            "Ref": "AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3VersionKeyDD9AE9E7",
+          },
+          "referencetointegstackGitlabEksClusterCreationRole321E5994Arn": Object {
+            "Fn::GetAtt": Array [
+              "GitlabEksClusterCreationRoleFA5C3E1D",
+              "Arn",
+            ],
+          },
+        },
+        "TemplateURL": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "https://s3.us-east-1.",
+              Object {
+                "Ref": "AWS::URLSuffix",
+              },
+              "/",
+              Object {
+                "Ref": "AssetParameters6f6ba65780b34ab5218a718dc1a30ed9a96795f1909db912b68ea7292e02ff74S3Bucket172A5100",
+              },
+              "/",
+              Object {
+                "Fn::Select": Array [
+                  0,
+                  Object {
+                    "Fn::Split": Array [
+                      "||",
+                      Object {
+                        "Ref": "AssetParameters6f6ba65780b34ab5218a718dc1a30ed9a96795f1909db912b68ea7292e02ff74S3VersionKey0EB86A6B",
+                      },
+                    ],
+                  },
+                ],
+              },
+              Object {
+                "Fn::Select": Array [
+                  1,
+                  Object {
+                    "Fn::Split": Array [
+                      "||",
+                      Object {
+                        "Ref": "AssetParameters6f6ba65780b34ab5218a718dc1a30ed9a96795f1909db912b68ea7292e02ff74S3VersionKey0EB86A6B",
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::CloudFormation::Stack",
+    },
+    "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B": Object {
+      "Properties": Object {
+        "Parameters": Object {
+          "referencetointegstackAssetParametersb7d8a9750f8bfded8ac76be100e3bee1c3d4824df006766110d023f42952f5c2S3Bucket40C01ECERef": Object {
+            "Ref": "AssetParametersb7d8a9750f8bfded8ac76be100e3bee1c3d4824df006766110d023f42952f5c2S3Bucket9ABBD5A2",
+          },
+          "referencetointegstackAssetParametersb7d8a9750f8bfded8ac76be100e3bee1c3d4824df006766110d023f42952f5c2S3VersionKey5A80EB8FRef": Object {
+            "Ref": "AssetParametersb7d8a9750f8bfded8ac76be100e3bee1c3d4824df006766110d023f42952f5c2S3VersionKey40FF2C4A",
+          },
+          "referencetointegstackAssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3Bucket9956EB8BRef": Object {
+            "Ref": "AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3BucketEAC9DD43",
+          },
+          "referencetointegstackAssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3VersionKeyEB79234ARef": Object {
+            "Ref": "AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3VersionKeyDD9AE9E7",
+          },
+          "referencetointegstackGitlabEksCluster8EBE0379Arn": Object {
+            "Fn::GetAtt": Array [
+              "GitlabEksCluster04011DE8",
+              "Arn",
+            ],
+          },
+          "referencetointegstackGitlabEksCluster8EBE0379ClusterSecurityGroupId": Object {
+            "Fn::GetAtt": Array [
+              "GitlabEksCluster04011DE8",
+              "ClusterSecurityGroupId",
+            ],
+          },
+          "referencetointegstackGitlabEksClusterCreationRole321E5994Arn": Object {
+            "Fn::GetAtt": Array [
+              "GitlabEksClusterCreationRoleFA5C3E1D",
+              "Arn",
+            ],
+          },
+          "referencetointegstackGitlabEksClusterDefaultVpcPrivateSubnet1Subnet10B3E07ARef": Object {
+            "Ref": "GitlabEksClusterDefaultVpcPrivateSubnet1Subnet79F576B3",
+          },
+          "referencetointegstackGitlabEksClusterDefaultVpcPrivateSubnet2Subnet511355A4Ref": Object {
+            "Ref": "GitlabEksClusterDefaultVpcPrivateSubnet2SubnetAFCE36B1",
+          },
+        },
+        "TemplateURL": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "https://s3.us-east-1.",
+              Object {
+                "Ref": "AWS::URLSuffix",
+              },
+              "/",
+              Object {
+                "Ref": "AssetParameters456c12587e28e9e258e07a919f3c252242a0ff9e0cc2d932757db63062ea476eS3BucketE429B224",
+              },
+              "/",
+              Object {
+                "Fn::Select": Array [
+                  0,
+                  Object {
+                    "Fn::Split": Array [
+                      "||",
+                      Object {
+                        "Ref": "AssetParameters456c12587e28e9e258e07a919f3c252242a0ff9e0cc2d932757db63062ea476eS3VersionKeyAF86745F",
+                      },
+                    ],
+                  },
+                ],
+              },
+              Object {
+                "Fn::Select": Array [
+                  1,
+                  Object {
+                    "Fn::Split": Array [
+                      "||",
+                      Object {
+                        "Ref": "AssetParameters456c12587e28e9e258e07a919f3c252242a0ff9e0cc2d932757db63062ea476eS3VersionKeyAF86745F",
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::CloudFormation::Stack",
+    },
+  },
+}
+`;
