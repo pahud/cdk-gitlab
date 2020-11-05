@@ -3,7 +3,7 @@ import * as ecs from '@aws-cdk/aws-ecs';
 import * as iam from '@aws-cdk/aws-iam';
 import * as cdk from '@aws-cdk/core';
 
-export interface RunnerManagerProps {
+export interface FargateRunnerProps {
   /**
    * VPC for the fargate
    */
@@ -29,7 +29,7 @@ export interface RunnerManagerProps {
 
 export class FargateRunner extends cdk.Construct {
   readonly vpc: ec2.IVpc;
-  constructor(scope: cdk.Construct, id: string, props: RunnerManagerProps ) {
+  constructor(scope: cdk.Construct, id: string, props: FargateRunnerProps ) {
     super(scope, id);
 
     this.vpc = props.vpc;
