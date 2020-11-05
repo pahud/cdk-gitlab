@@ -96,6 +96,18 @@ createEksServiceRole(): Role
 __Returns__:
 * <code>[Role](#aws-cdk-aws-iam-role)</code>
 
+#### createFargateRunner() <a id="cdk-gitlab-provider-createfargaterunner"></a>
+
+
+
+```ts
+createFargateRunner(): void
+```
+
+
+
+
+
 #### createGitlabManagedEksRole(props) <a id="cdk-gitlab-provider-creategitlabmanagedeksrole"></a>
 
 

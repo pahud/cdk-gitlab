@@ -2,7 +2,7 @@ import * as ec2 from '@aws-cdk/aws-ec2';
 import * as eks from '@aws-cdk/aws-eks';
 import * as iam from '@aws-cdk/aws-iam';
 import * as cdk from '@aws-cdk/core';
-
+import * as runner from './runner';
 
 export interface ProviderProps {
   readonly vpc?: ec2.IVpc;
@@ -25,6 +25,16 @@ export class Provider extends cdk.Construct {
 
     new cdk.CfnOutput(this, 'Region', { value: stack.region });
 
+  }
+  public createFargateRunner() {
+    const token = this.node.tryGetContext('GITLAB_REGISTRATION_TOKEN') || process.env.GITLAB_REGISTRATION_TOKEN;
+    if (!token) {
+      throw new Error('missing GITLAB_REGISTRATION_TOKEN in the context variable');
+    }
+    new runner.FargateRunner(this, 'FargateRunner', {
+      vpc: this.vpc,
+      registrationToken: this.node.tryGetContext('GITLAB_REGISTRATION_TOKEN'),
+    });
   }
   public createEksCluster(scope: cdk.Construct, id: string, props: eks.ClusterProps): eks.Cluster {
     return new eks.Cluster(scope, id, props);

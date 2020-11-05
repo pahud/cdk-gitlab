@@ -12,6 +12,7 @@ const project = new AwsCdkConstructLibrary({
   cdkDependencies: [
     '@aws-cdk/core',
     '@aws-cdk/aws-ec2',
+    '@aws-cdk/aws-ecs',
     '@aws-cdk/aws-eks',
     '@aws-cdk/aws-iam',
   ],

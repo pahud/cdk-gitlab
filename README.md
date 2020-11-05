@@ -19,12 +19,18 @@ provider.createEksCluster(stack, 'GitlabEksCluster', {
   version: eks.KubernetesVersion.V1_18,
 });
 
+// create the fargate runner
+provider.createFargateRunner();
+
 // TBD - create Amazon EC2 runner for the GitLab
 provider.createEc2Runner(...);
 
-// TBD - create Fargate runner for the GitLab
-provider.createFargateRunner(...);
-
 });
+```
 
+# Deploy
+
+
+```sh
+cdk deploy -c GITLAB_REGISTRATION_TOKEN=<TOKEN>
 ```

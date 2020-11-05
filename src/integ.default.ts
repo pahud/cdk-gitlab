@@ -19,23 +19,23 @@ export class IntegTesting {
 
     const stack = new cdk.Stack(app, 'integ-stack', { env });
 
-    const vpc = props.vpc;
+    const vpc = props.vpc ?? new ec2.Vpc(stack, 'Vpc', { natGateways: 1 });
 
-    const provider = new gl.Provider(stack, 'GitlabProvider');
+    const provider = new gl.Provider(stack, 'GitlabProvider', { vpc });
 
-    // provider.createGitlabManagedEksRole({
-    //   accountId: '855262394183',
-    //   externalId: '37447cd37a816aae731793fb8ebaf34928393c4d',
-    // });
-
+    // create a Amazon EKS cluster
     provider.createEksCluster(stack, 'GitlabEksCluster', {
       vpc,
       version: eks.KubernetesVersion.V1_18,
     });
 
-    this.stack = [stack];
+    // create the fargate runner
+    provider.createFargateRunner();
 
+    this.stack = [stack];
   }
 }
+
+process.env.GITLAB_REGISTRATION_TOKEN='mock';
 
 new IntegTesting();
