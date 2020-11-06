@@ -52,10 +52,10 @@ yarn-error.log
 !/.github/workflows/build.yml
 !/.github/workflows/release.yml
 !/.mergify.yml
-!/.github/dependabot.yml
 !/.github/pull_request_template.md
 !/src
 !/tsconfig.jest.json
 !/test
 !/.eslintrc.json
 !/API.md
+!/.github/workflows/projenyarnupgrade.yml
