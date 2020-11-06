@@ -1,6 +1,6 @@
 {
     "name": "Dev Container Definition - AWS CDK",
-    "image": "pahud/vscode",
+    "image": "ghcr.io/pahud/vscode",
     //"dockerFile": "Dockerfile",
     "mounts": [
         "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
