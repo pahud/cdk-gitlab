@@ -110,6 +110,372 @@ Object {
     },
   },
   "Resources": Object {
+    "FargateRunnerClusterFFA572F1": Object {
+      "Type": "AWS::ECS::Cluster",
+    },
+    "FargateRunnerFargateSecurityGroupC01BE5FB": Object {
+      "Properties": Object {
+        "GroupDescription": "integ-stack/FargateRunner/FargateSecurityGroup",
+        "SecurityGroupEgress": Array [
+          Object {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "Vpc8378EB38",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "FargateRunnerFargateSecurityGroupfromintegstackFargateRunnerFargateSecurityGroup80E7C35AALLTRAFFIC502EB20B": Object {
+      "Properties": Object {
+        "Description": "from integstackFargateRunnerFargateSecurityGroup80E7C35A:ALL TRAFFIC",
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
+            "FargateRunnerFargateSecurityGroupC01BE5FB",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "-1",
+        "SourceSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
+            "FargateRunnerFargateSecurityGroupC01BE5FB",
+            "GroupId",
+          ],
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "FargateRunnerJobExecutorJobsTaskEDEE4444": Object {
+      "Properties": Object {
+        "ContainerDefinitions": Array [
+          Object {
+            "Essential": true,
+            "Image": "registry.gitlab.com/tmaczukin-test-projects/fargate-driver-debian:latest",
+            "LogConfiguration": Object {
+              "LogDriver": "awslogs",
+              "Options": Object {
+                "awslogs-group": Object {
+                  "Ref": "FargateRunnerJobExecutorJobsTaskcicoordinatorLogGroupDEDE9F6E",
+                },
+                "awslogs-region": "us-east-1",
+                "awslogs-stream-prefix": "GitlabRunnerJob",
+              },
+            },
+            "Name": "ci-coordinator",
+            "PortMappings": Array [
+              Object {
+                "ContainerPort": 22,
+                "Protocol": "tcp",
+              },
+            ],
+          },
+        ],
+        "Cpu": "256",
+        "ExecutionRoleArn": Object {
+          "Fn::GetAtt": Array [
+            "FargateRunnerJobExecutorJobsTaskExecutionRole17061031",
+            "Arn",
+          ],
+        },
+        "Family": "integstackFargateRunnerJobExecutorJobsTask9CAD5439",
+        "Memory": "512",
+        "NetworkMode": "awsvpc",
+        "RequiresCompatibilities": Array [
+          "FARGATE",
+        ],
+        "TaskRoleArn": Object {
+          "Fn::GetAtt": Array [
+            "FargateRunnerJobExecutorJobsTaskTaskRole500E6ADF",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::ECS::TaskDefinition",
+    },
+    "FargateRunnerJobExecutorJobsTaskExecutionRole17061031": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "ecs-tasks.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "FargateRunnerJobExecutorJobsTaskExecutionRoleDefaultPolicy0D855F19": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+              ],
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::GetAtt": Array [
+                  "FargateRunnerJobExecutorJobsTaskcicoordinatorLogGroupDEDE9F6E",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "FargateRunnerJobExecutorJobsTaskExecutionRoleDefaultPolicy0D855F19",
+        "Roles": Array [
+          Object {
+            "Ref": "FargateRunnerJobExecutorJobsTaskExecutionRole17061031",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "FargateRunnerJobExecutorJobsTaskTaskRole500E6ADF": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "ecs-tasks.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "FargateRunnerJobExecutorJobsTaskcicoordinatorLogGroupDEDE9F6E": Object {
+      "DeletionPolicy": "Retain",
+      "Properties": Object {
+        "RetentionInDays": 7,
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "FargateRunnerRunnerManagerService6E98525F": Object {
+      "Properties": Object {
+        "Cluster": Object {
+          "Ref": "FargateRunnerClusterFFA572F1",
+        },
+        "DeploymentConfiguration": Object {
+          "MaximumPercent": 200,
+          "MinimumHealthyPercent": 50,
+        },
+        "DesiredCount": 1,
+        "EnableECSManagedTags": false,
+        "LaunchType": "FARGATE",
+        "NetworkConfiguration": Object {
+          "AwsvpcConfiguration": Object {
+            "AssignPublicIp": "DISABLED",
+            "SecurityGroups": Array [
+              Object {
+                "Fn::GetAtt": Array [
+                  "FargateRunnerFargateSecurityGroupC01BE5FB",
+                  "GroupId",
+                ],
+              },
+            ],
+            "Subnets": Array [
+              Object {
+                "Ref": "VpcPrivateSubnet1Subnet536B997A",
+              },
+              Object {
+                "Ref": "VpcPrivateSubnet2Subnet3788AAA1",
+              },
+            ],
+          },
+        },
+        "TaskDefinition": Object {
+          "Ref": "FargateRunnerRunnerTask485CDCA5",
+        },
+      },
+      "Type": "AWS::ECS::Service",
+    },
+    "FargateRunnerRunnerTask485CDCA5": Object {
+      "Properties": Object {
+        "ContainerDefinitions": Array [
+          Object {
+            "Environment": Array [
+              Object {
+                "Name": "GITLAB_REGISTRATION_TOKEN",
+                "Value": "mock",
+              },
+              Object {
+                "Name": "GITLAB_URL",
+                "Value": "https://gitlab.com",
+              },
+              Object {
+                "Name": "FARGATE_REGION",
+                "Value": "us-east-1",
+              },
+              Object {
+                "Name": "FARGATE_CLUSTER",
+                "Value": Object {
+                  "Ref": "FargateRunnerClusterFFA572F1",
+                },
+              },
+              Object {
+                "Name": "FARGATE_SUBNET",
+                "Value": Object {
+                  "Ref": "VpcPrivateSubnet1Subnet536B997A",
+                },
+              },
+              Object {
+                "Name": "FARGATE_SECURITY_GROUP",
+                "Value": Object {
+                  "Fn::GetAtt": Array [
+                    "FargateRunnerFargateSecurityGroupC01BE5FB",
+                    "GroupId",
+                  ],
+                },
+              },
+              Object {
+                "Name": "FARGATE_TASK_DEFINITION",
+                "Value": Object {
+                  "Ref": "JobExecutorJobsTask6E8000D3",
+                },
+              },
+              Object {
+                "Name": "RUNNER_TAG_LIST",
+                "Value": "fargate,gitlab,aws,docker",
+              },
+            ],
+            "Essential": true,
+            "Image": "registry.gitlab.com/pahud/docker-gitlab-runner-fargate-driver",
+            "LogConfiguration": Object {
+              "LogDriver": "awslogs",
+              "Options": Object {
+                "awslogs-group": Object {
+                  "Ref": "FargateRunnerRunnerTaskrunnerLogGroup98D7ED88",
+                },
+                "awslogs-region": "us-east-1",
+                "awslogs-stream-prefix": "GitlabRunnerManager",
+              },
+            },
+            "Name": "runner",
+          },
+        ],
+        "Cpu": "256",
+        "ExecutionRoleArn": Object {
+          "Fn::GetAtt": Array [
+            "FargateRunnerRunnerTaskExecutionRole57895ADB",
+            "Arn",
+          ],
+        },
+        "Family": "integstackFargateRunnerRunnerTask0679A865",
+        "Memory": "512",
+        "NetworkMode": "awsvpc",
+        "RequiresCompatibilities": Array [
+          "FARGATE",
+        ],
+        "TaskRoleArn": Object {
+          "Fn::GetAtt": Array [
+            "FargateRunnerRunnerTaskTaskRole3E282FEA",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::ECS::TaskDefinition",
+    },
+    "FargateRunnerRunnerTaskExecutionRole57895ADB": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "ecs-tasks.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "FargateRunnerRunnerTaskExecutionRoleDefaultPolicy28C40137": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+              ],
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::GetAtt": Array [
+                  "FargateRunnerRunnerTaskrunnerLogGroup98D7ED88",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "FargateRunnerRunnerTaskExecutionRoleDefaultPolicy28C40137",
+        "Roles": Array [
+          Object {
+            "Ref": "FargateRunnerRunnerTaskExecutionRole57895ADB",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "FargateRunnerRunnerTaskTaskRole3E282FEA": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "ecs-tasks.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/AmazonECS_FullAccess",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "FargateRunnerRunnerTaskrunnerLogGroup98D7ED88": Object {
+      "DeletionPolicy": "Retain",
+      "Properties": Object {
+        "RetentionInDays": 7,
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Retain",
+    },
     "GitlabEksCluster04011DE8": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
@@ -633,7 +999,7 @@ Object {
       },
       "Type": "AWS::EC2::SecurityGroupIngress",
     },
-    "GitlabProviderFargateRunnerJobsTask7DEAC5AD": Object {
+    "GitlabProviderFargateRunnerJobExecutorJobsTaskAB6D349C": Object {
       "Properties": Object {
         "ContainerDefinitions": Array [
           Object {
@@ -643,7 +1009,7 @@ Object {
               "LogDriver": "awslogs",
               "Options": Object {
                 "awslogs-group": Object {
-                  "Ref": "GitlabProviderFargateRunnerJobsTaskcicoordinatorLogGroupDDE5968D",
+                  "Ref": "GitlabProviderFargateRunnerJobExecutorJobsTaskcicoordinatorLogGroup40CF368A",
                 },
                 "awslogs-region": "us-east-1",
                 "awslogs-stream-prefix": "GitlabRunnerJob",
@@ -661,11 +1027,11 @@ Object {
         "Cpu": "256",
         "ExecutionRoleArn": Object {
           "Fn::GetAtt": Array [
-            "GitlabProviderFargateRunnerJobsTaskExecutionRole583EC51C",
+            "GitlabProviderFargateRunnerJobExecutorJobsTaskExecutionRoleC5FE41A6",
             "Arn",
           ],
         },
-        "Family": "integstackGitlabProviderFargateRunnerJobsTask87604D31",
+        "Family": "integstackGitlabProviderFargateRunnerJobExecutorJobsTaskF5D1928A",
         "Memory": "512",
         "NetworkMode": "awsvpc",
         "RequiresCompatibilities": Array [
@@ -673,14 +1039,14 @@ Object {
         ],
         "TaskRoleArn": Object {
           "Fn::GetAtt": Array [
-            "GitlabProviderFargateRunnerJobsTaskTaskRoleE8176F67",
+            "GitlabProviderFargateRunnerJobExecutorJobsTaskTaskRole1A8F051B",
             "Arn",
           ],
         },
       },
       "Type": "AWS::ECS::TaskDefinition",
     },
-    "GitlabProviderFargateRunnerJobsTaskExecutionRole583EC51C": Object {
+    "GitlabProviderFargateRunnerJobExecutorJobsTaskExecutionRoleC5FE41A6": Object {
       "Properties": Object {
         "AssumeRolePolicyDocument": Object {
           "Statement": Array [
@@ -697,7 +1063,7 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "GitlabProviderFargateRunnerJobsTaskExecutionRoleDefaultPolicyAD228BE5": Object {
+    "GitlabProviderFargateRunnerJobExecutorJobsTaskExecutionRoleDefaultPolicyF42EF37D": Object {
       "Properties": Object {
         "PolicyDocument": Object {
           "Statement": Array [
@@ -709,7 +1075,7 @@ Object {
               "Effect": "Allow",
               "Resource": Object {
                 "Fn::GetAtt": Array [
-                  "GitlabProviderFargateRunnerJobsTaskcicoordinatorLogGroupDDE5968D",
+                  "GitlabProviderFargateRunnerJobExecutorJobsTaskcicoordinatorLogGroup40CF368A",
                   "Arn",
                 ],
               },
@@ -717,16 +1083,16 @@ Object {
           ],
           "Version": "2012-10-17",
         },
-        "PolicyName": "GitlabProviderFargateRunnerJobsTaskExecutionRoleDefaultPolicyAD228BE5",
+        "PolicyName": "GitlabProviderFargateRunnerJobExecutorJobsTaskExecutionRoleDefaultPolicyF42EF37D",
         "Roles": Array [
           Object {
-            "Ref": "GitlabProviderFargateRunnerJobsTaskExecutionRole583EC51C",
+            "Ref": "GitlabProviderFargateRunnerJobExecutorJobsTaskExecutionRoleC5FE41A6",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "GitlabProviderFargateRunnerJobsTaskTaskRoleE8176F67": Object {
+    "GitlabProviderFargateRunnerJobExecutorJobsTaskTaskRole1A8F051B": Object {
       "Properties": Object {
         "AssumeRolePolicyDocument": Object {
           "Statement": Array [
@@ -743,7 +1109,7 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "GitlabProviderFargateRunnerJobsTaskcicoordinatorLogGroupDDE5968D": Object {
+    "GitlabProviderFargateRunnerJobExecutorJobsTaskcicoordinatorLogGroup40CF368A": Object {
       "DeletionPolicy": "Retain",
       "Properties": Object {
         "RetentionInDays": 7,
@@ -797,6 +1163,11 @@ Object {
             "Environment": Array [
               Object {
                 "Name": "GITLAB_REGISTRATION_TOKEN",
+                "Value": "mock",
+              },
+              Object {
+                "Name": "GITLAB_URL",
+                "Value": "https://gitlab.com",
               },
               Object {
                 "Name": "FARGATE_REGION",
@@ -825,7 +1196,9 @@ Object {
               },
               Object {
                 "Name": "FARGATE_TASK_DEFINITION",
-                "Value": "integstackGitlabProviderFargateRunnerJobsTask87604D31",
+                "Value": Object {
+                  "Ref": "GitlabProviderFargateRunnerJobExecutorJobsTaskAB6D349C",
+                },
               },
               Object {
                 "Name": "RUNNER_TAG_LIST",
@@ -947,6 +1320,124 @@ Object {
       "Type": "AWS::IAM::Role",
     },
     "GitlabProviderFargateRunnerRunnerTaskrunnerLogGroup93470F50": Object {
+      "DeletionPolicy": "Retain",
+      "Properties": Object {
+        "RetentionInDays": 7,
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "JobExecutorJobsTask6E8000D3": Object {
+      "Properties": Object {
+        "ContainerDefinitions": Array [
+          Object {
+            "Essential": true,
+            "Image": "registry.gitlab.com/tmaczukin-test-projects/fargate-driver-debian:latest",
+            "LogConfiguration": Object {
+              "LogDriver": "awslogs",
+              "Options": Object {
+                "awslogs-group": Object {
+                  "Ref": "JobExecutorJobsTaskcicoordinatorLogGroup8879A6BF",
+                },
+                "awslogs-region": "us-east-1",
+                "awslogs-stream-prefix": "GitlabRunnerJob",
+              },
+            },
+            "Name": "ci-coordinator",
+            "PortMappings": Array [
+              Object {
+                "ContainerPort": 22,
+                "Protocol": "tcp",
+              },
+            ],
+          },
+        ],
+        "Cpu": "256",
+        "ExecutionRoleArn": Object {
+          "Fn::GetAtt": Array [
+            "JobExecutorJobsTaskExecutionRoleAF930FE8",
+            "Arn",
+          ],
+        },
+        "Family": "integstackJobExecutorJobsTaskA2BA4778",
+        "Memory": "512",
+        "NetworkMode": "awsvpc",
+        "RequiresCompatibilities": Array [
+          "FARGATE",
+        ],
+        "TaskRoleArn": Object {
+          "Fn::GetAtt": Array [
+            "JobExecutorJobsTaskTaskRole9690A2D1",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::ECS::TaskDefinition",
+    },
+    "JobExecutorJobsTaskExecutionRoleAF930FE8": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "ecs-tasks.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "JobExecutorJobsTaskExecutionRoleDefaultPolicy67E5CCA0": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+              ],
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::GetAtt": Array [
+                  "JobExecutorJobsTaskcicoordinatorLogGroup8879A6BF",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "JobExecutorJobsTaskExecutionRoleDefaultPolicy67E5CCA0",
+        "Roles": Array [
+          Object {
+            "Ref": "JobExecutorJobsTaskExecutionRoleAF930FE8",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "JobExecutorJobsTaskTaskRole9690A2D1": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "ecs-tasks.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "JobExecutorJobsTaskcicoordinatorLogGroup8879A6BF": Object {
       "DeletionPolicy": "Retain",
       "Properties": Object {
         "RetentionInDays": 7,

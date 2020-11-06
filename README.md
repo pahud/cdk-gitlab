@@ -10,17 +10,30 @@ High level CDK construct to provision GitLab integrations with AWS
 # Sample
 
 ```ts
-import * as gl from 'cdk-gitlab';
+import { Provider, FargateJobExecutor, FargateRunner, JobExecutorImage } from 'cdk-gitlab';
 
-const provider = new gl.Provider(stack, 'GitlabProvider');
+const provider = new Provider(stack, 'GitlabProvider', { vpc });
 
-// create Amazon EKS cluster for the GitLab integration
+// create a Amazon EKS cluster
 provider.createEksCluster(stack, 'GitlabEksCluster', {
+  vpc,
   version: eks.KubernetesVersion.V1_18,
 });
 
-// create the fargate runner
+// create a default fargate runner with its job executor
 provider.createFargateRunner();
+
+// alternatively, create the runner and the executor indivicually.
+// first, create the executor
+const executor = new FargateJobExecutor(stack, 'JobExecutor', {
+  image: JobExecutorImage.DEBIAN,
+});
+
+// second, create the runner with the task definition of the executor
+new FargateRunner(stack, 'FargateRunner', {
+  vpc,
+  executor: { task: executor.taskDefinitionArn },
+});
 
 // TBD - create Amazon EC2 runner for the GitLab
 provider.createEc2Runner(...);

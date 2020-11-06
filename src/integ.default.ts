@@ -1,7 +1,7 @@
 import * as ec2 from '@aws-cdk/aws-ec2';
 import * as eks from '@aws-cdk/aws-eks';
 import * as cdk from '@aws-cdk/core';
-import * as gl from './index';
+import { Provider, FargateJobExecutor, FargateRunner, JobExecutorImage } from './';
 
 
 export interface IntegTestingProps {
@@ -21,7 +21,7 @@ export class IntegTesting {
 
     const vpc = props.vpc ?? new ec2.Vpc(stack, 'Vpc', { natGateways: 1 });
 
-    const provider = new gl.Provider(stack, 'GitlabProvider', { vpc });
+    const provider = new Provider(stack, 'GitlabProvider', { vpc });
 
     // create a Amazon EKS cluster
     provider.createEksCluster(stack, 'GitlabEksCluster', {
@@ -29,8 +29,21 @@ export class IntegTesting {
       version: eks.KubernetesVersion.V1_18,
     });
 
-    // create the fargate runner
+    // create a default fargate runner with its job executor
     provider.createFargateRunner();
+
+    // alternatively, create the runner and the executor indivicually.
+    // first, create the executor
+    const executor = new FargateJobExecutor(stack, 'JobExecutor', {
+      image: JobExecutorImage.DEBIAN,
+    });
+
+    // second,create the runner with the task definition of the executor
+    new FargateRunner(stack, 'FargateRunner', {
+      vpc,
+      executor: { task: executor.taskDefinitionArn },
+    });
+
 
     this.stack = [stack];
   }

@@ -4,6 +4,9 @@
 
 Name|Description
 ----|-----------
+[FargateJobExecutor](#cdk-gitlab-fargatejobexecutor)|*No description*
+[FargateRunner](#cdk-gitlab-fargaterunner)|*No description*
+[JobExecutorImage](#cdk-gitlab-jobexecutorimage)|The docker image for the job executor.
 [Provider](#cdk-gitlab-provider)|*No description*
 
 
@@ -11,8 +14,114 @@ Name|Description
 
 Name|Description
 ----|-----------
+[FargateJobExecutorProps](#cdk-gitlab-fargatejobexecutorprops)|*No description*
+[FargateRunnerProps](#cdk-gitlab-fargaterunnerprops)|*No description*
+[JobExecutorOptions](#cdk-gitlab-jobexecutoroptions)|Options for the runner to create the fargate job executor.
 [ProviderProps](#cdk-gitlab-providerprops)|*No description*
 [RoleProps](#cdk-gitlab-roleprops)|*No description*
+
+
+
+## class FargateJobExecutor  <a id="cdk-gitlab-fargatejobexecutor"></a>
+
+
+
+__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
+__Extends__: [Construct](#aws-cdk-core-construct)
+
+### Initializer
+
+
+
+
+```ts
+new FargateJobExecutor(scope: Construct, id: string, props?: FargateJobExecutorProps)
+```
+
+* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **id** (<code>string</code>)  *No description*
+* **props** (<code>[FargateJobExecutorProps](#cdk-gitlab-fargatejobexecutorprops)</code>)  *No description*
+  * **image** (<code>[JobExecutorImage](#cdk-gitlab-jobexecutorimage)</code>)  The docker image for the job executor container. __*Optional*__
+
+
+
+### Properties
+
+
+Name | Type | Description 
+-----|------|-------------
+**taskDefinitionArn** | <code>string</code> | task definition arn.
+
+
+
+## class FargateRunner  <a id="cdk-gitlab-fargaterunner"></a>
+
+
+
+__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
+__Extends__: [Construct](#aws-cdk-core-construct)
+
+### Initializer
+
+
+
+
+```ts
+new FargateRunner(scope: Construct, id: string, props: FargateRunnerProps)
+```
+
+* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **id** (<code>string</code>)  *No description*
+* **props** (<code>[FargateRunnerProps](#cdk-gitlab-fargaterunnerprops)</code>)  *No description*
+  * **executor** (<code>[JobExecutorOptions](#cdk-gitlab-jobexecutoroptions)</code>)  Fargate job executor options. 
+  * **vpc** (<code>[IVpc](#aws-cdk-aws-ec2-ivpc)</code>)  VPC for the fargate. 
+  * **fargateJobSubnet** (<code>[SubnetSelection](#aws-cdk-aws-ec2-subnetselection)</code>)  subnet for fargate CI task. __*Optional*__
+  * **gitlabURL** (<code>string</code>)  gitlab URL prefix. __*Default*__: 'https://gitlab.com'
+  * **registrationToken** (<code>string</code>)  GitLab registration token for the runner. __*Optional*__
+  * **securityGroup** (<code>[ISecurityGroup](#aws-cdk-aws-ec2-isecuritygroup)</code>)  The security group for Fargate CI task. __*Optional*__
+  * **tags** (<code>Array<string></code>)  tags for the runner. __*Optional*__
+
+
+
+### Properties
+
+
+Name | Type | Description 
+-----|------|-------------
+**vpc** | <code>[IVpc](#aws-cdk-aws-ec2-ivpc)</code> | <span></span>
+
+
+
+## class JobExecutorImage  <a id="cdk-gitlab-jobexecutorimage"></a>
+
+The docker image for the job executor.
+
+
+
+### Properties
+
+
+Name | Type | Description 
+-----|------|-------------
+**uri** | <code>string</code> | <span></span>
+*static* **DEBIAN** | <code>[JobExecutorImage](#cdk-gitlab-jobexecutorimage)</code> | Debian.
+*static* **NODE** | <code>[JobExecutorImage](#cdk-gitlab-jobexecutorimage)</code> | Node.
+
+### Methods
+
+
+#### *static* of(image) <a id="cdk-gitlab-jobexecutorimage-of"></a>
+
+Custom image.
+
+```ts
+static of(image: string): JobExecutorImage
+```
+
+* **image** (<code>string</code>)  custom image registry URI.
+
+__Returns__:
+* <code>[JobExecutorImage](#cdk-gitlab-jobexecutorimage)</code>
 
 
 
@@ -96,14 +205,20 @@ createEksServiceRole(): Role
 __Returns__:
 * <code>[Role](#aws-cdk-aws-iam-role)</code>
 
-#### createFargateRunner() <a id="cdk-gitlab-provider-createfargaterunner"></a>
+#### createFargateRunner(executor?) <a id="cdk-gitlab-provider-createfargaterunner"></a>
 
 
 
 ```ts
-createFargateRunner(): void
+createFargateRunner(executor?: JobExecutorOptions): void
 ```
 
+* **executor** (<code>[JobExecutorOptions](#cdk-gitlab-jobexecutoroptions)</code>)  *No description*
+  * **cluster** (<code>[ICluster](#aws-cdk-aws-ecs-icluster)</code>)  The ECS clsuter of the job executor fargate task. __*Default*__: the cluster for the runner
+  * **region** (<code>string</code>)  AWS region for the job executor. __*Default*__: the region of the stack
+  * **securityGroup** (<code>[ISecurityGroup](#aws-cdk-aws-ec2-isecuritygroup)</code>)  security group for the executor. __*Optional*__
+  * **subnet** (<code>[ISubnet](#aws-cdk-aws-ec2-isubnet)</code>)  subnet for the executor. __*Optional*__
+  * **task** (<code>string</code>)  task definition arn of the executor. __*Optional*__
 
 
 
@@ -134,6 +249,55 @@ createSecurityGroup(): SecurityGroup
 
 __Returns__:
 * <code>[SecurityGroup](#aws-cdk-aws-ec2-securitygroup)</code>
+
+
+
+## struct FargateJobExecutorProps  <a id="cdk-gitlab-fargatejobexecutorprops"></a>
+
+
+
+
+
+
+Name | Type | Description 
+-----|------|-------------
+**image**? | <code>[JobExecutorImage](#cdk-gitlab-jobexecutorimage)</code> | The docker image for the job executor container.<br/>__*Optional*__
+
+
+
+## struct FargateRunnerProps  <a id="cdk-gitlab-fargaterunnerprops"></a>
+
+
+
+
+
+
+Name | Type | Description 
+-----|------|-------------
+**executor** | <code>[JobExecutorOptions](#cdk-gitlab-jobexecutoroptions)</code> | Fargate job executor options.
+**vpc** | <code>[IVpc](#aws-cdk-aws-ec2-ivpc)</code> | VPC for the fargate.
+**fargateJobSubnet**? | <code>[SubnetSelection](#aws-cdk-aws-ec2-subnetselection)</code> | subnet for fargate CI task.<br/>__*Optional*__
+**gitlabURL**? | <code>string</code> | gitlab URL prefix.<br/>__*Default*__: 'https://gitlab.com'
+**registrationToken**? | <code>string</code> | GitLab registration token for the runner.<br/>__*Optional*__
+**securityGroup**? | <code>[ISecurityGroup](#aws-cdk-aws-ec2-isecuritygroup)</code> | The security group for Fargate CI task.<br/>__*Optional*__
+**tags**? | <code>Array<string></code> | tags for the runner.<br/>__*Optional*__
+
+
+
+## struct JobExecutorOptions  <a id="cdk-gitlab-jobexecutoroptions"></a>
+
+
+Options for the runner to create the fargate job executor.
+
+
+
+Name | Type | Description 
+-----|------|-------------
+**cluster**? | <code>[ICluster](#aws-cdk-aws-ecs-icluster)</code> | The ECS clsuter of the job executor fargate task.<br/>__*Default*__: the cluster for the runner
+**region**? | <code>string</code> | AWS region for the job executor.<br/>__*Default*__: the region of the stack
+**securityGroup**? | <code>[ISecurityGroup](#aws-cdk-aws-ec2-isecuritygroup)</code> | security group for the executor.<br/>__*Optional*__
+**subnet**? | <code>[ISubnet](#aws-cdk-aws-ec2-isubnet)</code> | subnet for the executor.<br/>__*Optional*__
+**task**? | <code>string</code> | task definition arn of the executor.<br/>__*Optional*__
 
 
 
