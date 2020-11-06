@@ -25,6 +25,13 @@ export interface FargateRunnerProps {
    * GitLab registration token for the runner
    */
   readonly registrationToken: string;
+
+  /**
+   * gitlab URL prefix
+   *
+   * @default - 'https://gitlab.com'
+   */
+  readonly gitlabURL?: string;
 }
 
 export class FargateRunner extends cdk.Construct {
@@ -62,6 +69,7 @@ export class FargateRunner extends cdk.Construct {
       logging: new ecs.AwsLogDriver({ streamPrefix: 'GitlabRunnerManager', logRetention: 7 }),
       environment: {
         GITLAB_REGISTRATION_TOKEN: props.registrationToken,
+        GITLAB_URL: props.gitlabURL ?? 'https://gitlab.com',
         FARGATE_REGION: stack.region,
         FARGATE_CLUSTER: cluster.clusterName,
         FARGATE_SUBNET: fargateSubnet.subnetIds[0],
