@@ -1170,10 +1170,6 @@ Object {
                 "Value": "https://gitlab.com",
               },
               Object {
-                "Name": "GITLAB_URL",
-                "Value": "https://gitlab.com",
-              },
-              Object {
                 "Name": "FARGATE_REGION",
                 "Value": "us-east-1",
               },
