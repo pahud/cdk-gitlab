@@ -105,6 +105,7 @@ Name | Type | Description
 -----|------|-------------
 **uri** | <code>string</code> | <span></span>
 *static* **DEBIAN** | <code>[JobExecutorImage](#cdk-gitlab-jobexecutorimage)</code> | Debian.
+*static* **JSII** | <code>[JobExecutorImage](#cdk-gitlab-jobexecutorimage)</code> | JSII for AWS CDK.
 *static* **NODE** | <code>[JobExecutorImage](#cdk-gitlab-jobexecutorimage)</code> | Node.
 
 ### Methods
