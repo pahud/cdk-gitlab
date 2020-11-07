@@ -89,6 +89,12 @@ export class JobExecutorImage {
    */
   public static readonly NODE = JobExecutorImage.of('registry.gitlab.com/aws-fargate-driver-demo/docker-nodejs-gitlab-ci-fargate:latest');
   /**
+   * JSII for AWS CDK
+   * @see https://gitlab.com/pahud/docker-jsii-cdk-gitlab-ci-fargate
+   *
+   */
+  public static readonly JSII = JobExecutorImage.of('registry.gitlab.com/pahud/docker-jsii-cdk-gitlab-ci-fargate:latest');
+  /**
    * Custom image
    * @param image custom image registry URI
    */
