@@ -32,7 +32,7 @@ const executor = new FargateJobExecutor(stack, 'JobExecutor', {
 // second, create the runner with the task definition of the executor
 new FargateRunner(stack, 'FargateRunner', {
   vpc,
-  executor: { task: executor.taskDefinitionArn },
+  executor,
 });
 
 // TBD - create Amazon EC2 runner for the GitLab
