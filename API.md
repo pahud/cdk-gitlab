@@ -16,7 +16,6 @@ Name|Description
 ----|-----------
 [FargateJobExecutorProps](#cdk-gitlab-fargatejobexecutorprops)|*No description*
 [FargateRunnerProps](#cdk-gitlab-fargaterunnerprops)|*No description*
-[JobExecutorOptions](#cdk-gitlab-jobexecutoroptions)|Options for the runner to create the fargate job executor.
 [ProviderProps](#cdk-gitlab-providerprops)|*No description*
 [RoleProps](#cdk-gitlab-roleprops)|*No description*
 
@@ -41,7 +40,11 @@ new FargateJobExecutor(scope: Construct, id: string, props?: FargateJobExecutorP
 * **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[FargateJobExecutorProps](#cdk-gitlab-fargatejobexecutorprops)</code>)  *No description*
+  * **cluster** (<code>[ICluster](#aws-cdk-aws-ecs-icluster)</code>)  *No description* __*Optional*__
   * **image** (<code>[JobExecutorImage](#cdk-gitlab-jobexecutorimage)</code>)  The docker image for the job executor container. __*Optional*__
+  * **region** (<code>string</code>)  AWS region for the job executor. __*Optional*__
+  * **securityGroup** (<code>[ISecurityGroup](#aws-cdk-aws-ec2-isecuritygroup)</code>)  *No description* __*Optional*__
+  * **subnet** (<code>[ISubnet](#aws-cdk-aws-ec2-isubnet)</code>)  *No description* __*Optional*__
 
 
 
@@ -50,7 +53,11 @@ new FargateJobExecutor(scope: Construct, id: string, props?: FargateJobExecutorP
 
 Name | Type | Description 
 -----|------|-------------
+**region** | <code>string</code> | <span></span>
 **taskDefinitionArn** | <code>string</code> | task definition arn.
+**cluster**? | <code>[ICluster](#aws-cdk-aws-ecs-icluster)</code> | __*Optional*__
+**securityGroup**? | <code>[ISecurityGroup](#aws-cdk-aws-ec2-isecuritygroup)</code> | __*Optional*__
+**subnet**? | <code>[ISubnet](#aws-cdk-aws-ec2-isubnet)</code> | __*Optional*__
 
 
 
@@ -73,8 +80,8 @@ new FargateRunner(scope: Construct, id: string, props: FargateRunnerProps)
 * **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[FargateRunnerProps](#cdk-gitlab-fargaterunnerprops)</code>)  *No description*
-  * **executor** (<code>[JobExecutorOptions](#cdk-gitlab-jobexecutoroptions)</code>)  Fargate job executor options. 
   * **vpc** (<code>[IVpc](#aws-cdk-aws-ec2-ivpc)</code>)  VPC for the fargate. 
+  * **executor** (<code>[FargateJobExecutor](#cdk-gitlab-fargatejobexecutor)</code>)  Fargate job executor options. __*Optional*__
   * **fargateJobSubnet** (<code>[SubnetSelection](#aws-cdk-aws-ec2-subnetselection)</code>)  subnet for fargate CI task. __*Optional*__
   * **gitlabURL** (<code>string</code>)  gitlab URL prefix. __*Default*__: 'https://gitlab.com'
   * **registrationToken** (<code>string</code>)  GitLab registration token for the runner. __*Optional*__
@@ -211,15 +218,10 @@ __Returns__:
 
 
 ```ts
-createFargateRunner(executor?: JobExecutorOptions): void
+createFargateRunner(executor?: FargateJobExecutor): void
 ```
 
-* **executor** (<code>[JobExecutorOptions](#cdk-gitlab-jobexecutoroptions)</code>)  *No description*
-  * **cluster** (<code>[ICluster](#aws-cdk-aws-ecs-icluster)</code>)  The ECS clsuter of the job executor fargate task. __*Default*__: the cluster for the runner
-  * **region** (<code>string</code>)  AWS region for the job executor. __*Default*__: the region of the stack
-  * **securityGroup** (<code>[ISecurityGroup](#aws-cdk-aws-ec2-isecuritygroup)</code>)  security group for the executor. __*Optional*__
-  * **subnet** (<code>[ISubnet](#aws-cdk-aws-ec2-isubnet)</code>)  subnet for the executor. __*Optional*__
-  * **task** (<code>string</code>)  task definition arn of the executor. __*Optional*__
+* **executor** (<code>[FargateJobExecutor](#cdk-gitlab-fargatejobexecutor)</code>)  *No description*
 
 
 
@@ -262,7 +264,11 @@ __Returns__:
 
 Name | Type | Description 
 -----|------|-------------
+**cluster**? | <code>[ICluster](#aws-cdk-aws-ecs-icluster)</code> | __*Optional*__
 **image**? | <code>[JobExecutorImage](#cdk-gitlab-jobexecutorimage)</code> | The docker image for the job executor container.<br/>__*Optional*__
+**region**? | <code>string</code> | AWS region for the job executor.<br/>__*Optional*__
+**securityGroup**? | <code>[ISecurityGroup](#aws-cdk-aws-ec2-isecuritygroup)</code> | __*Optional*__
+**subnet**? | <code>[ISubnet](#aws-cdk-aws-ec2-isubnet)</code> | __*Optional*__
 
 
 
@@ -275,30 +281,13 @@ Name | Type | Description
 
 Name | Type | Description 
 -----|------|-------------
-**executor** | <code>[JobExecutorOptions](#cdk-gitlab-jobexecutoroptions)</code> | Fargate job executor options.
 **vpc** | <code>[IVpc](#aws-cdk-aws-ec2-ivpc)</code> | VPC for the fargate.
+**executor**? | <code>[FargateJobExecutor](#cdk-gitlab-fargatejobexecutor)</code> | Fargate job executor options.<br/>__*Optional*__
 **fargateJobSubnet**? | <code>[SubnetSelection](#aws-cdk-aws-ec2-subnetselection)</code> | subnet for fargate CI task.<br/>__*Optional*__
 **gitlabURL**? | <code>string</code> | gitlab URL prefix.<br/>__*Default*__: 'https://gitlab.com'
 **registrationToken**? | <code>string</code> | GitLab registration token for the runner.<br/>__*Optional*__
 **securityGroup**? | <code>[ISecurityGroup](#aws-cdk-aws-ec2-isecuritygroup)</code> | The security group for Fargate CI task.<br/>__*Optional*__
 **tags**? | <code>Array<string></code> | tags for the runner.<br/>__*Optional*__
-
-
-
-## struct JobExecutorOptions  <a id="cdk-gitlab-jobexecutoroptions"></a>
-
-
-Options for the runner to create the fargate job executor.
-
-
-
-Name | Type | Description 
------|------|-------------
-**cluster**? | <code>[ICluster](#aws-cdk-aws-ecs-icluster)</code> | The ECS clsuter of the job executor fargate task.<br/>__*Default*__: the cluster for the runner
-**region**? | <code>string</code> | AWS region for the job executor.<br/>__*Default*__: the region of the stack
-**securityGroup**? | <code>[ISecurityGroup](#aws-cdk-aws-ec2-isecuritygroup)</code> | security group for the executor.<br/>__*Optional*__
-**subnet**? | <code>[ISubnet](#aws-cdk-aws-ec2-isubnet)</code> | subnet for the executor.<br/>__*Optional*__
-**task**? | <code>string</code> | task definition arn of the executor.<br/>__*Optional*__
 
 
 

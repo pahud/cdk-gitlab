@@ -35,15 +35,14 @@ export class IntegTesting {
     // alternatively, create the runner and the executor indivicually.
     // first, create the executor
     const executor = new FargateJobExecutor(stack, 'JobExecutor', {
-      image: JobExecutorImage.DEBIAN,
+      image: JobExecutorImage.JSII,
     });
 
     // second,create the runner with the task definition of the executor
     new FargateRunner(stack, 'FargateRunner', {
       vpc,
-      executor: { task: executor.taskDefinitionArn },
+      executor,
     });
-
 
     this.stack = [stack];
   }

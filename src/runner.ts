@@ -3,38 +3,6 @@ import * as ecs from '@aws-cdk/aws-ecs';
 import * as iam from '@aws-cdk/aws-iam';
 import * as cdk from '@aws-cdk/core';
 
-/**
- * Options for the runner to create the fargate job executor
- */
-export interface JobExecutorOptions {
-  /**
-   * AWS region for the job executor
-   * @default - the region of the stack
-   */
-  readonly region?: string;
-
-  /**
-   * The ECS clsuter of the job executor fargate task
-   * @default - the cluster for the runner
-   */
-  readonly cluster?: ecs.ICluster;
-
-  /**
-   * subnet for the executor
-   */
-  readonly subnet?: ec2.ISubnet;
-
-  /**
-   * security group for the executor
-   */
-  readonly securityGroup?: ec2.ISecurityGroup;
-
-  /**
-   * task definition arn of the executor
-   */
-  readonly task?: string;
-}
-
 export interface FargateRunnerProps {
   /**
    * VPC for the fargate
@@ -71,7 +39,7 @@ export interface FargateRunnerProps {
   /**
    * Fargate job executor options
    */
-  readonly executor: JobExecutorOptions;
+  readonly executor?: FargateJobExecutor;
 }
 
 /**
@@ -126,8 +94,6 @@ export class FargateRunner extends cdk.Construct {
 
     const fargateSecurityGroup = props.securityGroup ?? this.createSecurityGroup();
 
-    const jobExecutor = new FargateJobExecutor(this, 'JobExecutor');
-
     const registrationToken = props.registrationToken ?? (this.node.tryGetContext('GITLAB_REGISTRATION_TOKEN') || process.env.GITLAB_REGISTRATION_TOKEN);
 
     if (!registrationToken) {
@@ -140,11 +106,11 @@ export class FargateRunner extends cdk.Construct {
       environment: {
         GITLAB_REGISTRATION_TOKEN: registrationToken,
         GITLAB_URL: props.gitlabURL ?? 'https://gitlab.com',
-        FARGATE_REGION: props.executor.region ?? stack.region,
-        FARGATE_CLUSTER: props.executor.cluster?.clusterName ?? cluster.clusterName,
-        FARGATE_SUBNET: props.executor.subnet?.subnetId ?? fargateSubnet.subnetIds[0],
-        FARGATE_SECURITY_GROUP: props.executor.securityGroup?.securityGroupId ?? fargateSecurityGroup.securityGroupId,
-        FARGATE_TASK_DEFINITION: props.executor.task || jobExecutor.taskDefinitionArn,
+        FARGATE_REGION: props.executor?.region ?? stack.region,
+        FARGATE_CLUSTER: props.executor?.cluster?.clusterName ?? cluster.clusterName,
+        FARGATE_SUBNET: props.executor?.subnet?.subnetId ?? fargateSubnet.subnetIds[0],
+        FARGATE_SECURITY_GROUP: props.executor?.securityGroup?.securityGroupId ?? fargateSecurityGroup.securityGroupId,
+        FARGATE_TASK_DEFINITION: props.executor?.taskDefinitionArn || new FargateJobExecutor(this, 'JobExecutor').taskDefinitionArn,
         RUNNER_TAG_LIST: this.synthesizeTags(props.tags ?? ['fargate', 'gitlab', 'aws', 'docker']),
       },
     });
@@ -172,6 +138,13 @@ export interface FargateJobExecutorProps {
    * The docker image for the job executor container
    */
   readonly image?: JobExecutorImage;
+  /**
+   * AWS region for the job executor
+   */
+  readonly region?: string;
+  readonly cluster?: ecs.ICluster;
+  readonly subnet?: ec2.ISubnet;
+  readonly securityGroup?: ec2.ISecurityGroup;
 }
 
 export class FargateJobExecutor extends cdk.Construct {
@@ -179,8 +152,17 @@ export class FargateJobExecutor extends cdk.Construct {
    * task definition arn
    */
   readonly taskDefinitionArn: string;
+  readonly region: string;
+  readonly cluster?: ecs.ICluster;
+  readonly subnet?: ec2.ISubnet;
+  readonly securityGroup?: ec2.ISecurityGroup;
   constructor(scope: cdk.Construct, id:string, props: FargateJobExecutorProps = {}) {
     super(scope, id);
+
+    this.region = props.region ?? cdk.Stack.of(this).region;
+    this.cluster = props.cluster;
+    this.subnet = props.subnet;
+    this.securityGroup = props.securityGroup;
 
     const task = new ecs.FargateTaskDefinition(this, 'JobsTask', {
       cpu: 256,

@@ -26,7 +26,7 @@ export class Provider extends cdk.Construct {
     new cdk.CfnOutput(this, 'Region', { value: stack.region });
 
   }
-  public createFargateRunner(executor: runner.JobExecutorOptions = {}) {
+  public createFargateRunner(executor?: runner.FargateJobExecutor) {
     const token = this.node.tryGetContext('GITLAB_REGISTRATION_TOKEN') || process.env.GITLAB_REGISTRATION_TOKEN;
     if (!token) {
       throw new Error('missing GITLAB_REGISTRATION_TOKEN in the context variable');
