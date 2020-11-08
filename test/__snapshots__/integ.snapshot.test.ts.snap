@@ -48,6 +48,18 @@ Object {
     },
   },
   "Parameters": Object {
+    "AssetParameters10e0d4bba7ae4b96280b39e3351d41c9fd4487d0e005c1e18f2d50bf056b1608ArtifactHashECA71323": Object {
+      "Description": "Artifact hash for asset \\"10e0d4bba7ae4b96280b39e3351d41c9fd4487d0e005c1e18f2d50bf056b1608\\"",
+      "Type": "String",
+    },
+    "AssetParameters10e0d4bba7ae4b96280b39e3351d41c9fd4487d0e005c1e18f2d50bf056b1608S3BucketDCF19BBB": Object {
+      "Description": "S3 bucket for asset \\"10e0d4bba7ae4b96280b39e3351d41c9fd4487d0e005c1e18f2d50bf056b1608\\"",
+      "Type": "String",
+    },
+    "AssetParameters10e0d4bba7ae4b96280b39e3351d41c9fd4487d0e005c1e18f2d50bf056b1608S3VersionKey945AF9FB": Object {
+      "Description": "S3 key for asset version \\"10e0d4bba7ae4b96280b39e3351d41c9fd4487d0e005c1e18f2d50bf056b1608\\"",
+      "Type": "String",
+    },
     "AssetParameters50e10880d134a01b440991fc77d217f39f01c2d56945215ee9a3b81187c6f3b1ArtifactHash32F5D823": Object {
       "Description": "Artifact hash for asset \\"50e10880d134a01b440991fc77d217f39f01c2d56945215ee9a3b81187c6f3b1\\"",
       "Type": "String",
@@ -96,6 +108,18 @@ Object {
       "Description": "S3 key for asset version \\"b7d8a9750f8bfded8ac76be100e3bee1c3d4824df006766110d023f42952f5c2\\"",
       "Type": "String",
     },
+    "AssetParametersbac0243f487acc20e4218710f00301de6ecd41f11245b7d1229d38bfec963e37ArtifactHash75842D94": Object {
+      "Description": "Artifact hash for asset \\"bac0243f487acc20e4218710f00301de6ecd41f11245b7d1229d38bfec963e37\\"",
+      "Type": "String",
+    },
+    "AssetParametersbac0243f487acc20e4218710f00301de6ecd41f11245b7d1229d38bfec963e37S3BucketD01B79A5": Object {
+      "Description": "S3 bucket for asset \\"bac0243f487acc20e4218710f00301de6ecd41f11245b7d1229d38bfec963e37\\"",
+      "Type": "String",
+    },
+    "AssetParametersbac0243f487acc20e4218710f00301de6ecd41f11245b7d1229d38bfec963e37S3VersionKeyC0E7DA00": Object {
+      "Description": "S3 key for asset version \\"bac0243f487acc20e4218710f00301de6ecd41f11245b7d1229d38bfec963e37\\"",
+      "Type": "String",
+    },
     "AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cArtifactHash627DAAA7": Object {
       "Description": "Artifact hash for asset \\"c691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49c\\"",
       "Type": "String",
@@ -110,6 +134,183 @@ Object {
     },
   },
   "Resources": Object {
+    "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57": Object {
+      "DependsOn": Array [
+        "AWSCDKCfnUtilsProviderCustomResourceProviderRoleFE0EE867",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameters10e0d4bba7ae4b96280b39e3351d41c9fd4487d0e005c1e18f2d50bf056b1608S3BucketDCF19BBB",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters10e0d4bba7ae4b96280b39e3351d41c9fd4487d0e005c1e18f2d50bf056b1608S3VersionKey945AF9FB",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters10e0d4bba7ae4b96280b39e3351d41c9fd4487d0e005c1e18f2d50bf056b1608S3VersionKey945AF9FB",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Handler": "__entrypoint__.handler",
+        "MemorySize": 128,
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "AWSCDKCfnUtilsProviderCustomResourceProviderRoleFE0EE867",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+        "Timeout": 900,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "AWSCDKCfnUtilsProviderCustomResourceProviderRoleFE0EE867": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Sub": "arn:\${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderHandlerF2C543E0": Object {
+      "DependsOn": Array [
+        "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParametersbac0243f487acc20e4218710f00301de6ecd41f11245b7d1229d38bfec963e37S3BucketD01B79A5",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersbac0243f487acc20e4218710f00301de6ecd41f11245b7d1229d38bfec963e37S3VersionKeyC0E7DA00",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersbac0243f487acc20e4218710f00301de6ecd41f11245b7d1229d38bfec963e37S3VersionKeyC0E7DA00",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Handler": "__entrypoint__.handler",
+        "MemorySize": 128,
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+        "Timeout": 900,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Sub": "arn:\${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+          },
+        ],
+        "Policies": Array [
+          Object {
+            "PolicyDocument": Object {
+              "Statement": Array [
+                Object {
+                  "Action": Array [
+                    "iam:CreateOpenIDConnectProvider",
+                    "iam:DeleteOpenIDConnectProvider",
+                    "iam:UpdateOpenIDConnectProviderThumbprint",
+                    "iam:AddClientIDToOpenIDConnectProvider",
+                    "iam:RemoveClientIDFromOpenIDConnectProvider",
+                  ],
+                  "Effect": "Allow",
+                  "Resource": "*",
+                },
+              ],
+              "Version": "2012-10-17",
+            },
+            "PolicyName": "Inline",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
     "FargateRunnerClusterFFA572F1": Object {
       "Type": "AWS::ECS::Cluster",
     },
@@ -468,11 +669,11 @@ Object {
               "\\\\\\",\\\\\\"groups\\\\\\":[\\\\\\"system:masters\\\\\\"]},{\\\\\\"rolearn\\\\\\":\\\\\\"",
               Object {
                 "Fn::GetAtt": Array [
-                  "GitlabEksClusterNodegroupDefaultCapacityNodeGroupRoleD3626F4D",
+                  "GitlabEksClusterfargateprofiledefaultPodExecutionRole627844DD",
                   "Arn",
                 ],
               },
-              "\\\\\\",\\\\\\"username\\\\\\":\\\\\\"system:node:{{EC2PrivateDNSName}}\\\\\\",\\\\\\"groups\\\\\\":[\\\\\\"system:bootstrappers\\\\\\",\\\\\\"system:nodes\\\\\\"]}]\\",\\"mapUsers\\":\\"[]\\",\\"mapAccounts\\":\\"[]\\"}}]",
+              "\\\\\\",\\\\\\"username\\\\\\":\\\\\\"system:node:{{SessionName}}\\\\\\",\\\\\\"groups\\\\\\":[\\\\\\"system:bootstrappers\\\\\\",\\\\\\"system:nodes\\\\\\",\\\\\\"system:node-proxier\\\\\\"]}]\\",\\"mapUsers\\":\\"[]\\",\\"mapAccounts\\":\\"[]\\"}}]",
             ],
           ],
         },
@@ -507,6 +708,36 @@ Object {
         },
       },
       "Type": "AWS::EC2::SecurityGroup",
+    },
+    "GitlabEksClusterCoreDnsComputeTypePatch62337082": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "GitlabEksClusterKubectlReadyBarrierF39FD0FB",
+      ],
+      "Properties": Object {
+        "ApplyPatchJson": "{\\"spec\\":{\\"template\\":{\\"metadata\\":{\\"annotations\\":{\\"eks.amazonaws.com/compute-type\\":\\"fargate\\"}}}}}",
+        "ClusterName": Object {
+          "Ref": "GitlabEksCluster04011DE8",
+        },
+        "PatchType": "strategic",
+        "ResourceName": "deployment/coredns",
+        "ResourceNamespace": "kube-system",
+        "RestorePatchJson": "{\\"spec\\":{\\"template\\":{\\"metadata\\":{\\"annotations\\":{\\"eks.amazonaws.com/compute-type\\":\\"ec2\\"}}}}}",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "GitlabEksClusterCreationRoleFA5C3E1D",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.integstackawscdkawseksKubectlProviderframeworkonEvent0B680441Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesPatch",
+      "UpdateReplacePolicy": "Delete",
     },
     "GitlabEksClusterCreationRoleDefaultPolicy48F9306E": Object {
       "DependsOn": Array [
@@ -614,6 +845,16 @@ Object {
                 ],
               },
             },
+            Object {
+              "Action": "iam:PassRole",
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::GetAtt": Array [
+                  "GitlabEksClusterfargateprofiledefaultPodExecutionRole627844DD",
+                  "Arn",
+                ],
+              },
+            },
           ],
           "Version": "2012-10-17",
         },
@@ -683,6 +924,8 @@ Object {
     },
     "GitlabEksClusterKubectlReadyBarrierF39FD0FB": Object {
       "DependsOn": Array [
+        "GitlabEksClusterfargateprofiledefaultPodExecutionRole627844DD",
+        "GitlabEksClusterfargateprofiledefault953F9ECE",
         "GitlabEksClusterCreationRoleDefaultPolicy48F9306E",
         "GitlabEksClusterCreationRoleFA5C3E1D",
         "GitlabEksCluster04011DE8",
@@ -725,92 +968,30 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "GitlabEksClusterNodegroupDefaultCapacity6A883D4A": Object {
+    "GitlabEksClusterOpenIdConnectProvider9C70FF40": Object {
+      "DeletionPolicy": "Delete",
       "Properties": Object {
-        "AmiType": "AL2_x86_64",
-        "ClusterName": Object {
-          "Ref": "GitlabEksCluster04011DE8",
-        },
-        "ForceUpdateEnabled": true,
-        "InstanceTypes": Array [
-          "m5.large",
+        "ClientIDList": Array [
+          "sts.amazonaws.com",
         ],
-        "NodeRole": Object {
+        "ServiceToken": Object {
           "Fn::GetAtt": Array [
-            "GitlabEksClusterNodegroupDefaultCapacityNodeGroupRoleD3626F4D",
+            "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderHandlerF2C543E0",
             "Arn",
           ],
         },
-        "ScalingConfig": Object {
-          "DesiredSize": 2,
-          "MaxSize": 2,
-          "MinSize": 2,
-        },
-        "Subnets": Array [
-          Object {
-            "Ref": "VpcPrivateSubnet1Subnet536B997A",
-          },
-          Object {
-            "Ref": "VpcPrivateSubnet2Subnet3788AAA1",
-          },
+        "ThumbprintList": Array [
+          "9e99a48a9960b14926bb7f3b02e22da2b0ab7280",
         ],
-      },
-      "Type": "AWS::EKS::Nodegroup",
-    },
-    "GitlabEksClusterNodegroupDefaultCapacityNodeGroupRoleD3626F4D": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": Object {
-                "Service": "ec2.amazonaws.com",
-              },
-            },
+        "Url": Object {
+          "Fn::GetAtt": Array [
+            "GitlabEksCluster04011DE8",
+            "OpenIdConnectIssuerUrl",
           ],
-          "Version": "2012-10-17",
         },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                "arn:",
-                Object {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/AmazonEKSWorkerNodePolicy",
-              ],
-            ],
-          },
-          Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                "arn:",
-                Object {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/AmazonEKS_CNI_Policy",
-              ],
-            ],
-          },
-          Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                "arn:",
-                Object {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
-              ],
-            ],
-          },
-        ],
       },
-      "Type": "AWS::IAM::Role",
+      "Type": "Custom::AWSCDKOpenIdConnectProvider",
+      "UpdateReplacePolicy": "Delete",
     },
     "GitlabEksClusterRole49C5ADB7": Object {
       "Properties": Object {
@@ -842,6 +1023,203 @@ Object {
         ],
       },
       "Type": "AWS::IAM::Role",
+    },
+    "GitlabEksClusterfargateprofiledefault953F9ECE": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "AssumeRoleArn": Object {
+          "Fn::GetAtt": Array [
+            "GitlabEksClusterCreationRoleFA5C3E1D",
+            "Arn",
+          ],
+        },
+        "Config": Object {
+          "clusterName": Object {
+            "Ref": "GitlabEksCluster04011DE8",
+          },
+          "podExecutionRoleArn": Object {
+            "Fn::GetAtt": Array [
+              "GitlabEksClusterfargateprofiledefaultPodExecutionRole627844DD",
+              "Arn",
+            ],
+          },
+          "selectors": Array [
+            Object {
+              "namespace": "default",
+            },
+            Object {
+              "namespace": "kube-system",
+            },
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454",
+            "Outputs.integstackawscdkawseksClusterResourceProviderframeworkonEvent212B1211Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-FargateProfile",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "GitlabEksClusterfargateprofiledefaultPodExecutionRole627844DD": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "eks-fargate-pods.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/AmazonEKSFargatePodExecutionRolePolicy",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "GitlabEksClustergitlabConditionJson19EEDBAF": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57",
+            "Arn",
+          ],
+        },
+        "Value": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "{\\"",
+              Object {
+                "Fn::GetAtt": Array [
+                  "GitlabEksCluster04011DE8",
+                  "OpenIdConnectIssuer",
+                ],
+              },
+              ":aud\\":\\"sts.amazonaws.com\\",\\"",
+              Object {
+                "Fn::GetAtt": Array [
+                  "GitlabEksCluster04011DE8",
+                  "OpenIdConnectIssuer",
+                ],
+              },
+              ":sub\\":\\"system:serviceaccount:default:integstackgitlabeksclustergitlab0901e0fe\\"}",
+            ],
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDKCfnJson",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "GitlabEksClustergitlabRole66A56A9A": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRoleWithWebIdentity",
+              "Condition": Object {
+                "StringEquals": Object {
+                  "Fn::GetAtt": Array [
+                    "GitlabEksClustergitlabConditionJson19EEDBAF",
+                    "Value",
+                  ],
+                },
+              },
+              "Effect": "Allow",
+              "Principal": Object {
+                "Federated": Object {
+                  "Ref": "GitlabEksClusterOpenIdConnectProvider9C70FF40",
+                },
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "GitlabEksClustergitlabmanifestgitlabServiceAccountResourceE6D688D8": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "GitlabEksClusterKubectlReadyBarrierF39FD0FB",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "GitlabEksCluster04011DE8",
+        },
+        "Manifest": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "[{\\"apiVersion\\":\\"v1\\",\\"kind\\":\\"ServiceAccount\\",\\"metadata\\":{\\"name\\":\\"integstackgitlabeksclustergitlab0901e0fe\\",\\"namespace\\":\\"default\\",\\"labels\\":{\\"app.kubernetes.io/name\\":\\"integstackgitlabeksclustergitlab0901e0fe\\"},\\"annotations\\":{\\"eks.amazonaws.com/role-arn\\":\\"",
+              Object {
+                "Fn::GetAtt": Array [
+                  "GitlabEksClustergitlabRole66A56A9A",
+                  "Arn",
+                ],
+              },
+              "\\"}}}]",
+            ],
+          ],
+        },
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "GitlabEksClusterCreationRoleFA5C3E1D",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.integstackawscdkawseksKubectlProviderframeworkonEvent0B680441Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "GitlabEksClustermanifestClusterRoleBinding49B1EB3E": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "GitlabEksClusterKubectlReadyBarrierF39FD0FB",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "GitlabEksCluster04011DE8",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1beta1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"name\\":\\"gitlab-admin\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"cluster-admin\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"gitlab\\",\\"namespace\\":\\"kube-system\\"}]}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "GitlabEksClusterCreationRoleFA5C3E1D",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.integstackawscdkawseksKubectlProviderframeworkonEvent0B680441Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
     },
     "GitlabProviderFargateRunnerCluster69894B32": Object {
       "Type": "AWS::ECS::Cluster",
