@@ -13,6 +13,55 @@ export interface RoleProps {
   readonly externalId: string;
 }
 
+export interface EksClusterOptions {
+  /**
+   * create serivce account and rbac ClusterRoleBinding for gitlab
+   * @see https://docs.gitlab.com/ee/user/project/clusters/add_remove_clusters.html#add-existing-cluster
+   *
+   * @default true
+   */
+  readonly rbac?: boolean;
+  /**
+   * cluster properties for Amazon EKS cluster
+   */
+  readonly clusterOptions: eks.ClusterProps;
+}
+
+export interface FargateEksClusterOptions {
+  /**
+   * create serivce account and rbac ClusterRoleBinding for gitlab
+   * @see https://docs.gitlab.com/ee/user/project/clusters/add_remove_clusters.html#add-existing-cluster
+   *
+   * @default true
+   */
+  readonly rbac?: boolean;
+  /**
+   * cluster properties for Amazon EKS cluster
+   */
+  readonly clusterOptions: eks.FargateClusterProps;
+}
+
+const gitLabClusterRoleBinding = {
+  apiVersion: 'rbac.authorization.k8s.io/v1beta1',
+  kind: 'ClusterRoleBinding',
+  metadata: { name: 'gitlab-admin' },
+  roleRef: {
+    apiGroup: 'rbac.authorization.k8s.io',
+    kind: 'ClusterRole',
+    name: 'cluster-admin',
+  },
+  subjects: [
+    {
+      kind: 'ServiceAccount',
+      name: 'gitlab',
+      namespace: 'kube-system',
+    },
+  ],
+};
+
+/**
+ * The Provider to create GitLab Integrations with AWS
+ */
 export class Provider extends cdk.Construct {
   public gitlabEksRole?: iam.IRole;
   readonly vpc: ec2.IVpc;
@@ -37,8 +86,21 @@ export class Provider extends cdk.Construct {
       executor,
     });
   }
-  public createEksCluster(scope: cdk.Construct, id: string, props: eks.ClusterProps): eks.Cluster {
-    return new eks.Cluster(scope, id, props);
+  public createEksCluster(scope: cdk.Construct, id: string, props: EksClusterOptions ): eks.Cluster {
+    const cluster = new eks.Cluster(scope, id, props.clusterOptions);
+    if (props.rbac != false) {
+      cluster.addServiceAccount('gitlab');
+      cluster.addManifest('ClusterRoleBinding', gitLabClusterRoleBinding);
+    }
+    return cluster;
+  }
+  public createFargateEksCluster(scope: cdk.Construct, id: string, props: FargateEksClusterOptions): eks.Cluster {
+    const cluster = new eks.FargateCluster(scope, id, props.clusterOptions);
+    if (props.rbac != false) {
+      cluster.addServiceAccount('gitlab');
+      cluster.addManifest('ClusterRoleBinding', gitLabClusterRoleBinding);
+    }
+    return cluster;
   }
   public createSecurityGroup(): ec2.SecurityGroup {
     const sg = new ec2.SecurityGroup(this, 'GitlabEksSecurityGroup', {
