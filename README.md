@@ -15,9 +15,11 @@ import { Provider, FargateJobExecutor, FargateRunner, JobExecutorImage } from 'c
 const provider = new Provider(stack, 'GitlabProvider', { vpc });
 
 // create a Amazon EKS cluster
-provider.createEksCluster(stack, 'GitlabEksCluster', {
-  vpc,
-  version: eks.KubernetesVersion.V1_18,
+provider.createFargateEksCluster(stack, 'GitlabEksCluster', {
+  clusterOptions: {
+    vpc,
+    version: eks.KubernetesVersion.V1_18,
+  },
 });
 
 // create a default fargate runner with its job executor
