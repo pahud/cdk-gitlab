@@ -4,8 +4,8 @@
 
 Name|Description
 ----|-----------
-[FargateJobExecutor](#cdk-gitlab-fargatejobexecutor)|*No description*
-[FargateRunner](#cdk-gitlab-fargaterunner)|*No description*
+[FargateJobExecutor](#cdk-gitlab-fargatejobexecutor)|The FargateJobExecutor.
+[FargateRunner](#cdk-gitlab-fargaterunner)|The FargateRunner.
 [JobExecutorImage](#cdk-gitlab-jobexecutorimage)|The docker image for the job executor.
 [Provider](#cdk-gitlab-provider)|The Provider to create GitLab Integrations with AWS.
 
@@ -14,18 +14,26 @@ Name|Description
 
 Name|Description
 ----|-----------
+[CapacityProviderStrategyItem](#cdk-gitlab-capacityproviderstrategyitem)|The Capacity Provider strategy.
 [EksClusterOptions](#cdk-gitlab-eksclusteroptions)|*No description*
 [FargateEksClusterOptions](#cdk-gitlab-fargateeksclusteroptions)|*No description*
-[FargateJobExecutorProps](#cdk-gitlab-fargatejobexecutorprops)|*No description*
-[FargateRunnerProps](#cdk-gitlab-fargaterunnerprops)|*No description*
+[FargateJobExecutorProps](#cdk-gitlab-fargatejobexecutorprops)|The properties for the FargateJobExecutor.
+[FargateRunnerProps](#cdk-gitlab-fargaterunnerprops)|Properties for the FargateRunner.
 [ProviderProps](#cdk-gitlab-providerprops)|*No description*
 [RoleProps](#cdk-gitlab-roleprops)|*No description*
+
+
+**Enums**
+
+Name|Description
+----|-----------
+[FargateCapacityProviderType](#cdk-gitlab-fargatecapacityprovidertype)|Amazon ECS Capacity Providers for AWS Fargate.
 
 
 
 ## class FargateJobExecutor  <a id="cdk-gitlab-fargatejobexecutor"></a>
 
-
+The FargateJobExecutor.
 
 __Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
 __Extends__: [Construct](#aws-cdk-core-construct)
@@ -65,7 +73,7 @@ Name | Type | Description
 
 ## class FargateRunner  <a id="cdk-gitlab-fargaterunner"></a>
 
-
+The FargateRunner.
 
 __Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
 __Extends__: [Construct](#aws-cdk-core-construct)
@@ -83,11 +91,13 @@ new FargateRunner(scope: Construct, id: string, props: FargateRunnerProps)
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[FargateRunnerProps](#cdk-gitlab-fargaterunnerprops)</code>)  *No description*
   * **vpc** (<code>[IVpc](#aws-cdk-aws-ec2-ivpc)</code>)  VPC for the fargate. 
+  * **clusterDefaultCapacityProviderStrategy** (<code>Array<[CapacityProviderStrategyItem](#cdk-gitlab-capacityproviderstrategyitem)></code>)  Default capacity provider strategy for the Amazon ECS cluster. __*Default*__: DEFAULT_CLUSTER_CAPACITY_PROVIDER_STRATEGY
   * **executor** (<code>[FargateJobExecutor](#cdk-gitlab-fargatejobexecutor)</code>)  Fargate job executor options. __*Optional*__
   * **fargateJobSubnet** (<code>[SubnetSelection](#aws-cdk-aws-ec2-subnetselection)</code>)  subnet for fargate CI task. __*Optional*__
   * **gitlabURL** (<code>string</code>)  gitlab URL prefix. __*Default*__: 'https://gitlab.com'
   * **registrationToken** (<code>string</code>)  GitLab registration token for the runner. __*Optional*__
   * **securityGroup** (<code>[ISecurityGroup](#aws-cdk-aws-ec2-isecuritygroup)</code>)  The security group for Fargate CI task. __*Optional*__
+  * **serviceDefaultCapacityProviderStrategy** (<code>Array<[CapacityProviderStrategyItem](#cdk-gitlab-capacityproviderstrategyitem)></code>)  Default capacity provider strategy for the Amazon ECS service. __*Default*__: DEFAULT_SERVICE_CAPACITY_PROVIDER_STRATEGY
   * **tags** (<code>Array<string></code>)  tags for the runner. __*Optional*__
 
 
@@ -257,6 +267,21 @@ __Returns__:
 
 
 
+## struct CapacityProviderStrategyItem  <a id="cdk-gitlab-capacityproviderstrategyitem"></a>
+
+
+The Capacity Provider strategy.
+
+
+
+Name | Type | Description 
+-----|------|-------------
+**capacityProvider** | <code>[FargateCapacityProviderType](#cdk-gitlab-fargatecapacityprovidertype)</code> | <span></span>
+**weight** | <code>number</code> | <span></span>
+**base**? | <code>number</code> | __*Optional*__
+
+
+
 ## struct EksClusterOptions  <a id="cdk-gitlab-eksclusteroptions"></a>
 
 
@@ -288,7 +313,7 @@ Name | Type | Description
 ## struct FargateJobExecutorProps  <a id="cdk-gitlab-fargatejobexecutorprops"></a>
 
 
-
+The properties for the FargateJobExecutor.
 
 
 
@@ -305,18 +330,20 @@ Name | Type | Description
 ## struct FargateRunnerProps  <a id="cdk-gitlab-fargaterunnerprops"></a>
 
 
-
+Properties for the FargateRunner.
 
 
 
 Name | Type | Description 
 -----|------|-------------
 **vpc** | <code>[IVpc](#aws-cdk-aws-ec2-ivpc)</code> | VPC for the fargate.
+**clusterDefaultCapacityProviderStrategy**? | <code>Array<[CapacityProviderStrategyItem](#cdk-gitlab-capacityproviderstrategyitem)></code> | Default capacity provider strategy for the Amazon ECS cluster.<br/>__*Default*__: DEFAULT_CLUSTER_CAPACITY_PROVIDER_STRATEGY
 **executor**? | <code>[FargateJobExecutor](#cdk-gitlab-fargatejobexecutor)</code> | Fargate job executor options.<br/>__*Optional*__
 **fargateJobSubnet**? | <code>[SubnetSelection](#aws-cdk-aws-ec2-subnetselection)</code> | subnet for fargate CI task.<br/>__*Optional*__
 **gitlabURL**? | <code>string</code> | gitlab URL prefix.<br/>__*Default*__: 'https://gitlab.com'
 **registrationToken**? | <code>string</code> | GitLab registration token for the runner.<br/>__*Optional*__
 **securityGroup**? | <code>[ISecurityGroup](#aws-cdk-aws-ec2-isecuritygroup)</code> | The security group for Fargate CI task.<br/>__*Optional*__
+**serviceDefaultCapacityProviderStrategy**? | <code>Array<[CapacityProviderStrategyItem](#cdk-gitlab-capacityproviderstrategyitem)></code> | Default capacity provider strategy for the Amazon ECS service.<br/>__*Default*__: DEFAULT_SERVICE_CAPACITY_PROVIDER_STRATEGY
 **tags**? | <code>Array<string></code> | tags for the runner.<br/>__*Optional*__
 
 
@@ -346,5 +373,15 @@ Name | Type | Description
 **accountId** | <code>string</code> | <span></span>
 **externalId** | <code>string</code> | <span></span>
 
+
+
+## enum FargateCapacityProviderType  <a id="cdk-gitlab-fargatecapacityprovidertype"></a>
+
+Amazon ECS Capacity Providers for AWS Fargate.
+
+Name | Description
+-----|-----
+**FARGATE** |
+**FARGATE_SPOT** |
 
 

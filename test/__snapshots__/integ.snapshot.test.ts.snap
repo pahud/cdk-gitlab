@@ -312,6 +312,19 @@ Object {
       "Type": "AWS::IAM::Role",
     },
     "FargateRunnerClusterFFA572F1": Object {
+      "Properties": Object {
+        "CapacityProviders": Array [
+          "FARGATE",
+          "FARGATE_SPOT",
+        ],
+        "DefaultCapacityProviderStrategy": Array [
+          Object {
+            "base": 0,
+            "capacityProvider": "FARGATE_SPOT",
+            "weight": 1,
+          },
+        ],
+      },
       "Type": "AWS::ECS::Cluster",
     },
     "FargateRunnerFargateSecurityGroupC01BE5FB": Object {
@@ -351,6 +364,17 @@ Object {
     },
     "FargateRunnerRunnerManagerService6E98525F": Object {
       "Properties": Object {
+        "CapacityProviderStrategy": Array [
+          Object {
+            "base": 0,
+            "capacityProvider": "FARGATE",
+            "weight": 0,
+          },
+          Object {
+            "capacityProvider": "FARGATE_SPOT",
+            "weight": 1,
+          },
+        ],
         "Cluster": Object {
           "Ref": "FargateRunnerClusterFFA572F1",
         },
@@ -360,7 +384,6 @@ Object {
         },
         "DesiredCount": 1,
         "EnableECSManagedTags": false,
-        "LaunchType": "FARGATE",
         "NetworkConfiguration": Object {
           "AwsvpcConfiguration": Object {
             "AssignPublicIp": "DISABLED",
@@ -1222,6 +1245,19 @@ Object {
       "UpdateReplacePolicy": "Delete",
     },
     "GitlabProviderFargateRunnerCluster69894B32": Object {
+      "Properties": Object {
+        "CapacityProviders": Array [
+          "FARGATE",
+          "FARGATE_SPOT",
+        ],
+        "DefaultCapacityProviderStrategy": Array [
+          Object {
+            "base": 0,
+            "capacityProvider": "FARGATE_SPOT",
+            "weight": 1,
+          },
+        ],
+      },
       "Type": "AWS::ECS::Cluster",
     },
     "GitlabProviderFargateRunnerFargateSecurityGroup83A59793": Object {
@@ -1379,6 +1415,17 @@ Object {
     },
     "GitlabProviderFargateRunnerRunnerManagerService95EFD79A": Object {
       "Properties": Object {
+        "CapacityProviderStrategy": Array [
+          Object {
+            "base": 0,
+            "capacityProvider": "FARGATE",
+            "weight": 0,
+          },
+          Object {
+            "capacityProvider": "FARGATE_SPOT",
+            "weight": 1,
+          },
+        ],
         "Cluster": Object {
           "Ref": "GitlabProviderFargateRunnerCluster69894B32",
         },
@@ -1388,7 +1435,6 @@ Object {
         },
         "DesiredCount": 1,
         "EnableECSManagedTags": false,
-        "LaunchType": "FARGATE",
         "NetworkConfiguration": Object {
           "AwsvpcConfiguration": Object {
             "AssignPublicIp": "DISABLED",

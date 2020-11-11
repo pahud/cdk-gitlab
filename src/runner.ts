@@ -3,6 +3,26 @@ import * as ecs from '@aws-cdk/aws-ecs';
 import * as iam from '@aws-cdk/aws-iam';
 import * as cdk from '@aws-cdk/core';
 
+/**
+ * Amazon ECS Capacity Providers for AWS Fargate
+ */
+export enum FargateCapacityProviderType {
+  FARGATE = 'FARGATE',
+  FARGATE_SPOT = 'FARGATE_SPOT'
+}
+
+/**
+ * The Capacity Provider strategy
+ */
+export interface CapacityProviderStrategyItem {
+  readonly base?: number;
+  readonly weight: number;
+  readonly capacityProvider: FargateCapacityProviderType;
+}
+
+/**
+ * Properties for the FargateRunner
+ */
 export interface FargateRunnerProps {
   /**
    * VPC for the fargate
@@ -40,6 +60,19 @@ export interface FargateRunnerProps {
    * Fargate job executor options
    */
   readonly executor?: FargateJobExecutor;
+
+  /**
+   * Default capacity provider strategy for the Amazon ECS cluster
+   *
+   * @default DEFAULT_CLUSTER_CAPACITY_PROVIDER_STRATEGY
+   */
+  readonly clusterDefaultCapacityProviderStrategy?: CapacityProviderStrategyItem[];
+  /**
+   * Default capacity provider strategy for the Amazon ECS service
+   *
+   * @default DEFAULT_SERVICE_CAPACITY_PROVIDER_STRATEGY
+   */
+  readonly serviceDefaultCapacityProviderStrategy?: CapacityProviderStrategyItem[];
 }
 
 /**
@@ -74,6 +107,26 @@ export class JobExecutorImage {
   private constructor(public readonly uri: string) { }
 }
 
+const CLUSTER_DEFAULT_CAPACITY_PROVIDER = [
+  FargateCapacityProviderType.FARGATE,
+  FargateCapacityProviderType.FARGATE_SPOT,
+];
+
+const DEFAULT_CLUSTER_CAPACITY_PROVIDER_STRATEGY: CapacityProviderStrategyItem[] = [{
+  base: 0,
+  weight: 1,
+  capacityProvider: FargateCapacityProviderType.FARGATE_SPOT,
+}];
+
+const DEFAULT_SERVICE_CAPACITY_PROVIDER_STRATEGY: CapacityProviderStrategyItem[] = [
+  { base: 0, weight: 0, capacityProvider: FargateCapacityProviderType.FARGATE },
+  { weight: 1, capacityProvider: FargateCapacityProviderType.FARGATE_SPOT },
+];
+
+
+/**
+ * The FargateRunner
+ */
 export class FargateRunner extends cdk.Construct {
   readonly vpc: ec2.IVpc;
   constructor(scope: cdk.Construct, id: string, props: FargateRunnerProps ) {
@@ -86,6 +139,9 @@ export class FargateRunner extends cdk.Construct {
     const fargateSubnet = this.vpc.selectSubnets(props.fargateJobSubnet);
 
     const cluster = new ecs.Cluster(this, 'Cluster', { vpc: this.vpc });
+    const cfnCluster = cluster.node.tryFindChild('Resource') as ecs.CfnCluster;
+    cfnCluster.addPropertyOverride('CapacityProviders', CLUSTER_DEFAULT_CAPACITY_PROVIDER);
+    cfnCluster.addPropertyOverride('DefaultCapacityProviderStrategy', props.serviceDefaultCapacityProviderStrategy ?? DEFAULT_CLUSTER_CAPACITY_PROVIDER_STRATEGY);
 
     const runnerTask = new ecs.FargateTaskDefinition(this, 'RunnerTask', {
       cpu: 256,
@@ -117,11 +173,14 @@ export class FargateRunner extends cdk.Construct {
 
     runnerTask.taskRole.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName('AmazonECS_FullAccess'));
 
-    new ecs.FargateService(this, 'RunnerManagerService', {
+    const svc = new ecs.FargateService(this, 'RunnerManagerService', {
       cluster,
       taskDefinition: runnerTask,
       securityGroups: [fargateSecurityGroup],
     });
+    const cfnService = svc.node.tryFindChild('Service') as ecs.CfnService;
+    cfnService.addPropertyDeletionOverride('LaunchType');
+    cfnService.addPropertyOverride('CapacityProviderStrategy', props.serviceDefaultCapacityProviderStrategy ?? DEFAULT_SERVICE_CAPACITY_PROVIDER_STRATEGY);
   }
   private synthesizeTags(tags: string[]): string {
     return tags.join(',');
@@ -133,6 +192,9 @@ export class FargateRunner extends cdk.Construct {
   }
 }
 
+/**
+ * The properties for the FargateJobExecutor
+ */
 export interface FargateJobExecutorProps {
   /**
    * The docker image for the job executor container
@@ -147,6 +209,9 @@ export interface FargateJobExecutorProps {
   readonly securityGroup?: ec2.ISecurityGroup;
 }
 
+/**
+ * The FargateJobExecutor
+ */
 export class FargateJobExecutor extends cdk.Construct {
   /**
    * task definition arn
