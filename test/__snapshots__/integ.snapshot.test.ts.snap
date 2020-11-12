@@ -12,7 +12,7 @@ Object {
             Object {
               "Ref": "GitlabEksCluster04011DE8",
             },
-            " --region us-east-1 --role-arn ",
+            " --region ap-northeast-1 --role-arn ",
             Object {
               "Fn::GetAtt": Array [
                 "GitlabEksClusterMastersRole5C87183A",
@@ -32,7 +32,7 @@ Object {
             Object {
               "Ref": "GitlabEksCluster04011DE8",
             },
-            " --region us-east-1 --role-arn ",
+            " --region ap-northeast-1 --role-arn ",
             Object {
               "Fn::GetAtt": Array [
                 "GitlabEksClusterMastersRole5C87183A",
@@ -44,10 +44,22 @@ Object {
       },
     },
     "GitlabProviderRegionAAFDAA56": Object {
-      "Value": "us-east-1",
+      "Value": "ap-northeast-1",
     },
   },
   "Parameters": Object {
+    "AssetParameters0051de2aab5e789ba95a019596526da9d9a775d2d028d94f6ad5171df4eb8b23ArtifactHashFFEDAB74": Object {
+      "Description": "Artifact hash for asset \\"0051de2aab5e789ba95a019596526da9d9a775d2d028d94f6ad5171df4eb8b23\\"",
+      "Type": "String",
+    },
+    "AssetParameters0051de2aab5e789ba95a019596526da9d9a775d2d028d94f6ad5171df4eb8b23S3BucketF98E8FBE": Object {
+      "Description": "S3 bucket for asset \\"0051de2aab5e789ba95a019596526da9d9a775d2d028d94f6ad5171df4eb8b23\\"",
+      "Type": "String",
+    },
+    "AssetParameters0051de2aab5e789ba95a019596526da9d9a775d2d028d94f6ad5171df4eb8b23S3VersionKeyFC3B4301": Object {
+      "Description": "S3 key for asset version \\"0051de2aab5e789ba95a019596526da9d9a775d2d028d94f6ad5171df4eb8b23\\"",
+      "Type": "String",
+    },
     "AssetParameters10e0d4bba7ae4b96280b39e3351d41c9fd4487d0e005c1e18f2d50bf056b1608ArtifactHashECA71323": Object {
       "Description": "Artifact hash for asset \\"10e0d4bba7ae4b96280b39e3351d41c9fd4487d0e005c1e18f2d50bf056b1608\\"",
       "Type": "String",
@@ -82,18 +94,6 @@ Object {
     },
     "AssetParameters578cc0b22693dc0174d1d1ed44a3bfc0a64a8c8ffb2826565a056f82b70b7316S3VersionKey87F332F5": Object {
       "Description": "S3 key for asset version \\"578cc0b22693dc0174d1d1ed44a3bfc0a64a8c8ffb2826565a056f82b70b7316\\"",
-      "Type": "String",
-    },
-    "AssetParameters6f6ba65780b34ab5218a718dc1a30ed9a96795f1909db912b68ea7292e02ff74ArtifactHashD7A6A7E4": Object {
-      "Description": "Artifact hash for asset \\"6f6ba65780b34ab5218a718dc1a30ed9a96795f1909db912b68ea7292e02ff74\\"",
-      "Type": "String",
-    },
-    "AssetParameters6f6ba65780b34ab5218a718dc1a30ed9a96795f1909db912b68ea7292e02ff74S3Bucket172A5100": Object {
-      "Description": "S3 bucket for asset \\"6f6ba65780b34ab5218a718dc1a30ed9a96795f1909db912b68ea7292e02ff74\\"",
-      "Type": "String",
-    },
-    "AssetParameters6f6ba65780b34ab5218a718dc1a30ed9a96795f1909db912b68ea7292e02ff74S3VersionKey0EB86A6B": Object {
-      "Description": "S3 key for asset version \\"6f6ba65780b34ab5218a718dc1a30ed9a96795f1909db912b68ea7292e02ff74\\"",
       "Type": "String",
     },
     "AssetParametersb7d8a9750f8bfded8ac76be100e3bee1c3d4824df006766110d023f42952f5c2ArtifactHashE86B38C7": Object {
@@ -426,7 +426,7 @@ Object {
               },
               Object {
                 "Name": "FARGATE_REGION",
-                "Value": "us-east-1",
+                "Value": "ap-northeast-1",
               },
               Object {
                 "Name": "FARGATE_CLUSTER",
@@ -468,7 +468,7 @@ Object {
                 "awslogs-group": Object {
                   "Ref": "FargateRunnerRunnerTaskrunnerLogGroup98D7ED88",
                 },
-                "awslogs-region": "us-east-1",
+                "awslogs-region": "ap-northeast-1",
                 "awslogs-stream-prefix": "GitlabRunnerManager",
               },
             },
@@ -856,7 +856,7 @@ Object {
                     Object {
                       "Ref": "AWS::Partition",
                     },
-                    ":ec2:us-east-1:",
+                    ":ec2:ap-northeast-1:",
                     Object {
                       "Ref": "AWS::AccountId",
                     },
@@ -1046,6 +1046,37 @@ Object {
         ],
       },
       "Type": "AWS::IAM::Role",
+    },
+    "GitlabEksClustercharthelmrunner2794A0C2": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "GitlabEksClusterKubectlReadyBarrierF39FD0FB",
+      ],
+      "Properties": Object {
+        "Chart": "gitlab-runner",
+        "ClusterName": Object {
+          "Ref": "GitlabEksCluster04011DE8",
+        },
+        "CreateNamespace": true,
+        "Namespace": "default",
+        "Release": "integstackgitlabeksclustercharthelmrunner04ad343e",
+        "Repository": "https://charts.gitlab.io",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "GitlabEksClusterCreationRoleFA5C3E1D",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.integstackawscdkawseksKubectlProviderframeworkonEvent0B680441Arn",
+          ],
+        },
+        "Values": "{\\"imagePullPolicy\\":\\"Always\\",\\"terminationGracePeriodSeconds\\":3600,\\"concurrent\\":10,\\"checkInterval\\":30,\\"gitlabUrl\\":\\"https://gitlab.com/\\",\\"runnerRegistrationToken\\":\\"mock\\",\\"unregisterRunners\\":true,\\"rbac\\":{\\"create\\":true,\\"clusterWideAccess\\":false},\\"metrics\\":{\\"enabled\\":true},\\"securityContext\\":{\\"fsGroup\\":65533,\\"runAsUser\\":100},\\"runners\\":{\\"image\\":\\"alpine:3.11\\",\\"tags\\":\\"eks,fargate,runner\\",\\"privileged\\":false},\\"envVars\\":[{\\"name\\":\\"RUNNER_EXECUTOR\\",\\"value\\":\\"kubernetes\\"}]}",
+      },
+      "Type": "Custom::AWSCDK-EKS-HelmChart",
+      "UpdateReplacePolicy": "Delete",
     },
     "GitlabEksClusterfargateprofiledefault953F9ECE": Object {
       "DeletionPolicy": "Delete",
@@ -1307,7 +1338,7 @@ Object {
                 "awslogs-group": Object {
                   "Ref": "GitlabProviderFargateRunnerJobExecutorJobsTaskcicoordinatorLogGroup40CF368A",
                 },
-                "awslogs-region": "us-east-1",
+                "awslogs-region": "ap-northeast-1",
                 "awslogs-stream-prefix": "GitlabRunnerJob",
               },
             },
@@ -1477,7 +1508,7 @@ Object {
               },
               Object {
                 "Name": "FARGATE_REGION",
-                "Value": "us-east-1",
+                "Value": "ap-northeast-1",
               },
               Object {
                 "Name": "FARGATE_CLUSTER",
@@ -1519,7 +1550,7 @@ Object {
                 "awslogs-group": Object {
                   "Ref": "GitlabProviderFargateRunnerRunnerTaskrunnerLogGroup93470F50",
                 },
-                "awslogs-region": "us-east-1",
+                "awslogs-region": "ap-northeast-1",
                 "awslogs-stream-prefix": "GitlabRunnerManager",
               },
             },
@@ -1645,7 +1676,7 @@ Object {
                 "awslogs-group": Object {
                   "Ref": "JobExecutorJobsTaskcicoordinatorLogGroup8879A6BF",
                 },
-                "awslogs-region": "us-east-1",
+                "awslogs-region": "ap-northeast-1",
                 "awslogs-stream-prefix": "GitlabRunnerJob",
               },
             },
@@ -2168,13 +2199,13 @@ Object {
           "Fn::Join": Array [
             "",
             Array [
-              "https://s3.us-east-1.",
+              "https://s3.ap-northeast-1.",
               Object {
                 "Ref": "AWS::URLSuffix",
               },
               "/",
               Object {
-                "Ref": "AssetParameters6f6ba65780b34ab5218a718dc1a30ed9a96795f1909db912b68ea7292e02ff74S3Bucket172A5100",
+                "Ref": "AssetParameters0051de2aab5e789ba95a019596526da9d9a775d2d028d94f6ad5171df4eb8b23S3BucketF98E8FBE",
               },
               "/",
               Object {
@@ -2184,7 +2215,7 @@ Object {
                     "Fn::Split": Array [
                       "||",
                       Object {
-                        "Ref": "AssetParameters6f6ba65780b34ab5218a718dc1a30ed9a96795f1909db912b68ea7292e02ff74S3VersionKey0EB86A6B",
+                        "Ref": "AssetParameters0051de2aab5e789ba95a019596526da9d9a775d2d028d94f6ad5171df4eb8b23S3VersionKeyFC3B4301",
                       },
                     ],
                   },
@@ -2197,7 +2228,7 @@ Object {
                     "Fn::Split": Array [
                       "||",
                       Object {
-                        "Ref": "AssetParameters6f6ba65780b34ab5218a718dc1a30ed9a96795f1909db912b68ea7292e02ff74S3VersionKey0EB86A6B",
+                        "Ref": "AssetParameters0051de2aab5e789ba95a019596526da9d9a775d2d028d94f6ad5171df4eb8b23S3VersionKeyFC3B4301",
                       },
                     ],
                   },
@@ -2253,7 +2284,7 @@ Object {
           "Fn::Join": Array [
             "",
             Array [
-              "https://s3.us-east-1.",
+              "https://s3.ap-northeast-1.",
               Object {
                 "Ref": "AWS::URLSuffix",
               },

@@ -27,6 +27,50 @@ export interface EksClusterOptions {
   readonly clusterOptions: eks.ClusterProps;
 }
 
+export interface HelmRunnerOptionsProps {
+  /**
+   * tags for the runner
+   *
+   * @default - ['eks', 'fargate', 'runner']
+   */
+  readonly tags?: string[];
+
+  /**
+   * GitLab registration token for the runner, you put registrationToken in cdk.context.json like "GITLAB_REGISTRATION_TOKEN": "xxxxxxx".
+   */
+  readonly registrationToken?: string;
+
+  /**
+   * gitlab URL prefix
+   *
+   * @default - 'https://gitlab.com'
+   */
+  readonly gitlabURL?: string;
+
+  /**
+   * Number of run job in the same time.
+   *
+   * @default - 10
+   */
+  readonly concurrent?: number;
+
+  /**
+   * Gitlab runners default image when job start not set "image" in gitlab-ci.yaml.
+   *
+   * @default - alpine:3.11
+   */
+  readonly jobDefaultImage?: string;
+
+  /**
+   * Gitlab helm chart install namespace.
+   *
+   * if you change this to other namespace, please addFargateProfile() add that you want namespace.
+   *
+   * @default - default.
+   */
+  readonly namespace?: string;
+}
+
 export interface FargateEksClusterOptions {
   /**
    * create serivce account and rbac ClusterRoleBinding for gitlab
@@ -39,6 +83,12 @@ export interface FargateEksClusterOptions {
    * cluster properties for Amazon EKS cluster
    */
   readonly clusterOptions: eks.FargateClusterProps;
+
+  /**
+   * Gitlab helm Chart runner install Options Props .
+   * see https://docs.gitlab.com/runner/install/kubernetes.html
+   */
+  readonly helmRunnerOptionsProps: HelmRunnerOptionsProps;
 }
 
 const gitLabClusterRoleBinding = {
@@ -100,6 +150,50 @@ export class Provider extends cdk.Construct {
       cluster.addServiceAccount('gitlab');
       cluster.addManifest('ClusterRoleBinding', gitLabClusterRoleBinding);
     }
+    const registrationToken = props.helmRunnerOptionsProps.registrationToken ?? (this.node.tryGetContext('GITLAB_REGISTRATION_TOKEN') || process.env.GITLAB_REGISTRATION_TOKEN);
+
+    if (!registrationToken) {
+      throw new Error('missing GITLAB_REGISTRATION_TOKEN in the context variable');
+    }
+
+    cluster.addHelmChart('helmrunner', {
+      chart: 'gitlab-runner',
+      repository: 'https://charts.gitlab.io',
+      namespace: 'default',
+      values: {
+        // use fargate run job ,always need to pull.
+        imagePullPolicy: 'Always',
+        terminationGracePeriodSeconds: 3600,
+        concurrent: props.helmRunnerOptionsProps.concurrent ?? 10, // number of run job in the same time.
+        checkInterval: 30,
+        gitlabUrl: props.helmRunnerOptionsProps.gitlabURL ?? 'https://gitlab.com/',
+        runnerRegistrationToken: registrationToken,
+        unregisterRunners: true,
+        rbac: {
+          create: true,
+          clusterWideAccess: false,
+        },
+        metrics: {
+          enabled: true,
+        },
+        securityContext: {
+          fsGroup: 65533,
+          runAsUser: 100,
+        },
+        // runners default image when job start not set "image" in gitlab-ci.yaml.
+        runners: {
+          image: props.helmRunnerOptionsProps.jobDefaultImage ?? 'alpine:3.11',
+          tags: this.synthesizeTags(props.helmRunnerOptionsProps.tags ?? ['eks', 'fargate', 'runner']),
+          privileged: false,
+        },
+        envVars: [
+          {
+            name: 'RUNNER_EXECUTOR',
+            value: 'kubernetes',
+          },
+        ],
+      },
+    });
     return cluster;
   }
   public createSecurityGroup(): ec2.SecurityGroup {
@@ -183,5 +277,8 @@ export class Provider extends cdk.Construct {
     });
     new cdk.CfnOutput(this, 'RoleArn', { value: this.gitlabEksRole.roleArn });
     new cdk.CfnOutput(this, 'EksAdminRole', { value: eksAdminRole.roleName });
+  }
+  private synthesizeTags(tags: string[]): string {
+    return tags.join(',');
   }
 }

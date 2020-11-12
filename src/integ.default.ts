@@ -29,6 +29,7 @@ export class IntegTesting {
         vpc,
         version: eks.KubernetesVersion.V1_18,
       },
+      helmRunnerOptionsProps: {},
     });
 
     // create a default fargate runner with its job executor

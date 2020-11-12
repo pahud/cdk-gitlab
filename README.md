@@ -20,6 +20,7 @@ provider.createFargateEksCluster(stack, 'GitlabEksCluster', {
     vpc,
     version: eks.KubernetesVersion.V1_18,
   },
+    helmRunnerOptionsProps: {},
 });
 
 // create a default fargate runner with its job executor
