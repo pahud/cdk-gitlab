@@ -19,6 +19,7 @@ Name|Description
 [FargateEksClusterOptions](#cdk-gitlab-fargateeksclusteroptions)|*No description*
 [FargateJobExecutorProps](#cdk-gitlab-fargatejobexecutorprops)|The properties for the FargateJobExecutor.
 [FargateRunnerProps](#cdk-gitlab-fargaterunnerprops)|Properties for the FargateRunner.
+[HelmRunnerOptions](#cdk-gitlab-helmrunneroptions)|*No description*
 [ProviderProps](#cdk-gitlab-providerprops)|*No description*
 [RoleProps](#cdk-gitlab-roleprops)|*No description*
 
@@ -220,6 +221,7 @@ createFargateEksCluster(scope: Construct, id: string, props: FargateEksClusterOp
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[FargateEksClusterOptions](#cdk-gitlab-fargateeksclusteroptions)</code>)  *No description*
   * **clusterOptions** (<code>[FargateClusterProps](#aws-cdk-aws-eks-fargateclusterprops)</code>)  cluster properties for Amazon EKS cluster. 
+  * **helmRunnerOptions** (<code>[HelmRunnerOptions](#cdk-gitlab-helmrunneroptions)</code>)  Gitlab helm Chart runner install Options. 
   * **rbac** (<code>boolean</code>)  create serivce account and rbac ClusterRoleBinding for gitlab. __*Default*__: true
 
 __Returns__:
@@ -306,6 +308,7 @@ Name | Type | Description
 Name | Type | Description 
 -----|------|-------------
 **clusterOptions** | <code>[FargateClusterProps](#aws-cdk-aws-eks-fargateclusterprops)</code> | cluster properties for Amazon EKS cluster.
+**helmRunnerOptions** | <code>[HelmRunnerOptions](#cdk-gitlab-helmrunneroptions)</code> | Gitlab helm Chart runner install Options.
 **rbac**? | <code>boolean</code> | create serivce account and rbac ClusterRoleBinding for gitlab.<br/>__*Default*__: true
 
 
@@ -345,6 +348,24 @@ Name | Type | Description
 **securityGroup**? | <code>[ISecurityGroup](#aws-cdk-aws-ec2-isecuritygroup)</code> | The security group for Fargate CI task.<br/>__*Optional*__
 **serviceDefaultCapacityProviderStrategy**? | <code>Array<[CapacityProviderStrategyItem](#cdk-gitlab-capacityproviderstrategyitem)></code> | Default capacity provider strategy for the Amazon ECS service.<br/>__*Default*__: DEFAULT_SERVICE_CAPACITY_PROVIDER_STRATEGY
 **tags**? | <code>Array<string></code> | tags for the runner.<br/>__*Optional*__
+
+
+
+## struct HelmRunnerOptions  <a id="cdk-gitlab-helmrunneroptions"></a>
+
+
+
+
+
+
+Name | Type | Description 
+-----|------|-------------
+**concurrent**? | <code>number</code> | Number of run job in the same time.<br/>__*Default*__: 10
+**gitlabURL**? | <code>string</code> | gitlab URL prefix.<br/>__*Default*__: 'https://gitlab.com'
+**jobDefaultImage**? | <code>string</code> | Gitlab runners default image when job start not set "image" in gitlab-ci.yaml.<br/>__*Default*__: alpine:3.11
+**namespace**? | <code>string</code> | Gitlab helm chart install namespace.<br/>__*Default*__: default.
+**registrationToken**? | <code>string</code> | GitLab registration token for the runner, you put registrationToken in cdk.context.json like "GITLAB_REGISTRATION_TOKEN": "xxxxxxx".<br/>__*Optional*__
+**tags**? | <code>Array<string></code> | tags for the runner.<br/>__*Default*__: ['eks', 'fargate', 'runner']
 
 
 

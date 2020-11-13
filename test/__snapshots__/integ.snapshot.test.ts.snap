@@ -1047,6 +1047,37 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
+    "GitlabEksClustercharthelmrunner2794A0C2": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "GitlabEksClusterKubectlReadyBarrierF39FD0FB",
+      ],
+      "Properties": Object {
+        "Chart": "gitlab-runner",
+        "ClusterName": Object {
+          "Ref": "GitlabEksCluster04011DE8",
+        },
+        "CreateNamespace": true,
+        "Namespace": "default",
+        "Release": "integstackgitlabeksclustercharthelmrunner04ad343e",
+        "Repository": "https://charts.gitlab.io",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "GitlabEksClusterCreationRoleFA5C3E1D",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.integstackawscdkawseksKubectlProviderframeworkonEvent0B680441Arn",
+          ],
+        },
+        "Values": "{\\"imagePullPolicy\\":\\"Always\\",\\"terminationGracePeriodSeconds\\":3600,\\"concurrent\\":10,\\"checkInterval\\":30,\\"gitlabUrl\\":\\"https://gitlab.com/\\",\\"runnerRegistrationToken\\":\\"mock\\",\\"unregisterRunners\\":true,\\"rbac\\":{\\"create\\":true,\\"clusterWideAccess\\":false},\\"metrics\\":{\\"enabled\\":true},\\"securityContext\\":{\\"fsGroup\\":65533,\\"runAsUser\\":100},\\"runners\\":{\\"image\\":\\"alpine:3.11\\",\\"tags\\":\\"eks,fargate,runner\\",\\"privileged\\":false},\\"envVars\\":[{\\"name\\":\\"RUNNER_EXECUTOR\\",\\"value\\":\\"kubernetes\\"}]}",
+      },
+      "Type": "Custom::AWSCDK-EKS-HelmChart",
+      "UpdateReplacePolicy": "Delete",
+    },
     "GitlabEksClusterfargateprofiledefault953F9ECE": Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
