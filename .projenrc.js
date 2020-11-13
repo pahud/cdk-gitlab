@@ -18,6 +18,7 @@ const project = new AwsCdkConstructLibrary({
     '@aws-cdk/aws-ecs',
     '@aws-cdk/aws-eks',
     '@aws-cdk/aws-iam',
+    '@aws-cdk/assert'
   ],
   python: {
     distName: "cdk-gitlab",

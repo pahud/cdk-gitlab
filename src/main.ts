@@ -85,10 +85,10 @@ export interface FargateEksClusterOptions {
   readonly clusterOptions: eks.FargateClusterProps;
 
   /**
-   * Gitlab helm Chart runner install Options Props .
+   * Gitlab helm Chart runner install Options.
    * see https://docs.gitlab.com/runner/install/kubernetes.html
    */
-  readonly helmRunnerOptionsProps: HelmRunnerOptions;
+  readonly helmRunnerOptions: HelmRunnerOptions;
 }
 
 const gitLabClusterRoleBinding = {
@@ -150,7 +150,7 @@ export class Provider extends cdk.Construct {
       cluster.addServiceAccount('gitlab');
       cluster.addManifest('ClusterRoleBinding', gitLabClusterRoleBinding);
     }
-    const registrationToken = props.helmRunnerOptionsProps.registrationToken ?? (this.node.tryGetContext('GITLAB_REGISTRATION_TOKEN') || process.env.GITLAB_REGISTRATION_TOKEN);
+    const registrationToken = props.helmRunnerOptions.registrationToken ?? (this.node.tryGetContext('GITLAB_REGISTRATION_TOKEN') || process.env.GITLAB_REGISTRATION_TOKEN);
 
     if (!registrationToken) {
       throw new Error('missing GITLAB_REGISTRATION_TOKEN in the context variable');
@@ -164,9 +164,9 @@ export class Provider extends cdk.Construct {
         // use fargate run job ,always need to pull.
         imagePullPolicy: 'Always',
         terminationGracePeriodSeconds: 3600,
-        concurrent: props.helmRunnerOptionsProps.concurrent ?? 10, // number of run job in the same time.
+        concurrent: props.helmRunnerOptions.concurrent ?? 10, // number of run job in the same time.
         checkInterval: 30,
-        gitlabUrl: props.helmRunnerOptionsProps.gitlabURL ?? 'https://gitlab.com/',
+        gitlabUrl: props.helmRunnerOptions.gitlabURL ?? 'https://gitlab.com/',
         runnerRegistrationToken: registrationToken,
         unregisterRunners: true,
         rbac: {
@@ -182,8 +182,8 @@ export class Provider extends cdk.Construct {
         },
         // runners default image when job start not set "image" in gitlab-ci.yaml.
         runners: {
-          image: props.helmRunnerOptionsProps.jobDefaultImage ?? 'alpine:3.11',
-          tags: this.synthesizeTags(props.helmRunnerOptionsProps.tags ?? ['eks', 'fargate', 'runner']),
+          image: props.helmRunnerOptions.jobDefaultImage ?? 'alpine:3.11',
+          tags: this.synthesizeTags(props.helmRunnerOptions.tags ?? ['eks', 'fargate', 'runner']),
           privileged: false,
         },
         envVars: [
