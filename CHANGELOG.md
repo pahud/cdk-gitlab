@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.1.14 (2020-11-13)
+
+
+### Features
+
+* support helm chart runner ([#23](https://github.com/pahud/cdk-gitlab/issues/23)) ([ee04fdc](https://github.com/pahud/cdk-gitlab/commit/ee04fdcfaefa39ab8f143096ac60a938a3e06397)), closes [#24](https://github.com/pahud/cdk-gitlab/issues/24)
+
 ### 0.1.13 (2020-11-11)
 
 ### 0.1.12 (2020-11-08)
