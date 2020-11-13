@@ -221,7 +221,7 @@ createFargateEksCluster(scope: Construct, id: string, props: FargateEksClusterOp
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[FargateEksClusterOptions](#cdk-gitlab-fargateeksclusteroptions)</code>)  *No description*
   * **clusterOptions** (<code>[FargateClusterProps](#aws-cdk-aws-eks-fargateclusterprops)</code>)  cluster properties for Amazon EKS cluster. 
-  * **helmRunnerOptions** (<code>[HelmRunnerOptions](#cdk-gitlab-helmrunneroptions)</code>)  Gitlab helm Chart runner install Options. 
+  * **helmRunnerOptions** (<code>[HelmRunnerOptions](#cdk-gitlab-helmrunneroptions)</code>)  Gitlab helm Chart runner install Options. __*Optional*__
   * **rbac** (<code>boolean</code>)  create serivce account and rbac ClusterRoleBinding for gitlab. __*Default*__: true
 
 __Returns__:
@@ -308,7 +308,7 @@ Name | Type | Description
 Name | Type | Description 
 -----|------|-------------
 **clusterOptions** | <code>[FargateClusterProps](#aws-cdk-aws-eks-fargateclusterprops)</code> | cluster properties for Amazon EKS cluster.
-**helmRunnerOptions** | <code>[HelmRunnerOptions](#cdk-gitlab-helmrunneroptions)</code> | Gitlab helm Chart runner install Options.
+**helmRunnerOptions**? | <code>[HelmRunnerOptions](#cdk-gitlab-helmrunneroptions)</code> | Gitlab helm Chart runner install Options.<br/>__*Optional*__
 **rbac**? | <code>boolean</code> | create serivce account and rbac ClusterRoleBinding for gitlab.<br/>__*Default*__: true
 
 

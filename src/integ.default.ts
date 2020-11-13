@@ -29,7 +29,6 @@ export class IntegTesting {
         vpc,
         version: eks.KubernetesVersion.V1_18,
       },
-      helmRunnerOptions: {},
     });
 
     // create a default fargate runner with its job executor
@@ -52,6 +51,7 @@ export class IntegTesting {
 }
 
 process.env.GITLAB_REGISTRATION_TOKEN='mock';
+process.env.CDK_INTEG_REGION='us-east-1';
 
 new IntegTesting();
 
