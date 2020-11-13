@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.1.15 (2020-11-13)
+
+
+### Bug Fixes
+
+* helmRunnerOptions to optional ([#26](https://github.com/pahud/cdk-gitlab/issues/26)) ([e5fe258](https://github.com/pahud/cdk-gitlab/commit/e5fe2588b9f1ab680889a91b95187c77937d5e5a)), closes [#25](https://github.com/pahud/cdk-gitlab/issues/25)
+
 ### 0.1.14 (2020-11-13)
 
 
