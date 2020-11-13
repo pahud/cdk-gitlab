@@ -27,7 +27,7 @@ export interface EksClusterOptions {
   readonly clusterOptions: eks.ClusterProps;
 }
 
-export interface HelmRunnerOptionsProps {
+export interface HelmRunnerOptions {
   /**
    * tags for the runner
    *
@@ -88,7 +88,7 @@ export interface FargateEksClusterOptions {
    * Gitlab helm Chart runner install Options Props .
    * see https://docs.gitlab.com/runner/install/kubernetes.html
    */
-  readonly helmRunnerOptionsProps: HelmRunnerOptionsProps;
+  readonly helmRunnerOptionsProps: HelmRunnerOptions;
 }
 
 const gitLabClusterRoleBinding = {

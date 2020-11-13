@@ -19,7 +19,7 @@ Name|Description
 [FargateEksClusterOptions](#cdk-gitlab-fargateeksclusteroptions)|*No description*
 [FargateJobExecutorProps](#cdk-gitlab-fargatejobexecutorprops)|The properties for the FargateJobExecutor.
 [FargateRunnerProps](#cdk-gitlab-fargaterunnerprops)|Properties for the FargateRunner.
-[HelmRunnerOptionsProps](#cdk-gitlab-helmrunneroptionsprops)|*No description*
+[HelmRunnerOptions](#cdk-gitlab-helmrunneroptions)|*No description*
 [ProviderProps](#cdk-gitlab-providerprops)|*No description*
 [RoleProps](#cdk-gitlab-roleprops)|*No description*
 
@@ -221,7 +221,7 @@ createFargateEksCluster(scope: Construct, id: string, props: FargateEksClusterOp
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[FargateEksClusterOptions](#cdk-gitlab-fargateeksclusteroptions)</code>)  *No description*
   * **clusterOptions** (<code>[FargateClusterProps](#aws-cdk-aws-eks-fargateclusterprops)</code>)  cluster properties for Amazon EKS cluster. 
-  * **helmRunnerOptionsProps** (<code>[HelmRunnerOptionsProps](#cdk-gitlab-helmrunneroptionsprops)</code>)  Gitlab helm Chart runner install Options Props . 
+  * **helmRunnerOptionsProps** (<code>[HelmRunnerOptions](#cdk-gitlab-helmrunneroptions)</code>)  Gitlab helm Chart runner install Options Props . 
   * **rbac** (<code>boolean</code>)  create serivce account and rbac ClusterRoleBinding for gitlab. __*Default*__: true
 
 __Returns__:
@@ -308,7 +308,7 @@ Name | Type | Description
 Name | Type | Description 
 -----|------|-------------
 **clusterOptions** | <code>[FargateClusterProps](#aws-cdk-aws-eks-fargateclusterprops)</code> | cluster properties for Amazon EKS cluster.
-**helmRunnerOptionsProps** | <code>[HelmRunnerOptionsProps](#cdk-gitlab-helmrunneroptionsprops)</code> | Gitlab helm Chart runner install Options Props .
+**helmRunnerOptionsProps** | <code>[HelmRunnerOptions](#cdk-gitlab-helmrunneroptions)</code> | Gitlab helm Chart runner install Options Props .
 **rbac**? | <code>boolean</code> | create serivce account and rbac ClusterRoleBinding for gitlab.<br/>__*Default*__: true
 
 
@@ -351,7 +351,7 @@ Name | Type | Description
 
 
 
-## struct HelmRunnerOptionsProps  <a id="cdk-gitlab-helmrunneroptionsprops"></a>
+## struct HelmRunnerOptions  <a id="cdk-gitlab-helmrunneroptions"></a>
 
 
 
