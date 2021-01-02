@@ -72,16 +72,16 @@ Object {
       "Description": "S3 key for asset version \\"50e10880d134a01b440991fc77d217f39f01c2d56945215ee9a3b81187c6f3b1\\"",
       "Type": "String",
     },
-    "AssetParameters578cc0b22693dc0174d1d1ed44a3bfc0a64a8c8ffb2826565a056f82b70b7316ArtifactHash49E4AB55": Object {
-      "Description": "Artifact hash for asset \\"578cc0b22693dc0174d1d1ed44a3bfc0a64a8c8ffb2826565a056f82b70b7316\\"",
+    "AssetParameters5388aa7dcf30f2f0c2967086f01fb859b082804742789d643b74755a06d860b7ArtifactHash699B007C": Object {
+      "Description": "Artifact hash for asset \\"5388aa7dcf30f2f0c2967086f01fb859b082804742789d643b74755a06d860b7\\"",
       "Type": "String",
     },
-    "AssetParameters578cc0b22693dc0174d1d1ed44a3bfc0a64a8c8ffb2826565a056f82b70b7316S3BucketC3B5FD73": Object {
-      "Description": "S3 bucket for asset \\"578cc0b22693dc0174d1d1ed44a3bfc0a64a8c8ffb2826565a056f82b70b7316\\"",
+    "AssetParameters5388aa7dcf30f2f0c2967086f01fb859b082804742789d643b74755a06d860b7S3BucketAB7B38B2": Object {
+      "Description": "S3 bucket for asset \\"5388aa7dcf30f2f0c2967086f01fb859b082804742789d643b74755a06d860b7\\"",
       "Type": "String",
     },
-    "AssetParameters578cc0b22693dc0174d1d1ed44a3bfc0a64a8c8ffb2826565a056f82b70b7316S3VersionKey87F332F5": Object {
-      "Description": "S3 key for asset version \\"578cc0b22693dc0174d1d1ed44a3bfc0a64a8c8ffb2826565a056f82b70b7316\\"",
+    "AssetParameters5388aa7dcf30f2f0c2967086f01fb859b082804742789d643b74755a06d860b7S3VersionKey77F099E4": Object {
+      "Description": "S3 key for asset version \\"5388aa7dcf30f2f0c2967086f01fb859b082804742789d643b74755a06d860b7\\"",
       "Type": "String",
     },
     "AssetParameters6f6ba65780b34ab5218a718dc1a30ed9a96795f1909db912b68ea7292e02ff74ArtifactHashD7A6A7E4": Object {
@@ -96,16 +96,16 @@ Object {
       "Description": "S3 key for asset version \\"6f6ba65780b34ab5218a718dc1a30ed9a96795f1909db912b68ea7292e02ff74\\"",
       "Type": "String",
     },
-    "AssetParametersb7d8a9750f8bfded8ac76be100e3bee1c3d4824df006766110d023f42952f5c2ArtifactHashE86B38C7": Object {
-      "Description": "Artifact hash for asset \\"b7d8a9750f8bfded8ac76be100e3bee1c3d4824df006766110d023f42952f5c2\\"",
+    "AssetParameters752aa9e7fcf8477dc4910d637ca8e9259ba59e7f1a7d4a3d88ecb6c3c13813f8ArtifactHash664BAE0D": Object {
+      "Description": "Artifact hash for asset \\"752aa9e7fcf8477dc4910d637ca8e9259ba59e7f1a7d4a3d88ecb6c3c13813f8\\"",
       "Type": "String",
     },
-    "AssetParametersb7d8a9750f8bfded8ac76be100e3bee1c3d4824df006766110d023f42952f5c2S3Bucket9ABBD5A2": Object {
-      "Description": "S3 bucket for asset \\"b7d8a9750f8bfded8ac76be100e3bee1c3d4824df006766110d023f42952f5c2\\"",
+    "AssetParameters752aa9e7fcf8477dc4910d637ca8e9259ba59e7f1a7d4a3d88ecb6c3c13813f8S3BucketA67326D3": Object {
+      "Description": "S3 bucket for asset \\"752aa9e7fcf8477dc4910d637ca8e9259ba59e7f1a7d4a3d88ecb6c3c13813f8\\"",
       "Type": "String",
     },
-    "AssetParametersb7d8a9750f8bfded8ac76be100e3bee1c3d4824df006766110d023f42952f5c2S3VersionKey40FF2C4A": Object {
-      "Description": "S3 key for asset version \\"b7d8a9750f8bfded8ac76be100e3bee1c3d4824df006766110d023f42952f5c2\\"",
+    "AssetParameters752aa9e7fcf8477dc4910d637ca8e9259ba59e7f1a7d4a3d88ecb6c3c13813f8S3VersionKey7F484692": Object {
+      "Description": "S3 key for asset version \\"752aa9e7fcf8477dc4910d637ca8e9259ba59e7f1a7d4a3d88ecb6c3c13813f8\\"",
       "Type": "String",
     },
     "AssetParametersbac0243f487acc20e4218710f00301de6ecd41f11245b7d1229d38bfec963e37ArtifactHash75842D94": Object {
@@ -118,6 +118,18 @@ Object {
     },
     "AssetParametersbac0243f487acc20e4218710f00301de6ecd41f11245b7d1229d38bfec963e37S3VersionKeyC0E7DA00": Object {
       "Description": "S3 key for asset version \\"bac0243f487acc20e4218710f00301de6ecd41f11245b7d1229d38bfec963e37\\"",
+      "Type": "String",
+    },
+    "AssetParametersbafd50ae9f214e496ff8c72c6425f93dca3ccd590e20963706d5d610d9c75757ArtifactHashF584A7D8": Object {
+      "Description": "Artifact hash for asset \\"bafd50ae9f214e496ff8c72c6425f93dca3ccd590e20963706d5d610d9c75757\\"",
+      "Type": "String",
+    },
+    "AssetParametersbafd50ae9f214e496ff8c72c6425f93dca3ccd590e20963706d5d610d9c75757S3Bucket008DBB35": Object {
+      "Description": "S3 bucket for asset \\"bafd50ae9f214e496ff8c72c6425f93dca3ccd590e20963706d5d610d9c75757\\"",
+      "Type": "String",
+    },
+    "AssetParametersbafd50ae9f214e496ff8c72c6425f93dca3ccd590e20963706d5d610d9c75757S3VersionKey97C3E1A0": Object {
+      "Description": "S3 key for asset version \\"bafd50ae9f214e496ff8c72c6425f93dca3ccd590e20963706d5d610d9c75757\\"",
       "Type": "String",
     },
     "AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cArtifactHash627DAAA7": Object {
@@ -675,7 +687,7 @@ Object {
           "Fn::Join": Array [
             "",
             Array [
-              "[{\\"apiVersion\\":\\"v1\\",\\"kind\\":\\"ConfigMap\\",\\"metadata\\":{\\"name\\":\\"aws-auth\\",\\"namespace\\":\\"kube-system\\"},\\"data\\":{\\"mapRoles\\":\\"[{\\\\\\"rolearn\\\\\\":\\\\\\"",
+              "[{\\"apiVersion\\":\\"v1\\",\\"kind\\":\\"ConfigMap\\",\\"metadata\\":{\\"name\\":\\"aws-auth\\",\\"namespace\\":\\"kube-system\\",\\"labels\\":{\\"aws.cdk.eks/prune-c8d9dd464fba98bd09050f29c9cd8544913dd7170d\\":\\"\\"}},\\"data\\":{\\"mapRoles\\":\\"[{\\\\\\"rolearn\\\\\\":\\\\\\"",
               Object {
                 "Fn::GetAtt": Array [
                   "GitlabEksClusterMastersRole5C87183A",
@@ -700,6 +712,8 @@ Object {
             ],
           ],
         },
+        "Overwrite": true,
+        "PruneLabel": "aws.cdk.eks/prune-c8d9dd464fba98bd09050f29c9cd8544913dd7170d",
         "RoleArn": Object {
           "Fn::GetAtt": Array [
             "GitlabEksClusterCreationRoleFA5C3E1D",
@@ -1162,16 +1176,30 @@ Object {
             Array [
               "{\\"",
               Object {
-                "Fn::GetAtt": Array [
-                  "GitlabEksCluster04011DE8",
-                  "OpenIdConnectIssuer",
+                "Fn::Select": Array [
+                  1,
+                  Object {
+                    "Fn::Split": Array [
+                      ":oidc-provider/",
+                      Object {
+                        "Ref": "GitlabEksClusterOpenIdConnectProvider9C70FF40",
+                      },
+                    ],
+                  },
                 ],
               },
               ":aud\\":\\"sts.amazonaws.com\\",\\"",
               Object {
-                "Fn::GetAtt": Array [
-                  "GitlabEksCluster04011DE8",
-                  "OpenIdConnectIssuer",
+                "Fn::Select": Array [
+                  1,
+                  Object {
+                    "Fn::Split": Array [
+                      ":oidc-provider/",
+                      Object {
+                        "Ref": "GitlabEksClusterOpenIdConnectProvider9C70FF40",
+                      },
+                    ],
+                  },
                 ],
               },
               ":sub\\":\\"system:serviceaccount:default:integstackgitlabeksclustergitlab0901e0fe\\"}",
@@ -1222,7 +1250,7 @@ Object {
           "Fn::Join": Array [
             "",
             Array [
-              "[{\\"apiVersion\\":\\"v1\\",\\"kind\\":\\"ServiceAccount\\",\\"metadata\\":{\\"name\\":\\"integstackgitlabeksclustergitlab0901e0fe\\",\\"namespace\\":\\"default\\",\\"labels\\":{\\"app.kubernetes.io/name\\":\\"integstackgitlabeksclustergitlab0901e0fe\\"},\\"annotations\\":{\\"eks.amazonaws.com/role-arn\\":\\"",
+              "[{\\"apiVersion\\":\\"v1\\",\\"kind\\":\\"ServiceAccount\\",\\"metadata\\":{\\"name\\":\\"integstackgitlabeksclustergitlab0901e0fe\\",\\"namespace\\":\\"default\\",\\"labels\\":{\\"aws.cdk.eks/prune-c81b5147c743c0917beeba656be9c22b5acdc34e8a\\":\\"\\",\\"app.kubernetes.io/name\\":\\"integstackgitlabeksclustergitlab0901e0fe\\"},\\"annotations\\":{\\"eks.amazonaws.com/role-arn\\":\\"",
               Object {
                 "Fn::GetAtt": Array [
                   "GitlabEksClustergitlabRole66A56A9A",
@@ -1233,6 +1261,7 @@ Object {
             ],
           ],
         },
+        "PruneLabel": "aws.cdk.eks/prune-c81b5147c743c0917beeba656be9c22b5acdc34e8a",
         "RoleArn": Object {
           "Fn::GetAtt": Array [
             "GitlabEksClusterCreationRoleFA5C3E1D",
@@ -1258,7 +1287,8 @@ Object {
         "ClusterName": Object {
           "Ref": "GitlabEksCluster04011DE8",
         },
-        "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1beta1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"name\\":\\"gitlab-admin\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"cluster-admin\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"gitlab\\",\\"namespace\\":\\"kube-system\\"}]}]",
+        "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1beta1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"name\\":\\"gitlab-admin\\",\\"labels\\":{\\"aws.cdk.eks/prune-c89f9fa012e7442c102e3920bc22bc0faea8f5b177\\":\\"\\"}},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"cluster-admin\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"gitlab\\",\\"namespace\\":\\"kube-system\\"}]}]",
+        "PruneLabel": "aws.cdk.eks/prune-c89f9fa012e7442c102e3920bc22bc0faea8f5b177",
         "RoleArn": Object {
           "Fn::GetAtt": Array [
             "GitlabEksClusterCreationRoleFA5C3E1D",
@@ -2243,11 +2273,17 @@ Object {
     "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B": Object {
       "Properties": Object {
         "Parameters": Object {
-          "referencetointegstackAssetParametersb7d8a9750f8bfded8ac76be100e3bee1c3d4824df006766110d023f42952f5c2S3Bucket40C01ECERef": Object {
-            "Ref": "AssetParametersb7d8a9750f8bfded8ac76be100e3bee1c3d4824df006766110d023f42952f5c2S3Bucket9ABBD5A2",
+          "referencetointegstackAssetParameters752aa9e7fcf8477dc4910d637ca8e9259ba59e7f1a7d4a3d88ecb6c3c13813f8S3Bucket121B1C25Ref": Object {
+            "Ref": "AssetParameters752aa9e7fcf8477dc4910d637ca8e9259ba59e7f1a7d4a3d88ecb6c3c13813f8S3BucketA67326D3",
           },
-          "referencetointegstackAssetParametersb7d8a9750f8bfded8ac76be100e3bee1c3d4824df006766110d023f42952f5c2S3VersionKey5A80EB8FRef": Object {
-            "Ref": "AssetParametersb7d8a9750f8bfded8ac76be100e3bee1c3d4824df006766110d023f42952f5c2S3VersionKey40FF2C4A",
+          "referencetointegstackAssetParameters752aa9e7fcf8477dc4910d637ca8e9259ba59e7f1a7d4a3d88ecb6c3c13813f8S3VersionKey3CF46014Ref": Object {
+            "Ref": "AssetParameters752aa9e7fcf8477dc4910d637ca8e9259ba59e7f1a7d4a3d88ecb6c3c13813f8S3VersionKey7F484692",
+          },
+          "referencetointegstackAssetParametersbafd50ae9f214e496ff8c72c6425f93dca3ccd590e20963706d5d610d9c75757S3Bucket747F81D1Ref": Object {
+            "Ref": "AssetParametersbafd50ae9f214e496ff8c72c6425f93dca3ccd590e20963706d5d610d9c75757S3Bucket008DBB35",
+          },
+          "referencetointegstackAssetParametersbafd50ae9f214e496ff8c72c6425f93dca3ccd590e20963706d5d610d9c75757S3VersionKey4D745E66Ref": Object {
+            "Ref": "AssetParametersbafd50ae9f214e496ff8c72c6425f93dca3ccd590e20963706d5d610d9c75757S3VersionKey97C3E1A0",
           },
           "referencetointegstackAssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3Bucket9956EB8BRef": Object {
             "Ref": "AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3BucketEAC9DD43",
@@ -2273,6 +2309,9 @@ Object {
               "Arn",
             ],
           },
+          "referencetointegstackVpc4359984DRef": Object {
+            "Ref": "Vpc8378EB38",
+          },
           "referencetointegstackVpcPrivateSubnet1Subnet057D9B63Ref": Object {
             "Ref": "VpcPrivateSubnet1Subnet536B997A",
           },
@@ -2290,7 +2329,7 @@ Object {
               },
               "/",
               Object {
-                "Ref": "AssetParameters578cc0b22693dc0174d1d1ed44a3bfc0a64a8c8ffb2826565a056f82b70b7316S3BucketC3B5FD73",
+                "Ref": "AssetParameters5388aa7dcf30f2f0c2967086f01fb859b082804742789d643b74755a06d860b7S3BucketAB7B38B2",
               },
               "/",
               Object {
@@ -2300,7 +2339,7 @@ Object {
                     "Fn::Split": Array [
                       "||",
                       Object {
-                        "Ref": "AssetParameters578cc0b22693dc0174d1d1ed44a3bfc0a64a8c8ffb2826565a056f82b70b7316S3VersionKey87F332F5",
+                        "Ref": "AssetParameters5388aa7dcf30f2f0c2967086f01fb859b082804742789d643b74755a06d860b7S3VersionKey77F099E4",
                       },
                     ],
                   },
@@ -2313,7 +2352,7 @@ Object {
                     "Fn::Split": Array [
                       "||",
                       Object {
-                        "Ref": "AssetParameters578cc0b22693dc0174d1d1ed44a3bfc0a64a8c8ffb2826565a056f82b70b7316S3VersionKey87F332F5",
+                        "Ref": "AssetParameters5388aa7dcf30f2f0c2967086f01fb859b082804742789d643b74755a06d860b7S3VersionKey77F099E4",
                       },
                     ],
                   },
