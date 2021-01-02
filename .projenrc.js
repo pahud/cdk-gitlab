@@ -1,14 +1,14 @@
-const { AwsCdkConstructLibrary, GithubWorkflow } = require('projen');
+const { AwsCdkConstructLibrary } = require('projen');
 
-const AUTOMATION_TOKEN = 'AUTOMATION_GITHUB_TOKEN'
+const AUTOMATION_TOKEN = 'AUTOMATION_GITHUB_TOKEN';
 
 const project = new AwsCdkConstructLibrary({
-  authorAddress: "pahudnet@gmail.com",
-  authorName: "Pahud Hsieh",
-  cdkVersion: "1.71.0",
-  name: "cdk-gitlab",
-  repository: "https://github.com/pahud/cdk-gitlab.git",
-  description: "High level CDK construct to provision GitLab integrations with AWS",
+  authorAddress: 'pahudnet@gmail.com',
+  authorName: 'Pahud Hsieh',
+  cdkVersion: '1.81.0',
+  name: 'cdk-gitlab',
+  repository: 'https://github.com/pahud/cdk-gitlab.git',
+  description: 'High level CDK construct to provision GitLab integrations with AWS',
   defaultReleaseBranch: 'main',
   autoDetectBin: false,
   dependabot: false,
@@ -19,18 +19,20 @@ const project = new AwsCdkConstructLibrary({
     '@aws-cdk/aws-eks',
     '@aws-cdk/aws-iam',
   ],
+  deps: ['awscdk-81-patch'],
+  peerDeps: ['awscdk-81-patch'],
   python: {
-    distName: "cdk-gitlab",
-    module: "cdk_gitlab",
+    distName: 'cdk-gitlab',
+    module: 'cdk_gitlab',
   },
 });
 
 // create a custom projen and yarn upgrade workflow
-const workflow = new GithubWorkflow(project, 'ProjenYarnUpgrade');
+workflow = project.github.addWorkflow('ProjenYarnUpgrade');
 
 workflow.on({
   schedule: [{
-    cron: '11 0 * * *'
+    cron: '11 0 * * *',
   }], // 0:11am every day
   workflow_dispatch: {}, // allow manual triggering
 });
@@ -40,14 +42,14 @@ workflow.addJobs({
     'runs-on': 'ubuntu-latest',
     'steps': [
       { uses: 'actions/checkout@v2' },
-      { 
+      {
         uses: 'actions/setup-node@v1',
         with: {
           'node-version': '10.17.0',
-        }
+        },
       },
-      { run: `yarn upgrade` },
-      { run: `yarn projen:upgrade` },
+      { run: 'yarn upgrade' },
+      { run: 'yarn projen:upgrade' },
       // submit a PR
       {
         name: 'Create Pull Request',
@@ -59,7 +61,7 @@ workflow.addJobs({
           'title': 'chore: upgrade projen and yarn',
           'body': 'This PR upgrades projen and yarn upgrade to the latest version',
           'labels': 'auto-merge',
-        }
+        },
       },
     ],
   },
