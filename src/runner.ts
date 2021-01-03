@@ -4,37 +4,25 @@ import * as iam from '@aws-cdk/aws-iam';
 import * as cdk from '@aws-cdk/core';
 
 /**
- * Options for the runner to create the fargate job executor
+ * Amazon ECS Capacity Providers for AWS Fargate
  */
-export interface JobExecutorOptions {
-  /**
-   * AWS region for the job executor
-   * @default - the region of the stack
-   */
-  readonly region?: string;
-
-  /**
-   * The ECS clsuter of the job executor fargate task
-   * @default - the cluster for the runner
-   */
-  readonly cluster?: ecs.ICluster;
-
-  /**
-   * subnet for the executor
-   */
-  readonly subnet?: ec2.ISubnet;
-
-  /**
-   * security group for the executor
-   */
-  readonly securityGroup?: ec2.ISecurityGroup;
-
-  /**
-   * task definition arn of the executor
-   */
-  readonly task?: string;
+export enum FargateCapacityProviderType {
+  FARGATE = 'FARGATE',
+  FARGATE_SPOT = 'FARGATE_SPOT'
 }
 
+/**
+ * The Capacity Provider strategy
+ */
+export interface CapacityProviderStrategyItem {
+  readonly base?: number;
+  readonly weight: number;
+  readonly capacityProvider: FargateCapacityProviderType;
+}
+
+/**
+ * Properties for the FargateRunner
+ */
 export interface FargateRunnerProps {
   /**
    * VPC for the fargate
@@ -71,7 +59,20 @@ export interface FargateRunnerProps {
   /**
    * Fargate job executor options
    */
-  readonly executor: JobExecutorOptions;
+  readonly executor?: FargateJobExecutor;
+
+  /**
+   * Default capacity provider strategy for the Amazon ECS cluster
+   *
+   * @default DEFAULT_CLUSTER_CAPACITY_PROVIDER_STRATEGY
+   */
+  readonly clusterDefaultCapacityProviderStrategy?: CapacityProviderStrategyItem[];
+  /**
+   * Default capacity provider strategy for the Amazon ECS service
+   *
+   * @default DEFAULT_SERVICE_CAPACITY_PROVIDER_STRATEGY
+   */
+  readonly serviceDefaultCapacityProviderStrategy?: CapacityProviderStrategyItem[];
 }
 
 /**
@@ -89,6 +90,12 @@ export class JobExecutorImage {
    */
   public static readonly NODE = JobExecutorImage.of('registry.gitlab.com/aws-fargate-driver-demo/docker-nodejs-gitlab-ci-fargate:latest');
   /**
+   * JSII for AWS CDK
+   * @see https://gitlab.com/pahud/docker-jsii-cdk-gitlab-ci-fargate
+   *
+   */
+  public static readonly JSII = JobExecutorImage.of('registry.gitlab.com/pahud/docker-jsii-cdk-gitlab-ci-fargate:latest');
+  /**
    * Custom image
    * @param image custom image registry URI
    */
@@ -100,6 +107,26 @@ export class JobExecutorImage {
   private constructor(public readonly uri: string) { }
 }
 
+const CLUSTER_DEFAULT_CAPACITY_PROVIDER = [
+  FargateCapacityProviderType.FARGATE,
+  FargateCapacityProviderType.FARGATE_SPOT,
+];
+
+const DEFAULT_CLUSTER_CAPACITY_PROVIDER_STRATEGY: CapacityProviderStrategyItem[] = [{
+  base: 0,
+  weight: 1,
+  capacityProvider: FargateCapacityProviderType.FARGATE_SPOT,
+}];
+
+const DEFAULT_SERVICE_CAPACITY_PROVIDER_STRATEGY: CapacityProviderStrategyItem[] = [
+  { base: 0, weight: 0, capacityProvider: FargateCapacityProviderType.FARGATE },
+  { weight: 1, capacityProvider: FargateCapacityProviderType.FARGATE_SPOT },
+];
+
+
+/**
+ * The FargateRunner
+ */
 export class FargateRunner extends cdk.Construct {
   readonly vpc: ec2.IVpc;
   constructor(scope: cdk.Construct, id: string, props: FargateRunnerProps ) {
@@ -112,6 +139,9 @@ export class FargateRunner extends cdk.Construct {
     const fargateSubnet = this.vpc.selectSubnets(props.fargateJobSubnet);
 
     const cluster = new ecs.Cluster(this, 'Cluster', { vpc: this.vpc });
+    const cfnCluster = cluster.node.tryFindChild('Resource') as ecs.CfnCluster;
+    cfnCluster.addPropertyOverride('CapacityProviders', CLUSTER_DEFAULT_CAPACITY_PROVIDER);
+    cfnCluster.addPropertyOverride('DefaultCapacityProviderStrategy', props.serviceDefaultCapacityProviderStrategy ?? DEFAULT_CLUSTER_CAPACITY_PROVIDER_STRATEGY);
 
     const runnerTask = new ecs.FargateTaskDefinition(this, 'RunnerTask', {
       cpu: 256,
@@ -119,8 +149,6 @@ export class FargateRunner extends cdk.Construct {
     });
 
     const fargateSecurityGroup = props.securityGroup ?? this.createSecurityGroup();
-
-    const jobExecutor = new FargateJobExecutor(this, 'JobExecutor');
 
     const registrationToken = props.registrationToken ?? (this.node.tryGetContext('GITLAB_REGISTRATION_TOKEN') || process.env.GITLAB_REGISTRATION_TOKEN);
 
@@ -134,22 +162,25 @@ export class FargateRunner extends cdk.Construct {
       environment: {
         GITLAB_REGISTRATION_TOKEN: registrationToken,
         GITLAB_URL: props.gitlabURL ?? 'https://gitlab.com',
-        FARGATE_REGION: props.executor.region ?? stack.region,
-        FARGATE_CLUSTER: props.executor.cluster?.clusterName ?? cluster.clusterName,
-        FARGATE_SUBNET: props.executor.subnet?.subnetId ?? fargateSubnet.subnetIds[0],
-        FARGATE_SECURITY_GROUP: props.executor.securityGroup?.securityGroupId ?? fargateSecurityGroup.securityGroupId,
-        FARGATE_TASK_DEFINITION: props.executor.task || jobExecutor.taskDefinitionArn,
+        FARGATE_REGION: props.executor?.region ?? stack.region,
+        FARGATE_CLUSTER: props.executor?.cluster?.clusterName ?? cluster.clusterName,
+        FARGATE_SUBNET: props.executor?.subnet?.subnetId ?? fargateSubnet.subnetIds[0],
+        FARGATE_SECURITY_GROUP: props.executor?.securityGroup?.securityGroupId ?? fargateSecurityGroup.securityGroupId,
+        FARGATE_TASK_DEFINITION: props.executor?.taskDefinitionArn || new FargateJobExecutor(this, 'JobExecutor').taskDefinitionArn,
         RUNNER_TAG_LIST: this.synthesizeTags(props.tags ?? ['fargate', 'gitlab', 'aws', 'docker']),
       },
     });
 
     runnerTask.taskRole.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName('AmazonECS_FullAccess'));
 
-    new ecs.FargateService(this, 'RunnerManagerService', {
+    const svc = new ecs.FargateService(this, 'RunnerManagerService', {
       cluster,
       taskDefinition: runnerTask,
       securityGroups: [fargateSecurityGroup],
     });
+    const cfnService = svc.node.tryFindChild('Service') as ecs.CfnService;
+    cfnService.addPropertyDeletionOverride('LaunchType');
+    cfnService.addPropertyOverride('CapacityProviderStrategy', props.serviceDefaultCapacityProviderStrategy ?? DEFAULT_SERVICE_CAPACITY_PROVIDER_STRATEGY);
   }
   private synthesizeTags(tags: string[]): string {
     return tags.join(',');
@@ -161,20 +192,42 @@ export class FargateRunner extends cdk.Construct {
   }
 }
 
+/**
+ * The properties for the FargateJobExecutor
+ */
 export interface FargateJobExecutorProps {
   /**
    * The docker image for the job executor container
    */
   readonly image?: JobExecutorImage;
+  /**
+   * AWS region for the job executor
+   */
+  readonly region?: string;
+  readonly cluster?: ecs.ICluster;
+  readonly subnet?: ec2.ISubnet;
+  readonly securityGroup?: ec2.ISecurityGroup;
 }
 
+/**
+ * The FargateJobExecutor
+ */
 export class FargateJobExecutor extends cdk.Construct {
   /**
    * task definition arn
    */
   readonly taskDefinitionArn: string;
+  readonly region: string;
+  readonly cluster?: ecs.ICluster;
+  readonly subnet?: ec2.ISubnet;
+  readonly securityGroup?: ec2.ISecurityGroup;
   constructor(scope: cdk.Construct, id:string, props: FargateJobExecutorProps = {}) {
     super(scope, id);
+
+    this.region = props.region ?? cdk.Stack.of(this).region;
+    this.cluster = props.cluster;
+    this.subnet = props.subnet;
+    this.securityGroup = props.securityGroup;
 
     const task = new ecs.FargateTaskDefinition(this, 'JobsTask', {
       cpu: 256,

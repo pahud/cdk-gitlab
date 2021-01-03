@@ -4,27 +4,37 @@
 
 Name|Description
 ----|-----------
-[FargateJobExecutor](#cdk-gitlab-fargatejobexecutor)|*No description*
-[FargateRunner](#cdk-gitlab-fargaterunner)|*No description*
+[FargateJobExecutor](#cdk-gitlab-fargatejobexecutor)|The FargateJobExecutor.
+[FargateRunner](#cdk-gitlab-fargaterunner)|The FargateRunner.
 [JobExecutorImage](#cdk-gitlab-jobexecutorimage)|The docker image for the job executor.
-[Provider](#cdk-gitlab-provider)|*No description*
+[Provider](#cdk-gitlab-provider)|The Provider to create GitLab Integrations with AWS.
 
 
 **Structs**
 
 Name|Description
 ----|-----------
-[FargateJobExecutorProps](#cdk-gitlab-fargatejobexecutorprops)|*No description*
-[FargateRunnerProps](#cdk-gitlab-fargaterunnerprops)|*No description*
-[JobExecutorOptions](#cdk-gitlab-jobexecutoroptions)|Options for the runner to create the fargate job executor.
+[CapacityProviderStrategyItem](#cdk-gitlab-capacityproviderstrategyitem)|The Capacity Provider strategy.
+[EksClusterOptions](#cdk-gitlab-eksclusteroptions)|*No description*
+[FargateEksClusterOptions](#cdk-gitlab-fargateeksclusteroptions)|*No description*
+[FargateJobExecutorProps](#cdk-gitlab-fargatejobexecutorprops)|The properties for the FargateJobExecutor.
+[FargateRunnerProps](#cdk-gitlab-fargaterunnerprops)|Properties for the FargateRunner.
+[HelmRunnerOptions](#cdk-gitlab-helmrunneroptions)|*No description*
 [ProviderProps](#cdk-gitlab-providerprops)|*No description*
 [RoleProps](#cdk-gitlab-roleprops)|*No description*
+
+
+**Enums**
+
+Name|Description
+----|-----------
+[FargateCapacityProviderType](#cdk-gitlab-fargatecapacityprovidertype)|Amazon ECS Capacity Providers for AWS Fargate.
 
 
 
 ## class FargateJobExecutor  <a id="cdk-gitlab-fargatejobexecutor"></a>
 
-
+The FargateJobExecutor.
 
 __Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
 __Extends__: [Construct](#aws-cdk-core-construct)
@@ -41,7 +51,11 @@ new FargateJobExecutor(scope: Construct, id: string, props?: FargateJobExecutorP
 * **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[FargateJobExecutorProps](#cdk-gitlab-fargatejobexecutorprops)</code>)  *No description*
+  * **cluster** (<code>[ICluster](#aws-cdk-aws-ecs-icluster)</code>)  *No description* __*Optional*__
   * **image** (<code>[JobExecutorImage](#cdk-gitlab-jobexecutorimage)</code>)  The docker image for the job executor container. __*Optional*__
+  * **region** (<code>string</code>)  AWS region for the job executor. __*Optional*__
+  * **securityGroup** (<code>[ISecurityGroup](#aws-cdk-aws-ec2-isecuritygroup)</code>)  *No description* __*Optional*__
+  * **subnet** (<code>[ISubnet](#aws-cdk-aws-ec2-isubnet)</code>)  *No description* __*Optional*__
 
 
 
@@ -50,13 +64,17 @@ new FargateJobExecutor(scope: Construct, id: string, props?: FargateJobExecutorP
 
 Name | Type | Description 
 -----|------|-------------
+**region** | <code>string</code> | <span></span>
 **taskDefinitionArn** | <code>string</code> | task definition arn.
+**cluster**? | <code>[ICluster](#aws-cdk-aws-ecs-icluster)</code> | __*Optional*__
+**securityGroup**? | <code>[ISecurityGroup](#aws-cdk-aws-ec2-isecuritygroup)</code> | __*Optional*__
+**subnet**? | <code>[ISubnet](#aws-cdk-aws-ec2-isubnet)</code> | __*Optional*__
 
 
 
 ## class FargateRunner  <a id="cdk-gitlab-fargaterunner"></a>
 
-
+The FargateRunner.
 
 __Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
 __Extends__: [Construct](#aws-cdk-core-construct)
@@ -73,12 +91,14 @@ new FargateRunner(scope: Construct, id: string, props: FargateRunnerProps)
 * **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[FargateRunnerProps](#cdk-gitlab-fargaterunnerprops)</code>)  *No description*
-  * **executor** (<code>[JobExecutorOptions](#cdk-gitlab-jobexecutoroptions)</code>)  Fargate job executor options. 
   * **vpc** (<code>[IVpc](#aws-cdk-aws-ec2-ivpc)</code>)  VPC for the fargate. 
+  * **clusterDefaultCapacityProviderStrategy** (<code>Array<[CapacityProviderStrategyItem](#cdk-gitlab-capacityproviderstrategyitem)></code>)  Default capacity provider strategy for the Amazon ECS cluster. __*Default*__: DEFAULT_CLUSTER_CAPACITY_PROVIDER_STRATEGY
+  * **executor** (<code>[FargateJobExecutor](#cdk-gitlab-fargatejobexecutor)</code>)  Fargate job executor options. __*Optional*__
   * **fargateJobSubnet** (<code>[SubnetSelection](#aws-cdk-aws-ec2-subnetselection)</code>)  subnet for fargate CI task. __*Optional*__
   * **gitlabURL** (<code>string</code>)  gitlab URL prefix. __*Default*__: 'https://gitlab.com'
   * **registrationToken** (<code>string</code>)  GitLab registration token for the runner. __*Optional*__
   * **securityGroup** (<code>[ISecurityGroup](#aws-cdk-aws-ec2-isecuritygroup)</code>)  The security group for Fargate CI task. __*Optional*__
+  * **serviceDefaultCapacityProviderStrategy** (<code>Array<[CapacityProviderStrategyItem](#cdk-gitlab-capacityproviderstrategyitem)></code>)  Default capacity provider strategy for the Amazon ECS service. __*Default*__: DEFAULT_SERVICE_CAPACITY_PROVIDER_STRATEGY
   * **tags** (<code>Array<string></code>)  tags for the runner. __*Optional*__
 
 
@@ -105,6 +125,7 @@ Name | Type | Description
 -----|------|-------------
 **uri** | <code>string</code> | <span></span>
 *static* **DEBIAN** | <code>[JobExecutorImage](#cdk-gitlab-jobexecutorimage)</code> | Debian.
+*static* **JSII** | <code>[JobExecutorImage](#cdk-gitlab-jobexecutorimage)</code> | JSII for AWS CDK.
 *static* **NODE** | <code>[JobExecutorImage](#cdk-gitlab-jobexecutorimage)</code> | Node.
 
 ### Methods
@@ -127,7 +148,7 @@ __Returns__:
 
 ## class Provider  <a id="cdk-gitlab-provider"></a>
 
-
+The Provider to create GitLab Integrations with AWS.
 
 __Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
 __Extends__: [Construct](#aws-cdk-core-construct)
@@ -164,31 +185,14 @@ Name | Type | Description
 
 
 ```ts
-createEksCluster(scope: Construct, id: string, props: ClusterProps): Cluster
+createEksCluster(scope: Construct, id: string, props: EksClusterOptions): Cluster
 ```
 
 * **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
-* **props** (<code>[ClusterProps](#aws-cdk-aws-eks-clusterprops)</code>)  *No description*
-  * **version** (<code>[KubernetesVersion](#aws-cdk-aws-eks-kubernetesversion)</code>)  The Kubernetes version to run in the cluster. 
-  * **clusterName** (<code>string</code>)  Name for the cluster. __*Default*__: Automatically generated name
-  * **outputClusterName** (<code>boolean</code>)  Determines whether a CloudFormation output with the name of the cluster will be synthesized. __*Default*__: false
-  * **outputConfigCommand** (<code>boolean</code>)  Determines whether a CloudFormation output with the `aws eks update-kubeconfig` command will be synthesized. __*Default*__: true
-  * **role** (<code>[IRole](#aws-cdk-aws-iam-irole)</code>)  Role that provides permissions for the Kubernetes control plane to make calls to AWS API operations on your behalf. __*Default*__: A role is automatically created for you
-  * **securityGroup** (<code>[ISecurityGroup](#aws-cdk-aws-ec2-isecuritygroup)</code>)  Security Group to use for Control Plane ENIs. __*Default*__: A security group is automatically created
-  * **vpc** (<code>[IVpc](#aws-cdk-aws-ec2-ivpc)</code>)  The VPC in which to create the Cluster. __*Default*__: a VPC with default configuration will be created and can be accessed through `cluster.vpc`.
-  * **vpcSubnets** (<code>Array<[SubnetSelection](#aws-cdk-aws-ec2-subnetselection)></code>)  Where to place EKS Control Plane ENIs. __*Default*__: All public and private subnets
-  * **coreDnsComputeType** (<code>[CoreDnsComputeType](#aws-cdk-aws-eks-corednscomputetype)</code>)  Controls the "eks.amazonaws.com/compute-type" annotation in the CoreDNS configuration on your cluster to determine which compute type to use for CoreDNS. __*Default*__: CoreDnsComputeType.EC2 (for `FargateCluster` the default is FARGATE)
-  * **endpointAccess** (<code>[EndpointAccess](#aws-cdk-aws-eks-endpointaccess)</code>)  Configure access to the Kubernetes API server endpoint.. __*Default*__: EndpointAccess.PUBLIC_AND_PRIVATE
-  * **kubectlEnvironment** (<code>Map<string, string></code>)  Environment variables for the kubectl execution. __*Default*__: No environment variables.
-  * **kubectlLayer** (<code>[ILayerVersion](#aws-cdk-aws-lambda-ilayerversion)</code>)  An AWS Lambda Layer which includes `kubectl`, Helm and the AWS CLI. __*Default*__: the layer provided by the `aws-lambda-layer-kubectl` SAR app.
-  * **mastersRole** (<code>[IRole](#aws-cdk-aws-iam-irole)</code>)  An IAM role that will be added to the `system:masters` Kubernetes RBAC group. __*Default*__: a role that assumable by anyone with permissions in the same account will automatically be defined
-  * **outputMastersRoleArn** (<code>boolean</code>)  Determines whether a CloudFormation output with the ARN of the "masters" IAM role will be synthesized (if `mastersRole` is specified). __*Default*__: false
-  * **defaultCapacity** (<code>number</code>)  Number of instances to allocate as an initial capacity for this cluster. __*Default*__: 2
-  * **defaultCapacityInstance** (<code>[InstanceType](#aws-cdk-aws-ec2-instancetype)</code>)  The instance type to use for the default capacity. __*Default*__: m5.large
-  * **defaultCapacityType** (<code>[DefaultCapacityType](#aws-cdk-aws-eks-defaultcapacitytype)</code>)  The default capacity type for the cluster. __*Default*__: NODEGROUP
-  * **kubectlEnabled** (<code>boolean</code>)  NOT SUPPORTED: We no longer allow disabling kubectl-support. Setting this option to `false` will throw an error. __*Default*__: true
-  * **secretsEncryptionKey** (<code>[IKey](#aws-cdk-aws-kms-ikey)</code>)  KMS secret for envelope encryption for Kubernetes secrets. __*Default*__: By default, Kubernetes stores all secret object data within etcd and   all etcd volumes used by Amazon EKS are encrypted at the disk-level   using AWS-Managed encryption keys.
+* **props** (<code>[EksClusterOptions](#cdk-gitlab-eksclusteroptions)</code>)  *No description*
+  * **clusterOptions** (<code>[ClusterProps](#aws-cdk-aws-eks-clusterprops)</code>)  cluster properties for Amazon EKS cluster. 
+  * **rbac** (<code>boolean</code>)  create serivce account and rbac ClusterRoleBinding for gitlab. __*Default*__: true
 
 __Returns__:
 * <code>[Cluster](#aws-cdk-aws-eks-cluster)</code>
@@ -205,20 +209,33 @@ createEksServiceRole(): Role
 __Returns__:
 * <code>[Role](#aws-cdk-aws-iam-role)</code>
 
+#### createFargateEksCluster(scope, id, props) <a id="cdk-gitlab-provider-createfargateekscluster"></a>
+
+
+
+```ts
+createFargateEksCluster(scope: Construct, id: string, props: FargateEksClusterOptions): Cluster
+```
+
+* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
+* **id** (<code>string</code>)  *No description*
+* **props** (<code>[FargateEksClusterOptions](#cdk-gitlab-fargateeksclusteroptions)</code>)  *No description*
+  * **clusterOptions** (<code>[FargateClusterProps](#aws-cdk-aws-eks-fargateclusterprops)</code>)  cluster properties for Amazon EKS cluster. 
+  * **helmRunnerOptions** (<code>[HelmRunnerOptions](#cdk-gitlab-helmrunneroptions)</code>)  Gitlab helm Chart runner install Options. __*Optional*__
+  * **rbac** (<code>boolean</code>)  create serivce account and rbac ClusterRoleBinding for gitlab. __*Default*__: true
+
+__Returns__:
+* <code>[Cluster](#aws-cdk-aws-eks-cluster)</code>
+
 #### createFargateRunner(executor?) <a id="cdk-gitlab-provider-createfargaterunner"></a>
 
 
 
 ```ts
-createFargateRunner(executor?: JobExecutorOptions): void
+createFargateRunner(executor?: FargateJobExecutor): void
 ```
 
-* **executor** (<code>[JobExecutorOptions](#cdk-gitlab-jobexecutoroptions)</code>)  *No description*
-  * **cluster** (<code>[ICluster](#aws-cdk-aws-ecs-icluster)</code>)  The ECS clsuter of the job executor fargate task. __*Default*__: the cluster for the runner
-  * **region** (<code>string</code>)  AWS region for the job executor. __*Default*__: the region of the stack
-  * **securityGroup** (<code>[ISecurityGroup](#aws-cdk-aws-ec2-isecuritygroup)</code>)  security group for the executor. __*Optional*__
-  * **subnet** (<code>[ISubnet](#aws-cdk-aws-ec2-isubnet)</code>)  subnet for the executor. __*Optional*__
-  * **task** (<code>string</code>)  task definition arn of the executor. __*Optional*__
+* **executor** (<code>[FargateJobExecutor](#cdk-gitlab-fargatejobexecutor)</code>)  *No description*
 
 
 
@@ -252,7 +269,22 @@ __Returns__:
 
 
 
-## struct FargateJobExecutorProps  <a id="cdk-gitlab-fargatejobexecutorprops"></a>
+## struct CapacityProviderStrategyItem  <a id="cdk-gitlab-capacityproviderstrategyitem"></a>
+
+
+The Capacity Provider strategy.
+
+
+
+Name | Type | Description 
+-----|------|-------------
+**capacityProvider** | <code>[FargateCapacityProviderType](#cdk-gitlab-fargatecapacityprovidertype)</code> | <span></span>
+**weight** | <code>number</code> | <span></span>
+**base**? | <code>number</code> | __*Optional*__
+
+
+
+## struct EksClusterOptions  <a id="cdk-gitlab-eksclusteroptions"></a>
 
 
 
@@ -261,43 +293,79 @@ __Returns__:
 
 Name | Type | Description 
 -----|------|-------------
+**clusterOptions** | <code>[ClusterProps](#aws-cdk-aws-eks-clusterprops)</code> | cluster properties for Amazon EKS cluster.
+**rbac**? | <code>boolean</code> | create serivce account and rbac ClusterRoleBinding for gitlab.<br/>__*Default*__: true
+
+
+
+## struct FargateEksClusterOptions  <a id="cdk-gitlab-fargateeksclusteroptions"></a>
+
+
+
+
+
+
+Name | Type | Description 
+-----|------|-------------
+**clusterOptions** | <code>[FargateClusterProps](#aws-cdk-aws-eks-fargateclusterprops)</code> | cluster properties for Amazon EKS cluster.
+**helmRunnerOptions**? | <code>[HelmRunnerOptions](#cdk-gitlab-helmrunneroptions)</code> | Gitlab helm Chart runner install Options.<br/>__*Optional*__
+**rbac**? | <code>boolean</code> | create serivce account and rbac ClusterRoleBinding for gitlab.<br/>__*Default*__: true
+
+
+
+## struct FargateJobExecutorProps  <a id="cdk-gitlab-fargatejobexecutorprops"></a>
+
+
+The properties for the FargateJobExecutor.
+
+
+
+Name | Type | Description 
+-----|------|-------------
+**cluster**? | <code>[ICluster](#aws-cdk-aws-ecs-icluster)</code> | __*Optional*__
 **image**? | <code>[JobExecutorImage](#cdk-gitlab-jobexecutorimage)</code> | The docker image for the job executor container.<br/>__*Optional*__
+**region**? | <code>string</code> | AWS region for the job executor.<br/>__*Optional*__
+**securityGroup**? | <code>[ISecurityGroup](#aws-cdk-aws-ec2-isecuritygroup)</code> | __*Optional*__
+**subnet**? | <code>[ISubnet](#aws-cdk-aws-ec2-isubnet)</code> | __*Optional*__
 
 
 
 ## struct FargateRunnerProps  <a id="cdk-gitlab-fargaterunnerprops"></a>
 
 
-
+Properties for the FargateRunner.
 
 
 
 Name | Type | Description 
 -----|------|-------------
-**executor** | <code>[JobExecutorOptions](#cdk-gitlab-jobexecutoroptions)</code> | Fargate job executor options.
 **vpc** | <code>[IVpc](#aws-cdk-aws-ec2-ivpc)</code> | VPC for the fargate.
+**clusterDefaultCapacityProviderStrategy**? | <code>Array<[CapacityProviderStrategyItem](#cdk-gitlab-capacityproviderstrategyitem)></code> | Default capacity provider strategy for the Amazon ECS cluster.<br/>__*Default*__: DEFAULT_CLUSTER_CAPACITY_PROVIDER_STRATEGY
+**executor**? | <code>[FargateJobExecutor](#cdk-gitlab-fargatejobexecutor)</code> | Fargate job executor options.<br/>__*Optional*__
 **fargateJobSubnet**? | <code>[SubnetSelection](#aws-cdk-aws-ec2-subnetselection)</code> | subnet for fargate CI task.<br/>__*Optional*__
 **gitlabURL**? | <code>string</code> | gitlab URL prefix.<br/>__*Default*__: 'https://gitlab.com'
 **registrationToken**? | <code>string</code> | GitLab registration token for the runner.<br/>__*Optional*__
 **securityGroup**? | <code>[ISecurityGroup](#aws-cdk-aws-ec2-isecuritygroup)</code> | The security group for Fargate CI task.<br/>__*Optional*__
+**serviceDefaultCapacityProviderStrategy**? | <code>Array<[CapacityProviderStrategyItem](#cdk-gitlab-capacityproviderstrategyitem)></code> | Default capacity provider strategy for the Amazon ECS service.<br/>__*Default*__: DEFAULT_SERVICE_CAPACITY_PROVIDER_STRATEGY
 **tags**? | <code>Array<string></code> | tags for the runner.<br/>__*Optional*__
 
 
 
-## struct JobExecutorOptions  <a id="cdk-gitlab-jobexecutoroptions"></a>
+## struct HelmRunnerOptions  <a id="cdk-gitlab-helmrunneroptions"></a>
 
 
-Options for the runner to create the fargate job executor.
+
 
 
 
 Name | Type | Description 
 -----|------|-------------
-**cluster**? | <code>[ICluster](#aws-cdk-aws-ecs-icluster)</code> | The ECS clsuter of the job executor fargate task.<br/>__*Default*__: the cluster for the runner
-**region**? | <code>string</code> | AWS region for the job executor.<br/>__*Default*__: the region of the stack
-**securityGroup**? | <code>[ISecurityGroup](#aws-cdk-aws-ec2-isecuritygroup)</code> | security group for the executor.<br/>__*Optional*__
-**subnet**? | <code>[ISubnet](#aws-cdk-aws-ec2-isubnet)</code> | subnet for the executor.<br/>__*Optional*__
-**task**? | <code>string</code> | task definition arn of the executor.<br/>__*Optional*__
+**concurrent**? | <code>number</code> | Number of run job in the same time.<br/>__*Default*__: 10
+**gitlabURL**? | <code>string</code> | gitlab URL prefix.<br/>__*Default*__: 'https://gitlab.com'
+**jobDefaultImage**? | <code>string</code> | Gitlab runners default image when job start not set "image" in gitlab-ci.yaml.<br/>__*Default*__: alpine:3.11
+**namespace**? | <code>string</code> | Gitlab helm chart install namespace.<br/>__*Default*__: default.
+**registrationToken**? | <code>string</code> | GitLab registration token for the runner, you put registrationToken in cdk.context.json like "GITLAB_REGISTRATION_TOKEN": "xxxxxxx".<br/>__*Optional*__
+**tags**? | <code>Array<string></code> | tags for the runner.<br/>__*Default*__: ['eks', 'fargate', 'runner']
 
 
 
@@ -326,5 +394,15 @@ Name | Type | Description
 **accountId** | <code>string</code> | <span></span>
 **externalId** | <code>string</code> | <span></span>
 
+
+
+## enum FargateCapacityProviderType  <a id="cdk-gitlab-fargatecapacityprovidertype"></a>
+
+Amazon ECS Capacity Providers for AWS Fargate.
+
+Name | Description
+-----|-----
+**FARGATE** |
+**FARGATE_SPOT** |
 
 

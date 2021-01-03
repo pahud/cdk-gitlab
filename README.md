@@ -15,9 +15,11 @@ import { Provider, FargateJobExecutor, FargateRunner, JobExecutorImage } from 'c
 const provider = new Provider(stack, 'GitlabProvider', { vpc });
 
 // create a Amazon EKS cluster
-provider.createEksCluster(stack, 'GitlabEksCluster', {
-  vpc,
-  version: eks.KubernetesVersion.V1_18,
+provider.createFargateEksCluster(stack, 'GitlabEksCluster', {
+  clusterOptions: {
+    vpc,
+    version: eks.KubernetesVersion.V1_18,
+  },
 });
 
 // create a default fargate runner with its job executor
@@ -32,7 +34,7 @@ const executor = new FargateJobExecutor(stack, 'JobExecutor', {
 // second, create the runner with the task definition of the executor
 new FargateRunner(stack, 'FargateRunner', {
   vpc,
-  executor: { task: executor.taskDefinitionArn },
+  executor,
 });
 
 // TBD - create Amazon EC2 runner for the GitLab
@@ -40,6 +42,11 @@ provider.createEc2Runner(...);
 
 });
 ```
+
+# Fargate Runner with Aamzon ECS
+
+On deployment with `createFargateRunner()`, the **Fargate Runner** will be provisioned in Amazon ECS with AWS Fargate and [Amazon ECS Capacity Providers](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-capacity-providers.html). By default, the `FARGATE` and `FARGATE_SPOT` capacity providers are available for the Amazon ECS cluster and the runner and job executor will run on `FARGATE_SPOT`. You can specify your custom `clusterDefaultCapacityProviderStrategy` and `serviceDefaultCapacityProviderStrategy` properties from the `FargateRunner` construct for different capacity provider strategies.
+
 
 # Deploy
 
