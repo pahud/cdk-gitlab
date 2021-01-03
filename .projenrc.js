@@ -3,12 +3,12 @@ const { AwsCdkConstructLibrary } = require('projen');
 const AUTOMATION_TOKEN = 'PROJEN_GITHUB_TOKEN';
 
 const project = new AwsCdkConstructLibrary({
-  authorAddress: "pahudnet@gmail.com",
-  authorName: "Pahud Hsieh",
-  cdkVersion: "1.81.0",
-  name: "cdk-gitlab",
-  repository: "https://github.com/pahud/cdk-gitlab.git",
-  description: "High level CDK construct to provision GitLab integrations with AWS",
+  authorAddress: 'pahudnet@gmail.com',
+  authorName: 'Pahud Hsieh',
+  cdkVersion: '1.82.0',
+  name: 'cdk-gitlab',
+  repository: 'https://github.com/pahud/cdk-gitlab.git',
+  description: 'High level CDK construct to provision GitLab integrations with AWS',
   defaultReleaseBranch: 'main',
   autoDetectBin: false,
   dependabot: false,
@@ -19,8 +19,6 @@ const project = new AwsCdkConstructLibrary({
     '@aws-cdk/aws-eks',
     '@aws-cdk/aws-iam',
   ],
-  deps: ['awscdk-81-patch'],
-  peerDeps: ['awscdk-81-patch'],
   python: {
     distName: 'cdk-gitlab',
     module: 'cdk_gitlab',
