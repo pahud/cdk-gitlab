@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.31](https://github.com/pahud/cdk-gitlab/compare/v0.1.30...v0.1.31) (2021-01-18)
+
+### [0.1.30](https://github.com/pahud/cdk-gitlab/compare/v0.1.29...v0.1.30) (2021-01-16)
+
+### [0.1.29](https://github.com/pahud/cdk-gitlab/compare/v0.1.28...v0.1.29) (2021-01-15)
+
+### [0.1.28](https://github.com/pahud/cdk-gitlab/compare/v0.1.27...v0.1.28) (2021-01-14)
+
+### [0.1.27](https://github.com/pahud/cdk-gitlab/compare/v0.1.26...v0.1.27) (2021-01-13)
+
+### [0.1.26](https://github.com/pahud/cdk-gitlab/compare/v0.1.25...v0.1.26) (2021-01-12)
+
+### [0.1.25](https://github.com/pahud/cdk-gitlab/compare/v0.1.24...v0.1.25) (2021-01-11)
+
+### [0.1.24](https://github.com/pahud/cdk-gitlab/compare/v0.1.23...v0.1.24) (2021-01-10)
+
+### [0.1.23](https://github.com/pahud/cdk-gitlab/compare/v0.1.22...v0.1.23) (2021-01-09)
+
+### [0.1.22](https://github.com/pahud/cdk-gitlab/compare/v0.1.21...v0.1.22) (2021-01-08)
+
+### [0.1.21](https://github.com/pahud/cdk-gitlab/compare/v0.1.20...v0.1.21) (2021-01-07)
+
 ### [0.1.20](https://github.com/pahud/cdk-gitlab/compare/v0.1.19...v0.1.20) (2021-01-06)
 
 ### [0.1.19](https://github.com/pahud/cdk-gitlab/compare/v0.1.18...v0.1.19) (2021-01-05)
