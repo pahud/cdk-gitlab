@@ -27,7 +27,7 @@ export class IntegTesting {
     provider.createFargateEksCluster(stack, 'GitlabEksCluster', {
       clusterOptions: {
         vpc,
-        version: eks.KubernetesVersion.V1_18,
+        version: eks.KubernetesVersion.V1_19,
       },
     });
 
