@@ -1,14 +1,13 @@
 {
     "name": "Dev Container Definition - AWS CDK",
-    "image": "ghcr.io/pahud/vscode:latest",
-    //"dockerFile": "Dockerfile",
+    "image": "public.ecr.aws/pahudnet/vscode:latest",
+    "workspaceFolder": "/workspace",
+    "workspaceMount": "source=remote-workspace,target=/workspace,type=volume",
+    "postCreateCommand": "sudo groupmod -g 800 docker; sudo usermod -a -G docker vscode; newgrp docker",
     "mounts": [
         "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
     ],
     "containerUser": "vscode",
-    "postCreateCommand": [
-        ".devcontainer/setup.sh"
-    ],
     "extensions": [
         "dbaeumer.vscode-eslint@2.1.5"
     ]
