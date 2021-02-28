@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.37](https://github.com/pahud/cdk-gitlab/compare/v0.1.36...v0.1.37) (2021-02-28)
+
 ### [0.1.36](https://github.com/pahud/cdk-gitlab/compare/v0.1.35...v0.1.36) (2021-02-27)
 
 ### [0.1.35](https://github.com/pahud/cdk-gitlab/compare/v0.1.34...v0.1.35) (2021-02-26)
