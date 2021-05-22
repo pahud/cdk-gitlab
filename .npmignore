@@ -6,7 +6,6 @@
 /.mergify.yml
 /.projen
 /.projenrc.js
-/.versionrc.json
 /.vscode
 /coverage
 /src
@@ -20,6 +19,7 @@ cdk.context.json
 cdk.out
 dist
 junit.xml
+tsconfig.tsbuildinfo
 yarn-error.log
 !.jsii
 !/lib
