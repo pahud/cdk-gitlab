@@ -14,11 +14,12 @@ const project = new AwsCdkConstructLibrary({
   depsUpgrade: DependenciesUpgradeMechanism.githubWorkflow({
     workflowOptions: {
       labels: ['auto-approve'],
-      secret: 'GITHUB_TOKEN',
+      secret: AUTOMATION_TOKEN,
     },
   }),
   autoApproveOptions: {
-    secret: AUTOMATION_TOKEN,
+    secret: 'GITHUB_TOKEN',
+    allowedUsernames: ['pahud'],
   },
   cdkDependencies: [
     '@aws-cdk/core',
