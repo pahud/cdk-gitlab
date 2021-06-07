@@ -1,4 +1,4 @@
-const { AwsCdkConstructLibrary } = require('projen');
+const { AwsCdkConstructLibrary, DependenciesUpgradeMechanism } = require('projen');
 
 const AUTOMATION_TOKEN = 'PROJEN_GITHUB_TOKEN';
 
@@ -11,7 +11,14 @@ const project = new AwsCdkConstructLibrary({
   description: 'High level CDK construct to provision GitLab integrations with AWS',
   defaultReleaseBranch: 'main',
   autoDetectBin: false,
-  dependabot: false,
+  depsUpgrade: DependenciesUpgradeMechanism.githubWorkflow({
+    workflowOptions: {
+      labels: ['auto-approve'],
+    },
+  }),
+  autoApproveOptions: {
+    secret: AUTOMATION_TOKEN,
+  },
   cdkDependencies: [
     '@aws-cdk/core',
     '@aws-cdk/aws-ec2',
