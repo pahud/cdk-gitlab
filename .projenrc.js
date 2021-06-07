@@ -19,7 +19,6 @@ const project = new AwsCdkConstructLibrary({
   }),
   autoApproveOptions: {
     secret: AUTOMATION_TOKEN,
-    allowedUsernames: ['pahud'],
   },
   cdkDependencies: [
     '@aws-cdk/core',
